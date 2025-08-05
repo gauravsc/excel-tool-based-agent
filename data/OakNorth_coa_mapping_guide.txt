@@ -1,0 +1,113 @@
+Guide to mapping borrower-supplied data into OakNorth’s Chart of Accounts (CoA) codes
+
+1000 Cash & Cash Equivalents – Post every balance that can be drawn within three business days without penalty: current accounts, instant-access savings, money-market deposits under 90 days and petty-cash floats. Ignore balances pledged to lenders or lawyers; those belong in 1300 Restricted Cash.
+Edge case: Debt-service reserve or interest-escrow accounts are excluded unless the facility agreement expressly allows free use.
+Example: “Metro Bank – Client A Current a/c £412,876” ➜ 1000.
+
+1100 Trade Receivables – Rent, service-charge, sales proceeds or other operating income that has been invoiced and is contractually due but not yet collected. Use invoice date, not cash-receipt date, to avoid double counting with 4000 series.
+Edge case: Rent in advance is a liability (2200 Deferred Income), not a receivable.
+Example: “Invoice #1184 – Unit 4Q rent Apr-24 £12,000” ➜ 1100.
+
+1200 Accrued Income & Other Receivables – Entitlements earned but un-invoiced at the balance date: accrued interest on deposits, insurance recoveries, VAT refunds.
+Edge case: Long-stop completion deposits held by solicitor are restricted cash, not accrued income.
+Example: “Accrued bank interest to 31 Mar £1,845” ➜ 1200.
+
+1300 Restricted Cash – Balances legally ring-fenced: retention accounts, escrow for warranties, capitalised interest reserves.
+Edge case: If pledged cash will be released within 30 days (e.g. rent sweep timing difference) classify as 1000.
+Example: “Senior-debt interest reserve a/c £250,000” ➜ 1300.
+
+1500 Inventory / Work in Progress – For trading or development borrowers: completed units held for sale and direct construction costs incurred to date that will be matched to revenue (materials, labour, prelims).
+Edge case: Land held for long-term investment belongs in 1700 Investment Property, not inventory.
+Example: “Site A – bricks delivered £47,900” ➜ 1500.
+
+1600 Capitalised Development Costs – Professional fees and finance costs being capitalised under IAS 23 or UK GAAP: planning, architect, capitalised interest before practical completion.
+Edge case: Ongoing letting fees after PC move to 5100 Direct Property Expenses.
+Example: “Capitalised loan interest Q1 £98,560” ➜ 1600.
+
+1700 Fixed Assets / Investment Property – Land and buildings held to earn rental income or for capital appreciation, plus plant, vehicles and office equipment. Record at cost or fair value per borrower policy.
+Edge case: Leased assets under IFRS 16 sit in 3300 Lease Right-of-Use if presented separately.
+Example: “Warehouse freehold at valuation £6.4 m” ➜ 1700.
+
+2000 Accounts Payable – Trade creditors for goods and services already received: contractors, utilities, managing agents.
+Edge case: Retentions owed to contractors sit in 2100 Accrued Expenses until certified.
+Example: “ABC Scaffolding invoice #9921 £14,220” ➜ 2000.
+
+2100 Accrued Expenses – Obligations incurred but not yet invoiced: payroll accruals, unpaid interest, contractor retentions.
+Edge case: Tax accruals go to 6000 Taxation.
+Example: “Accrued audit fee £8,000” ➜ 2100.
+
+2200 Deferred Income – Cash received in advance of performance: tenant deposits covering future periods, sales deposits not yet recognised, rent received in advance.
+Edge case: Tenant security deposits refundable on exit map to 2000 if held as creditor.
+Example: “Quarterly rent paid 25 Mar for Apr-Jun £36,000” ➜ 2200.
+
+2300 Interest & Fees Payable – Coupon, margin, commitment fees and default interest that has crystallised but not yet paid.
+Edge case: Accrued non-utilisation fees on RCFs also map here, not to finance costs until paid.
+Example: “Senior debt margin accrued Mar £22,410” ➜ 2300.
+
+3000 Senior Debt – Secured first-ranking loans (term, RCF, cap-ex) at amortised cost.
+Edge case: Revolvers with <12 months to maturity remain in 3000; do not split current/non-current for spreading.
+Example: “Facility A outstanding £38.5 m” ➜ 3000.
+
+3100 Mezzanine / Junior Debt – Contractual subordination, PIK structures or second-charge notes.
+Edge case: Preferred-equity instruments with contingent returns map to 3200 if legally equity.
+Example: “PIK note – 12% bullet £7 m” ➜ 3100.
+
+3200 Shareholder Loans & Preferred Equity – Funding from owners that ranks behind external creditors. Classify even if interest-bearing.
+Edge case: Undrawn committed equity sits off balance sheet; draw-downs post-reporting date are not booked.
+Example: “Director’s loan 0% rolled-up £2.1 m” ➜ 3200.
+
+3300 Lease Liabilities – IFRS 16 or FRS 102-11 obligations for property or equipment leases. Split current/non-current only if borrower does.
+Edge case: Ground rents with no lease-capitalisation under UK GAAP remain in 2100.
+Example: “ROU liability – head office £540,000” ➜ 3300.
+
+4000 Rental Income – Contracted gross rent for the period, before voids and incentives.
+Edge case: Insurance recharges and service-charges go to 4200 Other Income.
+Example: “April rent units 1-10 £86,400” ➜ 4000.
+
+4100 Property Sales Revenue – Recognised revenue from unit disposals (IFRS 15 or completed-contract).
+Edge case: Sales deposits prior to completion stay in 2200 until title transfers.
+Example: “Completion – Flat 3C £585,000” ➜ 4100.
+
+4200 Service-Charge, Parking & Other Income – Recoveries from tenants, licence fees, rooftop telecoms, dilapidations.
+Edge case: Insurance recoveries for prior-year claims map to 1200 if receivable, not 4200.
+Example: “Car-parking licences Feb £4,200” ➜ 4200.
+
+5000 Cost of Sales – Direct costs tied to revenue in 4100: land cost, build cost, sales agent commissions corresponding to disposed units.
+Edge case: Post-completion snagging costs that arise later should still be accrued here.
+Example: “Allocation of plot land cost £72,000” ➜ 5000.
+
+5100 Direct Property Expenses – Day-to-day operating outgoings: repairs, void rates, letting fees, utilities.
+Edge case: Major refurbishment capitalised to 1600.
+Example: “Lift maintenance contract £2,780” ➜ 5100.
+
+5200 Construction Costs – For live development: contractor valuations, preliminaries, variations, contingency draw-downs.
+Edge case: Capitalised staff costs attributable to development also map here, not to 5600 Admin.
+Example: “Valuation #12 main contract £1.46 m” ➜ 5200.
+
+5300 Professional Fees – Architect, QS, engineer, planning, legal and monitoring-surveyors that hit P&L (or capitalise to 1600 if appropriate).
+Edge case: Debt-raising fees amortised through 5500 Finance Costs, not 5300.
+Example: “Monitoring surveyor March claim £6,950” ➜ 5300.
+
+5400 Sales & Marketing – Estate-agent commissions, digital advertising, show-flat staging, brochures.
+Edge case: Post-completion listing fees for unsold units remain here, not 5100.
+Example: “Rightmove listings Q2 £3,600” ➜ 5400.
+
+5500 Finance Costs – Interest expense recognised in P&L, agency fees amortisation, commitment fees and hedge costs realised.
+Edge case: Capitalised interest during construction belongs in 1600.
+Example: “Senior facility margin Jan £118,240” ➜ 5500.
+
+5600 Overheads & Admin – Group-level costs not attributable to specific assets: head-office salaries, audit, IT, corporate travel.
+Edge case: Asset-management fees recharged to SPVs map to 5100.
+Example: “Finance team payroll Apr £41,300” ➜ 5600.
+
+5700 Depreciation & Amortisation – System-generated charge for tangible and intangible fixed assets.
+Edge case: Investment-property fair-value movements never map here; they bypass P&L under IFRS .
+Example: “Depreciation – office fit-out £9,740” ➜ 5700.
+
+6000 Taxation – Current-year corporation tax, deferred-tax movements, irrecoverable VAT.
+Edge case: Stamp duty on property acquisitions capitalised to 1700 or 5200, not 6000.
+Example: “Q1 CT instalment £23,800” ➜ 6000.
+
+7000 Equity – Issued share capital, share premium, retained earnings and revaluation reserves.
+Edge case: Dividends declared but unpaid sit in 2100 until settled.
+Example: “Retained profit brought forward £4.2 m” ➜ 7000.

@@ -2,8 +2,10 @@ import openpyxl
 from openpyxl.utils import get_column_letter, column_index_from_string
 from openpyxl.styles import Border
 from typing import List, Optional
+from langchain.tools import tool
 
 
+@tool
 def remove_hidden_columns(file_path: str, sheet_name: str, output_path: Optional[str] = None) -> List[str]:
     """Remove hidden and grouped columns from an Excel sheet and return list of removed columns."""
     # Load workbook
