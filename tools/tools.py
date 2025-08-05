@@ -1,5 +1,7 @@
 from openpyxl import load_workbook
 from typing import List, Any, Dict
+from datetime import datetime, date
+import re
 
 
 def load_excel_file(file_path: str) -> Any:
@@ -34,16 +36,59 @@ def get_cell_value(file_path: str, sheet_name: str, cell_reference: str) -> Any:
     return sheet[cell_reference].value
 
 
+def get_detailed_data_types(values: List[Any]) -> List[str]:
+    """Get detailed data types of values including dates, times, percentages, etc."""
+    def categorize_value(value):
+        if value is None:
+            return "null"
+        if isinstance(value, datetime):
+            return "datetime"
+        if isinstance(value, date):
+            return "date"
+        if isinstance(value, bool):
+            return "boolean"
+        if isinstance(value, int):
+            return "integer"
+        if isinstance(value, float):
+            if value.is_integer():
+                return "integer"
+            return "float"
+        if isinstance(value, str):
+            value_str = str(value).strip()
+            if not value_str:
+                return "empty_string"
+            if re.match(r'^\d+%$', value_str):
+                return "percentage"
+            if re.match(r'^\d+\.\d+%$', value_str):
+                return "percentage"
+            if re.match(r'^\d{1,2}:\d{2}(:\d{2})?$', value_str):
+                return "time"
+            if re.match(r'^\d{1,2}/\d{1,2}/\d{2,4}$', value_str):
+                return "date_string"
+            if re.match(r'^\d{4}-\d{2}-\d{2}$', value_str):
+                return "date_string"
+            if re.match(r'^\d+$', value_str):
+                return "integer_string"
+            if re.match(r'^\d+\.\d+$', value_str):
+                return "float_string"
+            if re.match(r'^\$[\d,]+\.?\d*$', value_str):
+                return "currency"
+            return "text"
+        return "unknown"
+    
+    return [categorize_value(value) for value in values]
+
+
 def get_data_types_row(file_path: str, sheet_name: str, row_number: int) -> List[str]:
     """Get the data types of all values in a specific row."""
     values = get_row_values(file_path, sheet_name, row_number)
-    return [type(value).__name__ for value in values]
+    return get_detailed_data_types(values)
 
 
 def get_data_types_column(file_path: str, sheet_name: str, column_letter: str) -> List[str]:
     """Get the data types of all values in a specific column."""
     values = get_column_values(file_path, sheet_name, column_letter)
-    return [type(value).__name__ for value in values]
+    return get_detailed_data_types(values)
 
 
 def get_sheet_dimensions(file_path: str, sheet_name: str) -> Dict[str, int]:
