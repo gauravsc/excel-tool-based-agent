@@ -19,9 +19,9 @@ class SpreadsheetEncoderAgent:
         """Initialize with OpenAI API key."""
         self.client = OpenAI(api_key=api_key or os.getenv("OPENAI_API_KEY"))
         self.tools = [
-            get_sheet_names, get_row_values, get_column_values, get_cell_value,
+            get_sheet_names, get_row_values, get_column_values,
             get_data_types_column, get_sheet_dimensions,
-            find_cells_with_value, get_range_values, get_sheet_content,
+            get_range_values, get_sheet_content,
             get_max_rows, get_max_columns
         ]
         logger.info("SpreadsheetEncoderAgent initialized")
@@ -34,11 +34,11 @@ class SpreadsheetEncoderAgent:
         system_prompt = get_system_prompt(**prompt_kwargs)
         
         messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Generate a compressed representation of the spreadsheet structure and data types from: {excel_file_path}. Include sheet names, dimensions, headers, data types, and sample values. Make it concise but informative for LLM understanding."}
+            {"role": "system", "content": "You are an expert financial analyst that understands spreadsheets."},
+            {"role": "user", "content": system_prompt}
         ]
         iteration = 0
-        max_iterations = 15
+        max_iterations = 50
         
         # Format tools for OpenAI API
         tools = []

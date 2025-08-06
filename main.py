@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from agents import ExcelAgent, SpreadsheetEncoderAgent
 from core.logger import setup_logger
+from core.utils import remove_hidden_columns_all_sheets
 
 logger = setup_logger(__name__)
 
@@ -14,7 +15,16 @@ def main():
     logger.info("Environment variables loaded")
     
     excel_file = "data/single_sheet.xlsx"
-    
+
+    # Clean the spreadsheet by removing hidden columns
+    logger.info("=== Cleaning spreadsheet by removing hidden columns ===")
+    removed_columns_by_sheet = remove_hidden_columns_all_sheets(excel_file, output_path=excel_file)
+    for sheet_name, removed_columns in removed_columns_by_sheet.items():
+        if removed_columns:
+            logger.info(f"Removed {len(removed_columns)} hidden columns from {sheet_name}")
+        else:
+            logger.info(f"No hidden columns found in {sheet_name}")
+
     # Example 1: Use SpreadsheetEncoderAgent to get structure
     logger.info("=== Using SpreadsheetEncoderAgent ===")
     encoder_agent = SpreadsheetEncoderAgent(api_key=api_key)
