@@ -8,6 +8,7 @@ from tools.tools import (
     get_max_rows, get_max_columns
 )
 from core.logger import setup_logger
+from prompts.spreadsheet_encoder_agent import get_system_prompt
 
 logger = setup_logger(__name__)
 
@@ -25,11 +26,17 @@ class SpreadsheetEncoderAgent:
         ]
         logger.info("SpreadsheetEncoderAgent initialized")
     
-    def encode(self, excel_file_path: str) -> str:
+    def encode(self, excel_file_path: str, **prompt_kwargs) -> str:
         """Generate compressed representation of spreadsheet structure and data."""
         logger.info(f"Starting spreadsheet encoding for: {excel_file_path}")
         
-        messages = [{"role": "user", "content": f"Generate a compressed representation of the spreadsheet structure and data types from: {excel_file_path}. Include sheet names, dimensions, headers, data types, and sample values. Make it concise but informative for LLM understanding."}]
+        # Get system prompt with any additional context
+        system_prompt = get_system_prompt(**prompt_kwargs)
+        
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": f"Generate a compressed representation of the spreadsheet structure and data types from: {excel_file_path}. Include sheet names, dimensions, headers, data types, and sample values. Make it concise but informative for LLM understanding."}
+        ]
         iteration = 0
         max_iterations = 15
         

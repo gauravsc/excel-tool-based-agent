@@ -8,6 +8,7 @@ from tools.tools import (
     get_max_rows, get_max_columns
 )
 from core.logger import setup_logger
+from prompts.excel_agent import get_system_prompt
 
 logger = setup_logger(__name__)
 
@@ -25,12 +26,18 @@ class ExcelAgent:
         ]
         logger.info("ExcelAgent initialized")
     
-    def execute(self, task_description: str, excel_file_path: str) -> str:
+    def execute(self, task_description: str, excel_file_path: str, **prompt_kwargs) -> str:
         """Execute task on Excel file using LLM and tools."""
         logger.info(f"Starting task execution: {task_description[:100]}...")
         logger.info(f"Excel file: {excel_file_path}")
         
-        messages = [{"role": "user", "content": f"Task: {task_description}\nExcel file: {excel_file_path}"}]
+        # Get system prompt with any additional context
+        system_prompt = get_system_prompt(**prompt_kwargs)
+        
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": f"Task: {task_description}\nExcel file: {excel_file_path}"}
+        ]
         iteration = 0
         max_iterations = 20
         

@@ -1,4 +1,4 @@
-def get_excel_agent_prompt(**kwargs) -> str:
+def get_system_prompt(**kwargs) -> str:
     """
     Returns the system prompt for the Excel Agent.
     
