@@ -4,6 +4,7 @@ from datetime import datetime, date
 import re
 from langchain.tools import tool
 from core.logger import setup_logger
+from tools.utils import get_detailed_data_types
 
 logger = setup_logger(__name__)
 
@@ -52,58 +53,15 @@ def get_cell_value(file_path: str, sheet_name: str, cell_reference: str) -> Any:
 
 
 @tool
-def get_detailed_data_types(values: List[Any]) -> List[str]:
-    """Get detailed data types of values including dates, times, percentages, etc."""
-    logger.info(f"Analyzing data types for {len(values)} values")
-    def categorize_value(value):
-        if value is None:
-            return "null"
-        if isinstance(value, datetime):
-            return "datetime"
-        if isinstance(value, date):
-            return "date"
-        if isinstance(value, bool):
-            return "boolean"
-        if isinstance(value, int):
-            return "integer"
-        if isinstance(value, float):
-            if value.is_integer():
-                return "integer"
-            return "float"
-        if isinstance(value, str):
-            value_str = str(value).strip()
-            if not value_str:
-                return "empty_string"
-            if re.match(r'^\d+%$', value_str):
-                return "percentage"
-            if re.match(r'^\d+\.\d+%$', value_str):
-                return "percentage"
-            if re.match(r'^\d{1,2}:\d{2}(:\d{2})?$', value_str):
-                return "time"
-            if re.match(r'^\d{1,2}/\d{1,2}/\d{2,4}$', value_str):
-                return "date_string"
-            if re.match(r'^\d{4}-\d{2}-\d{2}$', value_str):
-                return "date_string"
-            if re.match(r'^\d+$', value_str):
-                return "integer_string"
-            if re.match(r'^\d+\.\d+$', value_str):
-                return "float_string"
-            if re.match(r'^\$[\d,]+\.?\d*$', value_str):
-                return "currency"
-            return "text"
-        return "unknown"
-    
-    result = [categorize_value(value) for value in values]
-    logger.info(f"Data type analysis complete: {len(set(result))} unique types found")
-    return result
-
-
-@tool
 def get_data_types_column(file_path: str, sheet_name: str, column_letter: str) -> List[str]:
     """Get the data types of all values in a specific column."""
     logger.info(f"Getting data types for column {column_letter} in sheet '{sheet_name}' from {file_path}")
-    values = get_column_values(file_path, sheet_name, column_letter)
-    return get_detailed_data_types(values)
+    # Read the column values directly instead of calling get_column_values
+    workbook = load_workbook(file_path)
+    sheet = workbook[sheet_name]
+    result = [cell.value for cell in sheet[column_letter]]
+    logger.info(f"Column {column_letter} has {len(result)} values")
+    return get_detailed_data_types(result)
 
 
 @tool
@@ -118,12 +76,34 @@ def get_sheet_dimensions(file_path: str, sheet_name: str) -> Dict[str, int]:
 
 
 @tool
-def get_header_row(file_path: str, sheet_name: str, header_row: int = 1) -> List[str]:
-    """Get the header row values from the Excel sheet."""
-    logger.info(f"Getting header row {header_row} from sheet '{sheet_name}' in {file_path}")
-    result = get_row_values(file_path, sheet_name, header_row)
-    logger.info(f"Header row contains {len(result)} columns")
+def get_max_rows(file_path: str, sheet_name: str) -> int:
+    """Get the maximum number of rows in the Excel sheet."""
+    logger.info(f"Getting max rows for sheet '{sheet_name}' in {file_path}")
+    workbook = load_workbook(file_path)
+    sheet = workbook[sheet_name]
+    result = sheet.max_row
+    logger.info(f"Sheet '{sheet_name}' has {result} rows")
     return result
+
+
+@tool
+def get_max_columns(file_path: str, sheet_name: str) -> int:
+    """Get the maximum number of columns in the Excel sheet."""
+    logger.info(f"Getting max columns for sheet '{sheet_name}' in {file_path}")
+    workbook = load_workbook(file_path)
+    sheet = workbook[sheet_name]
+    result = sheet.max_column
+    logger.info(f"Sheet '{sheet_name}' has {result} columns")
+    return result
+
+
+# @tool
+# def get_header_row(file_path: str, sheet_name: str, header_row: int = 1) -> List[str]:
+#     """Get the header row values from the Excel sheet."""
+#     logger.info(f"Getting header row {header_row} from sheet '{sheet_name}' in {file_path}")
+#     result = get_row_values(file_path, sheet_name, header_row)
+#     logger.info(f"Header row contains {len(result)} columns")
+#     return result
 
 
 @tool
@@ -151,3 +131,24 @@ def get_range_values(file_path: str, sheet_name: str, start_cell: str, end_cell:
     result = [[cell.value for cell in row] for row in range_data]
     logger.info(f"Range {start_cell}:{end_cell} contains {len(result)} rows")
     return result
+
+
+@tool
+def get_sheet_content(file_path: str, sheet_name: str) -> Dict[int, Dict[str, Any]]:
+    """Get all content of the sheet as a nested dictionary where outer dict keys are row numbers and inner dict keys are column letters."""
+    logger.info(f"Getting all content from sheet '{sheet_name}' in {file_path}")
+    workbook = load_workbook(file_path)
+    sheet = workbook[sheet_name]
+    
+    result = {}
+    for row in sheet.iter_rows():
+        row_dict = {}
+        for cell in row:
+            if cell.value is not None:  # Only include non-empty cells
+                row_dict[cell.column_letter] = cell.value
+        if row_dict:  # Only include rows with data
+            result[cell.row] = row_dict
+    
+    logger.info(f"Retrieved {len(result)} rows with data from sheet '{sheet_name}'")
+    return result
+

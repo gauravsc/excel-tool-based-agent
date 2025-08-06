@@ -1,9 +1,9 @@
 import os
-from typing import List, Any
+from typing import List, Any, Dict
 from openai import OpenAI
 from tools.tools import (
     get_sheet_names, get_row_values, get_column_values, get_cell_value,
-    get_detailed_data_types, get_data_types_column, get_sheet_dimensions,
+    get_data_types_column, get_sheet_dimensions,
     find_cells_with_value, get_range_values, get_sheet_content,
     get_max_rows, get_max_columns
 )
@@ -11,8 +11,8 @@ from core.logger import setup_logger
 
 logger = setup_logger(__name__)
 
-class ExcelAgent:
-    """Agent that executes Excel tasks using OpenAI LLM and tool calls."""
+class SpreadsheetEncoderAgent:
+    """Agent that generates compressed representation of spreadsheet structure and data types."""
     
     def __init__(self, api_key: str = None):
         """Initialize with OpenAI API key."""
@@ -23,21 +23,19 @@ class ExcelAgent:
             find_cells_with_value, get_range_values, get_sheet_content,
             get_max_rows, get_max_columns
         ]
-        logger.info("ExcelAgent initialized")
+        logger.info("SpreadsheetEncoderAgent initialized")
     
-    def execute(self, task_description: str, excel_file_path: str) -> str:
-        """Execute task on Excel file using LLM and tools."""
-        logger.info(f"Starting task execution: {task_description[:100]}...")
-        logger.info(f"Excel file: {excel_file_path}")
+    def encode(self, excel_file_path: str) -> str:
+        """Generate compressed representation of spreadsheet structure and data."""
+        logger.info(f"Starting spreadsheet encoding for: {excel_file_path}")
         
-        messages = [{"role": "user", "content": f"Task: {task_description}\nExcel file: {excel_file_path}"}]
+        messages = [{"role": "user", "content": f"Generate a compressed representation of the spreadsheet structure and data types from: {excel_file_path}. Include sheet names, dimensions, headers, data types, and sample values. Make it concise but informative for LLM understanding."}]
         iteration = 0
-        max_iterations = 20
+        max_iterations = 15
         
         # Format tools for OpenAI API
         tools = []
         for tool in self.tools:
-            # Extract tool information from LangChain tool
             tool_schema = {
                 "type": "function",
                 "function": {
@@ -63,7 +61,7 @@ class ExcelAgent:
             messages.append(message)
             
             if not message.tool_calls:
-                logger.info("No more tool calls, task completed")
+                logger.info("No more tool calls, encoding completed")
                 return message.content
             
             logger.info(f"LLM requested {len(message.tool_calls)} tool calls")
@@ -76,6 +74,7 @@ class ExcelAgent:
                 logger.info(f"Executing tool: {tool_name} with args: {tool_args}")
                 
                 tool_func = next(tool for tool in self.tools if tool.name == tool_name)
+                logger.info(f"Calling tool function: {tool_name} with arguments: {tool_args}")
                 result = tool_func.invoke(tool_args)
                 
                 logger.info(f"Tool {tool_name} returned result: {str(result)[:200]}...")
@@ -86,5 +85,5 @@ class ExcelAgent:
                     "content": str(result)
                 })
         
-        logger.warning(f"Reached maximum iterations ({max_iterations}), stopping execution")
-        return "Task execution stopped due to maximum iteration limit reached."
+        logger.warning(f"Reached maximum iterations ({max_iterations}), stopping encoding")
+        return "Spreadsheet encoding stopped due to maximum iteration limit reached." 
