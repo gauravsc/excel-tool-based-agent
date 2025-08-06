@@ -1,11 +1,19 @@
-from agent import ExcelAgent
-from core.logger import logger
+import os
+from dotenv import load_dotenv
+from agents import ExcelAgent
+from core.logger import setup_logger
+
+logger = setup_logger(__name__)
 
 def main():
     """Example usage of ExcelAgent."""
     logger.info("Starting ExcelAgent application")
     
-    agent = ExcelAgent()
+    load_dotenv()
+    api_key = os.getenv("OPENAI_API_KEY")
+    logger.info("Environment variables loaded")
+    
+    agent = ExcelAgent(api_key=api_key)
     
     # Example task
     task_description = "Map values to the CoA codes based on the CoA codes in the below text"

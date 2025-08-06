@@ -3,7 +3,9 @@ from typing import List, Any, Dict
 from datetime import datetime, date
 import re
 from langchain.tools import tool
-from core.logger import logger
+from core.logger import setup_logger
+
+logger = setup_logger(__name__)
 
 
 @tool

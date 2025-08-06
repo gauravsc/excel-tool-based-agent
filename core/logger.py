@@ -22,7 +22,4 @@ def setup_logger(name: str = "excel_agent") -> logging.Logger:
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
     
-    return logger
-
-# Create a default logger instance
-logger = setup_logger() 
+    return logger 

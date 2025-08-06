@@ -6,7 +6,9 @@ from tools.tools import (
     get_detailed_data_types, get_data_types_column, get_sheet_dimensions,
     get_header_row, find_cells_with_value, get_range_values
 )
-from core.logger import logger
+from core.logger import setup_logger
+
+logger = setup_logger(__name__)
 
 class ExcelAgent:
     """Agent that executes Excel tasks using OpenAI LLM and tool calls."""
@@ -28,15 +30,30 @@ class ExcelAgent:
         
         messages = [{"role": "user", "content": f"Task: {task_description}\nExcel file: {excel_file_path}"}]
         iteration = 0
+        max_iterations = 20
         
-        while True:
+        # Format tools for OpenAI API
+        tools = []
+        for tool in self.tools:
+            # Extract tool information from LangChain tool
+            tool_schema = {
+                "type": "function",
+                "function": {
+                    "name": tool.name,
+                    "description": tool.description,
+                    "parameters": tool.args_schema.schema() if hasattr(tool, 'args_schema') else {}
+                }
+            }
+            tools.append(tool_schema)
+        
+        while iteration < max_iterations:
             iteration += 1
             logger.info(f"LLM iteration {iteration}")
             
             response = self.client.chat.completions.create(
                 model="gpt-4",
                 messages=messages,
-                tools=[{"type": "function", "function": tool.schema} for tool in self.tools],
+                tools=tools,
                 tool_choice="auto"
             )
             
@@ -66,3 +83,6 @@ class ExcelAgent:
                     "tool_call_id": tool_call.id,
                     "content": str(result)
                 })
+        
+        logger.warning(f"Reached maximum iterations ({max_iterations}), stopping execution")
+        return "Task execution stopped due to maximum iteration limit reached."
