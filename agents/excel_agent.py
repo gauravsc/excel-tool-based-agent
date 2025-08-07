@@ -31,8 +31,8 @@ class ExcelAgent(BaseAgent):
     
     def execute(self, task_description: str, excel_file_path: str, **prompt_kwargs) -> str:
         """Execute task on Excel file using LLM and tools."""
-        logger.info(f"Starting task execution: {task_description[:100]}...")
-        logger.info(f"Excel file: {excel_file_path}")
+        logger.info("Starting task execution: %s...", task_description[:100])
+        logger.info("Excel file: %s", excel_file_path)
         
         # Get system prompt with any additional context including file path
         system_prompt = get_system_prompt(excel_file_path=excel_file_path, **prompt_kwargs)
@@ -59,7 +59,7 @@ class ExcelAgent(BaseAgent):
         
         while iteration < max_iterations:
             iteration += 1
-            logger.info(f"LLM iteration {iteration}")
+            logger.info("LLM iteration %d", iteration)
             
             response = self.client.chat.completions.create(
                 model=self.model,
@@ -77,22 +77,22 @@ class ExcelAgent(BaseAgent):
             if not message.tool_calls:
                 logger.info("No more tool calls, task completed")
                 final_cost = self.compute_total_cost()
-                logger.info(f"Task completed. Final cost: ${final_cost['total_cost_usd']} (API calls: {final_cost['api_calls']}, tokens: {final_cost['total_tokens']})")
+                logger.info("Task completed. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
                 return message.content
             
-            logger.info(f"LLM requested {len(message.tool_calls)} tool calls")
+            logger.info("LLM requested %d tool calls", len(message.tool_calls))
             
             for tool_call in message.tool_calls:
                 tool_name = tool_call.function.name
                 tool_args = eval(tool_call.function.arguments)
                 tool_args['file_path'] = excel_file_path
                 
-                logger.info(f"Executing tool: {tool_name} with args: {tool_args}")
+                logger.info("Executing tool: %s with args: %s", tool_name, tool_args)
                 
                 tool_func = next(tool for tool in self.tools if tool.name == tool_name)
                 result = tool_func.invoke(tool_args)
                 
-                logger.info(f"Tool {tool_name} returned result: {str(result)[:200]}...")
+                logger.info("Tool %s returned result: %s...", tool_name, str(result)[:200])
                 
                 messages.append({
                     "role": "tool",
@@ -100,7 +100,7 @@ class ExcelAgent(BaseAgent):
                     "content": str(result)
                 })
         
-        logger.warning(f"Reached maximum iterations ({max_iterations}), stopping execution")
+        logger.warning("Reached maximum iterations (%d), stopping execution", max_iterations)
         final_cost = self.compute_total_cost()
-        logger.info(f"Task stopped due to max iterations. Final cost: ${final_cost['total_cost_usd']} (API calls: {final_cost['api_calls']}, tokens: {final_cost['total_tokens']})")
+        logger.info("Task stopped due to max iterations. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
         return "Task execution stopped due to maximum iteration limit reached."

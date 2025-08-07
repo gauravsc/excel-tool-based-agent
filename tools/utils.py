@@ -9,7 +9,7 @@ logger = setup_logger(__name__)
 
 def get_detailed_data_types(values: List[Any]) -> List[str]:
     """Get detailed data types of values including dates, times, percentages, etc."""
-    logger.info(f"Analyzing data types for {len(values)} values")
+    logger.info("Analyzing data types for %d values", len(values))
     def categorize_value(value):
         if value is None:
             return "null"
@@ -49,5 +49,5 @@ def get_detailed_data_types(values: List[Any]) -> List[str]:
         return "unknown"
     
     result = [categorize_value(value) for value in values]
-    logger.info(f"Data type analysis complete: {len(set(result))} unique types found")
+    logger.info("Data type analysis complete: %d unique types found", len(set(result)))
     return result

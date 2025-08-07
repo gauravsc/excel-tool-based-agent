@@ -18,7 +18,7 @@ def setup_logger(name: str = "excel_agent") -> logging.Logger:
         console_handler.setFormatter(formatter)
         logger.addHandler(console_handler)
         
-        file_handler = logging.FileHandler(f'logs/excel_agent_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')
+        file_handler = logging.FileHandler('logs/excel_agent_%s.log' % datetime.now().strftime("%Y%m%d_%H%M%S"))
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
     

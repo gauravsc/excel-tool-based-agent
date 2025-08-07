@@ -11,88 +11,88 @@ logger = setup_logger(__name__)
 @tool
 def get_sheet_names(file_path: str) -> List[str]:
     """Get all sheet names from the Excel file."""
-    logger.info(f"Getting sheet names from {file_path}")
+    logger.info("Getting sheet names from %s", file_path)
     workbook = load_workbook(file_path)
     result = workbook.sheetnames
-    logger.info(f"Found {len(result)} sheets: {result}")
+    logger.info("Found %d sheets: %s", len(result), result)
     return result
 
 
 @tool
 def get_row_values(file_path: str, sheet_name: str, row_number: int) -> List[Any]:
     """Get all values from a specific row in the Excel sheet."""
-    logger.info(f"Getting row {row_number} values from sheet '{sheet_name}' in {file_path}")
+    logger.info("Getting row %d values from sheet '%s' in %s", row_number, sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     result = [cell.value for cell in sheet[row_number]]
-    logger.info(f"Row {row_number} has {len(result)} values")
+    logger.info("Row %d has %d values", row_number, len(result))
     return result
 
 
 @tool
 def get_column_values(file_path: str, sheet_name: str, column_letter: str) -> List[Any]:
     """Get all values from a specific column in the Excel sheet."""
-    logger.info(f"Getting column {column_letter} values from sheet '{sheet_name}' in {file_path}")
+    logger.info("Getting column %s values from sheet '%s' in %s", column_letter, sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     result = [cell.value for cell in sheet[column_letter]]
-    logger.info(f"Column {column_letter} has {len(result)} values")
+    logger.info("Column %s has %d values", column_letter, len(result))
     return result
 
 
 @tool
 def get_cell_value(file_path: str, sheet_name: str, cell_reference: str) -> Any:
     """Get the value of a specific cell in the Excel sheet."""
-    logger.info(f"Getting cell {cell_reference} value from sheet '{sheet_name}' in {file_path}")
+    logger.info("Getting cell %s value from sheet '%s' in %s", cell_reference, sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     result = sheet[cell_reference].value
-    logger.info(f"Cell {cell_reference} value: {result}")
+    logger.info("Cell %s value: %s", cell_reference, result)
     return result
 
 
 @tool
 def get_data_types_column(file_path: str, sheet_name: str, column_letter: str) -> List[str]:
     """Get the data types of all values in a specific column."""
-    logger.info(f"Getting data types for column {column_letter} in sheet '{sheet_name}' from {file_path}")
+    logger.info("Getting data types for column %s in sheet '%s' from %s", column_letter, sheet_name, file_path)
     # Read the column values directly instead of calling get_column_values
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     result = [cell.value for cell in sheet[column_letter]]
-    logger.info(f"Column {column_letter} has {len(result)} values")
+    logger.info("Column %s has %d values", column_letter, len(result))
     return get_detailed_data_types(result)
 
 
 @tool
 def get_sheet_dimensions(file_path: str, sheet_name: str) -> Dict[str, int]:
     """Get the number of rows and columns in the Excel sheet."""
-    logger.info(f"Getting dimensions for sheet '{sheet_name}' in {file_path}")
+    logger.info("Getting dimensions for sheet '%s' in %s", sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     result = {"rows": sheet.max_row, "columns": sheet.max_column}
-    logger.info(f"Sheet '{sheet_name}' dimensions: {result['rows']} rows x {result['columns']} columns")
+    logger.info("Sheet '%s' dimensions: %d rows x %d columns", sheet_name, result['rows'], result['columns'])
     return result
 
 
 @tool
 def get_max_rows(file_path: str, sheet_name: str) -> int:
     """Get the maximum number of rows in the Excel sheet."""
-    logger.info(f"Getting max rows for sheet '{sheet_name}' in {file_path}")
+    logger.info("Getting max rows for sheet '%s' in %s", sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     result = sheet.max_row
-    logger.info(f"Sheet '{sheet_name}' has {result} rows")
+    logger.info("Sheet '%s' has %d rows", sheet_name, result)
     return result
 
 
 @tool
 def get_max_columns(file_path: str, sheet_name: str) -> int:
     """Get the maximum number of columns in the Excel sheet."""
-    logger.info(f"Getting max columns for sheet '{sheet_name}' in {file_path}")
+    logger.info("Getting max columns for sheet '%s' in %s", sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     result = sheet.max_column
-    logger.info(f"Sheet '{sheet_name}' has {result} columns")
+    logger.info("Sheet '%s' has %d columns", sheet_name, result)
     return result
 
 
@@ -108,7 +108,7 @@ def get_max_columns(file_path: str, sheet_name: str) -> int:
 @tool
 def find_cells_with_value(file_path: str, sheet_name: str, search_value: Any) -> List[str]:
     """Find all cell references that contain a specific value."""
-    logger.info(f"Searching for value '{search_value}' in sheet '{sheet_name}' from {file_path}")
+    logger.info("Searching for value '%s' in sheet '%s' from %s", search_value, sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     cells = []
@@ -116,26 +116,26 @@ def find_cells_with_value(file_path: str, sheet_name: str, search_value: Any) ->
         for cell in row:
             if cell.value == search_value:
                 cells.append(cell.coordinate)
-    logger.info(f"Found {len(cells)} cells with value '{search_value}': {cells}")
+    logger.info("Found %d cells with value '%s': %s", len(cells), search_value, cells)
     return cells
 
 
 @tool
 def get_range_values(file_path: str, sheet_name: str, start_cell: str, end_cell: str) -> List[List[Any]]:
     """Get values from a range of cells in the Excel sheet."""
-    logger.info(f"Getting range {start_cell}:{end_cell} from sheet '{sheet_name}' in {file_path}")
+    logger.info("Getting range %s:%s from sheet '%s' in %s", start_cell, end_cell, sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     range_data = sheet[start_cell:end_cell]
     result = [[cell.value for cell in row] for row in range_data]
-    logger.info(f"Range {start_cell}:{end_cell} contains {len(result)} rows")
+    logger.info("Range %s:%s contains %d rows", start_cell, end_cell, len(result))
     return result
 
 
 @tool
 def get_sheet_content(file_path: str, sheet_name: str) -> Dict[int, Dict[str, Any]]:
     """Get all content of the sheet as a nested dictionary where outer dict keys are row numbers and inner dict keys are column letters."""
-    logger.info(f"Getting all content from sheet '{sheet_name}' in {file_path}")
+    logger.info("Getting all content from sheet '%s' in %s", sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     
@@ -148,14 +148,14 @@ def get_sheet_content(file_path: str, sheet_name: str) -> Dict[int, Dict[str, An
         if row_dict:  # Only include rows with data
             result[cell.row] = row_dict
     
-    logger.info(f"Retrieved {len(result)} rows with data from sheet '{sheet_name}'")
+    logger.info("Retrieved %d rows with data from sheet '%s'", len(result), sheet_name)
     return result
 
 
 @tool
 def get_row_values_sample(file_path: str, sheet_name: str, row_number: int, sample_size: int = 10) -> List[Any]:
     """Get a random sample of values from a specific row in the Excel sheet."""
-    logger.info(f"Getting sample of {sample_size} values from row {row_number} in sheet '{sheet_name}' from {file_path}")
+    logger.info("Getting sample of %d values from row %d in sheet '%s' from %s", sample_size, row_number, sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     all_values = [cell.value for cell in sheet[row_number]]
@@ -165,10 +165,10 @@ def get_row_values_sample(file_path: str, sheet_name: str, row_number: int, samp
     
     if len(non_empty_values) <= sample_size:
         result = non_empty_values
-        logger.info(f"Row {row_number} has {len(result)} non-empty values (less than sample size)")
+        logger.info("Row %d has %d non-empty values (less than sample size)", row_number, len(result))
     else:
         result = random.sample(non_empty_values, sample_size)
-        logger.info(f"Sampled {len(result)} values from row {row_number} (total non-empty: {len(non_empty_values)})")
+        logger.info("Sampled %d values from row %d (total non-empty: %d)", len(result), row_number, len(non_empty_values))
     
     return result
 
@@ -176,7 +176,7 @@ def get_row_values_sample(file_path: str, sheet_name: str, row_number: int, samp
 @tool
 def get_column_values_sample(file_path: str, sheet_name: str, column_letter: str, sample_size: int = 10) -> List[Any]:
     """Get a random sample of values from a specific column in the Excel sheet."""
-    logger.info(f"Getting sample of {sample_size} values from column {column_letter} in sheet '{sheet_name}' from {file_path}")
+    logger.info("Getting sample of %d values from column %s in sheet '%s' from %s", sample_size, column_letter, sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     all_values = [cell.value for cell in sheet[column_letter]]
@@ -186,10 +186,10 @@ def get_column_values_sample(file_path: str, sheet_name: str, column_letter: str
     
     if len(non_empty_values) <= sample_size:
         result = non_empty_values
-        logger.info(f"Column {column_letter} has {len(result)} non-empty values (less than sample size)")
+        logger.info("Column %s has %d non-empty values (less than sample size)", column_letter, len(result))
     else:
         result = random.sample(non_empty_values, sample_size)
-        logger.info(f"Sampled {len(result)} values from column {column_letter} (total non-empty: {len(non_empty_values)})")
+        logger.info("Sampled %d values from column %s (total non-empty: %d)", len(result), column_letter, len(non_empty_values))
     
     return result
 
@@ -197,7 +197,7 @@ def get_column_values_sample(file_path: str, sheet_name: str, column_letter: str
 @tool
 def get_data_types_column_sample(file_path: str, sheet_name: str, column_letter: str, sample_size: int = 10) -> List[str]:
     """Get the data types of a random sample of values from a specific column."""
-    logger.info(f"Getting data types for sample of {sample_size} values from column {column_letter} in sheet '{sheet_name}' from {file_path}")
+    logger.info("Getting data types for sample of %d values from column %s in sheet '%s' from %s", sample_size, column_letter, sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     all_values = [cell.value for cell in sheet[column_letter]]
@@ -207,10 +207,10 @@ def get_data_types_column_sample(file_path: str, sheet_name: str, column_letter:
     
     if len(non_empty_values) <= sample_size:
         sample_values = non_empty_values
-        logger.info(f"Column {column_letter} has {len(sample_values)} non-empty values (less than sample size)")
+        logger.info("Column %s has %d non-empty values (less than sample size)", column_letter, len(sample_values))
     else:
         sample_values = random.sample(non_empty_values, sample_size)
-        logger.info(f"Sampled {len(sample_values)} values from column {column_letter} (total non-empty: {len(non_empty_values)})")
+        logger.info("Sampled %d values from column %s (total non-empty: %d)", len(sample_values), column_letter, len(non_empty_values))
     
     result = get_detailed_data_types(sample_values)
     return result

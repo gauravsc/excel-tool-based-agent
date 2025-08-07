@@ -19,7 +19,7 @@ class BaseAgent(ABC):
             "api_calls": 0,
             "model_used": None
         }
-        logger.info(f"{self.__class__.__name__} initialized")
+        logger.info("%s initialized", self.__class__.__name__)
         self.model = None
     
     @abstractmethod
@@ -64,4 +64,4 @@ class BaseAgent(ABC):
         
         # Log current cost after each API call
         current_cost = self.compute_total_cost()
-        logger.info(f"Current cost for {self.__class__.__name__}: ${current_cost['total_cost_usd']} (API calls: {current_cost['api_calls']}, tokens: {current_cost['total_tokens']})") 
+        logger.info("Current cost for %s: $%s (API calls: %s, tokens: %s)", self.__class__.__name__, current_cost['total_cost_usd'], current_cost['api_calls'], current_cost['total_tokens']) 
