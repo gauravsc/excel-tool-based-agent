@@ -2,7 +2,7 @@ from agents.base_agent import BaseAgent
 from tools.tools import (
     get_sheet_names, get_row_values_sample, get_column_values_sample, get_data_types_column_sample, get_sheet_dimensions,
     get_range_values, get_sheet_content,
-    get_max_rows, get_max_columns
+    get_max_rows, get_max_columns, get_nonempty_column_letters
 )
 from core.logger import setup_logger
 from prompts.spreadsheet_encoder_agent import get_system_prompt
@@ -19,7 +19,7 @@ class SpreadsheetEncoderAgent(BaseAgent):
             get_sheet_names, get_row_values_sample, get_column_values_sample,
             get_data_types_column_sample, get_sheet_dimensions,
             get_range_values, get_sheet_content,
-            get_max_rows, get_max_columns
+            get_max_rows, get_max_columns, get_nonempty_column_letters
         ]
         logger.info("SpreadsheetEncoderAgent initialized")
         # INSERT_YOUR_CODE

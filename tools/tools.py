@@ -215,3 +215,21 @@ def get_data_types_column_sample(file_path: str, sheet_name: str, column_letter:
     result = get_detailed_data_types(sample_values)
     return result
 
+
+@tool
+def get_nonempty_column_letters(file_path: str, sheet_name: str) -> List[str]:
+    """Get a list of column letters that contain non-empty values in the Excel sheet."""
+    logger.info("Getting non-empty column letters from sheet '%s' in %s", sheet_name, file_path)
+    workbook = load_workbook(file_path)
+    sheet = workbook[sheet_name]
+    
+    nonempty_columns = []
+    for column in sheet.columns:
+        # Check if any cell in this column has a non-empty value
+        has_data = any(cell.value is not None for cell in column)
+        if has_data:
+            nonempty_columns.append(column[0].column_letter)
+    
+    logger.info("Found %d non-empty columns: %s", len(nonempty_columns), nonempty_columns)
+    return nonempty_columns
+
