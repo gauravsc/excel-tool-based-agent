@@ -1,10 +1,8 @@
 import os
-from typing import List, Any, Dict
 from openai import OpenAI
 from tools.tools import (
-    get_sheet_names, get_row_values, get_column_values, get_cell_value,
-    get_data_types_column, get_sheet_dimensions,
-    find_cells_with_value, get_range_values, get_sheet_content,
+    get_sheet_names, get_row_values_sample, get_column_values_sample, get_data_types_column_sample, get_sheet_dimensions,
+    get_range_values, get_sheet_content,
     get_max_rows, get_max_columns
 )
 from core.logger import setup_logger
@@ -19,8 +17,8 @@ class SpreadsheetEncoderAgent:
         """Initialize with OpenAI API key."""
         self.client = OpenAI(api_key=api_key or os.getenv("OPENAI_API_KEY"))
         self.tools = [
-            get_sheet_names, get_row_values, get_column_values,
-            get_data_types_column, get_sheet_dimensions,
+            get_sheet_names, get_row_values_sample, get_column_values_sample,
+            get_data_types_column_sample, get_sheet_dimensions,
             get_range_values, get_sheet_content,
             get_max_rows, get_max_columns
         ]
@@ -55,10 +53,12 @@ class SpreadsheetEncoderAgent:
         
         while iteration < max_iterations:
             iteration += 1
+            # INSERT_YOUR_CODE
+            print("=" * 80)
             logger.info(f"LLM iteration {iteration}")
             
             response = self.client.chat.completions.create(
-                model="gpt-4",
+                model="o3",
                 messages=messages,
                 tools=tools,
                 tool_choice="auto"

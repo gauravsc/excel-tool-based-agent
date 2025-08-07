@@ -1,7 +1,6 @@
 from openpyxl import load_workbook
 from typing import List, Any, Dict
-from datetime import datetime, date
-import re
+import random
 from langchain.tools import tool
 from core.logger import setup_logger
 from tools.utils import get_detailed_data_types
@@ -150,5 +149,69 @@ def get_sheet_content(file_path: str, sheet_name: str) -> Dict[int, Dict[str, An
             result[cell.row] = row_dict
     
     logger.info(f"Retrieved {len(result)} rows with data from sheet '{sheet_name}'")
+    return result
+
+
+@tool
+def get_row_values_sample(file_path: str, sheet_name: str, row_number: int, sample_size: int = 10) -> List[Any]:
+    """Get a random sample of values from a specific row in the Excel sheet."""
+    logger.info(f"Getting sample of {sample_size} values from row {row_number} in sheet '{sheet_name}' from {file_path}")
+    workbook = load_workbook(file_path)
+    sheet = workbook[sheet_name]
+    all_values = [cell.value for cell in sheet[row_number]]
+    
+    # Filter out None values and get non-empty values
+    non_empty_values = [val for val in all_values if val is not None]
+    
+    if len(non_empty_values) <= sample_size:
+        result = non_empty_values
+        logger.info(f"Row {row_number} has {len(result)} non-empty values (less than sample size)")
+    else:
+        result = random.sample(non_empty_values, sample_size)
+        logger.info(f"Sampled {len(result)} values from row {row_number} (total non-empty: {len(non_empty_values)})")
+    
+    return result
+
+
+@tool
+def get_column_values_sample(file_path: str, sheet_name: str, column_letter: str, sample_size: int = 10) -> List[Any]:
+    """Get a random sample of values from a specific column in the Excel sheet."""
+    logger.info(f"Getting sample of {sample_size} values from column {column_letter} in sheet '{sheet_name}' from {file_path}")
+    workbook = load_workbook(file_path)
+    sheet = workbook[sheet_name]
+    all_values = [cell.value for cell in sheet[column_letter]]
+    
+    # Filter out None values and get non-empty values
+    non_empty_values = [val for val in all_values if val is not None]
+    
+    if len(non_empty_values) <= sample_size:
+        result = non_empty_values
+        logger.info(f"Column {column_letter} has {len(result)} non-empty values (less than sample size)")
+    else:
+        result = random.sample(non_empty_values, sample_size)
+        logger.info(f"Sampled {len(result)} values from column {column_letter} (total non-empty: {len(non_empty_values)})")
+    
+    return result
+
+
+@tool
+def get_data_types_column_sample(file_path: str, sheet_name: str, column_letter: str, sample_size: int = 10) -> List[str]:
+    """Get the data types of a random sample of values from a specific column."""
+    logger.info(f"Getting data types for sample of {sample_size} values from column {column_letter} in sheet '{sheet_name}' from {file_path}")
+    workbook = load_workbook(file_path)
+    sheet = workbook[sheet_name]
+    all_values = [cell.value for cell in sheet[column_letter]]
+    
+    # Filter out None values and get non-empty values
+    non_empty_values = [val for val in all_values if val is not None]
+    
+    if len(non_empty_values) <= sample_size:
+        sample_values = non_empty_values
+        logger.info(f"Column {column_letter} has {len(sample_values)} non-empty values (less than sample size)")
+    else:
+        sample_values = random.sample(non_empty_values, sample_size)
+        logger.info(f"Sampled {len(sample_values)} values from column {column_letter} (total non-empty: {len(non_empty_values)})")
+    
+    result = get_detailed_data_types(sample_values)
     return result
 
