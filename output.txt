@@ -1,0 +1,1148 @@
+2025-08-07 12:14:37 - __main__ - INFO - Starting ExcelAgent application
+2025-08-07 12:14:37 - __main__ - INFO - Environment variables loaded
+2025-08-07 12:14:37 - __main__ - INFO - === Cleaning spreadsheet by removing hidden columns ===
+2025-08-07 12:14:37 - __main__ - INFO - No hidden columns found in Profit and Loss
+2025-08-07 12:14:37 - __main__ - INFO - === Using SpreadsheetEncoderAgent ===
+2025-08-07 12:14:37 - agents.spreadsheet_encoder_agent - INFO - SpreadsheetEncoderAgent initialized
+2025-08-07 12:14:37 - agents.spreadsheet_encoder_agent - INFO - Starting spreadsheet encoding for: data/single_sheet.xlsx
+================================================================================
+2025-08-07 12:14:37 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 1
+2025-08-07 12:14:39 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:14:39 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_sheet_names with args: {'file_path': 'data/single_sheet.xlsx'}
+2025-08-07 12:14:39 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_sheet_names with arguments: {'file_path': 'data/single_sheet.xlsx'}
+2025-08-07 12:14:39 - tools.tools - INFO - Getting sheet names from data/single_sheet.xlsx
+2025-08-07 12:14:39 - tools.tools - INFO - Found 1 sheets: ['Profit and Loss']
+2025-08-07 12:14:39 - agents.spreadsheet_encoder_agent - INFO - Tool get_sheet_names returned result: ['Profit and Loss']...
+================================================================================
+2025-08-07 12:14:39 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 2
+2025-08-07 12:14:42 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:14:42 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_sheet_dimensions with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:14:42 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_sheet_dimensions with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:14:42 - tools.tools - INFO - Getting dimensions for sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:14:42 - tools.tools - INFO - Sheet 'Profit and Loss' dimensions: 158 rows x 54 columns
+2025-08-07 12:14:42 - agents.spreadsheet_encoder_agent - INFO - Tool get_sheet_dimensions returned result: {'rows': 158, 'columns': 54}...
+================================================================================
+2025-08-07 12:14:42 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 3
+2025-08-07 12:14:44 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:14:44 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_max_rows with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:14:44 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_max_rows with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:14:44 - tools.tools - INFO - Getting max rows for sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:14:44 - tools.tools - INFO - Sheet 'Profit and Loss' has 158 rows
+2025-08-07 12:14:44 - agents.spreadsheet_encoder_agent - INFO - Tool get_max_rows returned result: 158...
+================================================================================
+2025-08-07 12:14:44 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 4
+2025-08-07 12:14:46 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:14:46 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_max_columns with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:14:46 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_max_columns with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:14:46 - tools.tools - INFO - Getting max columns for sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:14:46 - tools.tools - INFO - Sheet 'Profit and Loss' has 54 columns
+2025-08-07 12:14:46 - agents.spreadsheet_encoder_agent - INFO - Tool get_max_columns returned result: 54...
+================================================================================
+2025-08-07 12:14:46 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 5
+2025-08-07 12:14:48 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:14:48 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_range_values with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'A1', 'end_cell': 'BB1'}
+2025-08-07 12:14:48 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_range_values with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'A1', 'end_cell': 'BB1'}
+2025-08-07 12:14:48 - tools.tools - INFO - Getting range A1:BB1 from sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:14:48 - tools.tools - INFO - Range A1:BB1 contains 1 rows
+2025-08-07 12:14:48 - agents.spreadsheet_encoder_agent - INFO - Tool get_range_values returned result: [[None, None, None, 7, None, None, None, None, None, None, None, None, None, None, None, None, None, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, None, 1, 1, 1, 1, 1, 1, 1, ...
+================================================================================
+2025-08-07 12:14:48 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 6
+2025-08-07 12:14:50 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:14:50 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_range_values with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'A2', 'end_cell': 'BB2'}
+2025-08-07 12:14:50 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_range_values with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'A2', 'end_cell': 'BB2'}
+2025-08-07 12:14:50 - tools.tools - INFO - Getting range A2:BB2 from sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:14:50 - tools.tools - INFO - Range A2:BB2 contains 1 rows
+2025-08-07 12:14:50 - agents.spreadsheet_encoder_agent - INFO - Tool get_range_values returned result: [[None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, ...
+================================================================================
+2025-08-07 12:14:50 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 7
+2025-08-07 12:14:53 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:14:53 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_row_values_sample with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'row_number': 1, 'sample_size': 10}
+2025-08-07 12:14:53 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_row_values_sample with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'row_number': 1, 'sample_size': 10}
+2025-08-07 12:14:53 - tools.tools - INFO - Getting sample of 10 values from row 1 in sheet 'Profit and Loss' from data/single_sheet.xlsx
+2025-08-07 12:14:53 - tools.tools - INFO - Sampled 10 values from row 1 (total non-empty: 37)
+2025-08-07 12:14:53 - agents.spreadsheet_encoder_agent - INFO - Tool get_row_values_sample returned result: [0, 1, 1, 0, 1, 1, 1, 0, 0, 0]...
+================================================================================
+2025-08-07 12:14:53 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 8
+2025-08-07 12:14:55 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:14:55 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_row_values_sample with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'row_number': 2, 'sample_size': 10}
+2025-08-07 12:14:55 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_row_values_sample with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'row_number': 2, 'sample_size': 10}
+2025-08-07 12:14:55 - tools.tools - INFO - Getting sample of 10 values from row 2 in sheet 'Profit and Loss' from data/single_sheet.xlsx
+2025-08-07 12:14:55 - tools.tools - INFO - Row 2 has 0 non-empty values (less than sample size)
+2025-08-07 12:14:55 - agents.spreadsheet_encoder_agent - INFO - Tool get_row_values_sample returned result: []...
+================================================================================
+2025-08-07 12:14:55 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 9
+2025-08-07 12:14:58 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:14:58 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_column_values_sample with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'A', 'sample_size': 10}
+2025-08-07 12:14:58 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_column_values_sample with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'A', 'sample_size': 10}
+2025-08-07 12:14:58 - tools.tools - INFO - Getting sample of 10 values from column A in sheet 'Profit and Loss' from data/single_sheet.xlsx
+2025-08-07 12:14:59 - tools.tools - INFO - Column A has 0 non-empty values (less than sample size)
+2025-08-07 12:14:59 - agents.spreadsheet_encoder_agent - INFO - Tool get_column_values_sample returned result: []...
+================================================================================
+2025-08-07 12:14:59 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 10
+2025-08-07 12:15:01 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:15:01 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_column_values_sample with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'D', 'sample_size': 10}
+2025-08-07 12:15:01 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_column_values_sample with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'D', 'sample_size': 10}
+2025-08-07 12:15:01 - tools.tools - INFO - Getting sample of 10 values from column D in sheet 'Profit and Loss' from data/single_sheet.xlsx
+2025-08-07 12:15:01 - tools.tools - INFO - Sampled 10 values from column D (total non-empty: 97)
+2025-08-07 12:15:01 - agents.spreadsheet_encoder_agent - INFO - Tool get_column_values_sample returned result: ['Norwich', 'Belfast', 'Depreciation Fixed Assets', 'Central', 'Overheads', '% sales', 'Occupancy', 'Cardiff', 'Nottingham', 'Pref Share Interest']...
+================================================================================
+2025-08-07 12:15:01 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 11
+2025-08-07 12:15:03 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:15:03 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_data_types_column_sample with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'D', 'sample_size': 10}
+2025-08-07 12:15:03 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_data_types_column_sample with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'D', 'sample_size': 10}
+2025-08-07 12:15:03 - tools.tools - INFO - Getting data types for sample of 10 values from column D in sheet 'Profit and Loss' from data/single_sheet.xlsx
+2025-08-07 12:15:03 - tools.tools - INFO - Sampled 10 values from column D (total non-empty: 97)
+2025-08-07 12:15:03 - tools.utils - INFO - Analyzing data types for 10 values
+2025-08-07 12:15:03 - tools.utils - INFO - Data type analysis complete: 1 unique types found
+2025-08-07 12:15:03 - agents.spreadsheet_encoder_agent - INFO - Tool get_data_types_column_sample returned result: ['text', 'text', 'text', 'text', 'text', 'text', 'text', 'text', 'text', 'text']...
+================================================================================
+2025-08-07 12:15:03 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 12
+2025-08-07 12:15:06 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:15:06 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_column_values_sample with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'E', 'sample_size': 10}
+2025-08-07 12:15:06 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_column_values_sample with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'E', 'sample_size': 10}
+2025-08-07 12:15:06 - tools.tools - INFO - Getting sample of 10 values from column E in sheet 'Profit and Loss' from data/single_sheet.xlsx
+2025-08-07 12:15:06 - tools.tools - INFO - Column E has 0 non-empty values (less than sample size)
+2025-08-07 12:15:06 - agents.spreadsheet_encoder_agent - INFO - Tool get_column_values_sample returned result: []...
+================================================================================
+2025-08-07 12:15:06 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 13
+2025-08-07 12:15:08 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:15:08 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_sheet_content with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:15:08 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_sheet_content with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:15:08 - tools.tools - INFO - Getting all content from sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:15:08 - tools.tools - INFO - Retrieved 99 rows with data from sheet 'Profit and Loss'
+2025-08-07 12:15:08 - agents.spreadsheet_encoder_agent - INFO - Tool get_sheet_content returned result: {1: {'D': 7, 'R': 1, 'S': 1, 'T': 1, 'U': 1, 'V': 1, 'W': 1, 'X': 1, 'Y': 0, 'Z': 0, 'AA': 0, 'AB': 0, 'AC': 0, 'AD': 1, 'AE': 1, 'AF': 1, 'AG': 1, 'AH': 1, 'AI': 1, 'AJ': 1, 'AK': 0, 'AL': 0, 'AM': 0...
+================================================================================
+2025-08-07 12:15:08 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 14
+Traceback (most recent call last):
+  File "/Users/gauravsingh/code/excel-tool-based-agent/main.py", line 60, in <module>
+    main()
+  File "/Users/gauravsingh/code/excel-tool-based-agent/main.py", line 33, in main
+    llm_encoding = encoder_agent.encode(excel_file)
+  File "/Users/gauravsingh/code/excel-tool-based-agent/agents/spreadsheet_encoder_agent.py", line 60, in encode
+    response = self.client.chat.completions.create(
+  File "/Users/gauravsingh/code/excel-tool-based-agent/.venv/lib/python3.9/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/gauravsingh/code/excel-tool-based-agent/.venv/lib/python3.9/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+  File "/Users/gauravsingh/code/excel-tool-based-agent/.venv/lib/python3.9/site-packages/openai/_base_client.py", line 1249, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/Users/gauravsingh/code/excel-tool-based-agent/.venv/lib/python3.9/site-packages/openai/_base_client.py", line 1037, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "This model's maximum context length is 8192 tokens. However, your messages resulted in 13735 tokens (13333 in the messages, 402 in the functions). Please reduce the length of the messages or functions.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+(.venv) gauravsingh@Gauravs-MacBook-Pro excel-tool-based-agent % python main.py
+/Users/gauravsingh/code/excel-tool-based-agent/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+2025-08-07 12:18:02 - __main__ - INFO - Starting ExcelAgent application
+2025-08-07 12:18:02 - __main__ - INFO - Environment variables loaded
+2025-08-07 12:18:02 - __main__ - INFO - === Cleaning spreadsheet by removing hidden columns ===
+2025-08-07 12:18:02 - __main__ - INFO - No hidden columns found in Profit and Loss
+2025-08-07 12:18:02 - __main__ - INFO - === Using SpreadsheetEncoderAgent ===
+2025-08-07 12:18:02 - agents.spreadsheet_encoder_agent - INFO - SpreadsheetEncoderAgent initialized
+2025-08-07 12:18:02 - agents.spreadsheet_encoder_agent - INFO - Starting spreadsheet encoding for: data/single_sheet.xlsx
+================================================================================
+2025-08-07 12:18:02 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 1
+2025-08-07 12:18:12 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:18:12 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_sheet_names with args: {'file_path': 'data/single_sheet.xlsx'}
+2025-08-07 12:18:12 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_sheet_names with arguments: {'file_path': 'data/single_sheet.xlsx'}
+2025-08-07 12:18:13 - tools.tools - INFO - Getting sheet names from data/single_sheet.xlsx
+2025-08-07 12:18:13 - tools.tools - INFO - Found 1 sheets: ['Profit and Loss']
+2025-08-07 12:18:13 - agents.spreadsheet_encoder_agent - INFO - Tool get_sheet_names returned result: ['Profit and Loss']...
+================================================================================
+2025-08-07 12:18:13 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 2
+2025-08-07 12:18:14 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:18:14 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_sheet_dimensions with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:18:14 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_sheet_dimensions with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:18:14 - tools.tools - INFO - Getting dimensions for sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:18:14 - tools.tools - INFO - Sheet 'Profit and Loss' dimensions: 158 rows x 54 columns
+2025-08-07 12:18:14 - agents.spreadsheet_encoder_agent - INFO - Tool get_sheet_dimensions returned result: {'rows': 158, 'columns': 54}...
+================================================================================
+2025-08-07 12:18:14 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 3
+2025-08-07 12:18:16 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:18:16 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_range_values with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'A1', 'end_cell': 'BB1'}
+2025-08-07 12:18:16 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_range_values with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'A1', 'end_cell': 'BB1'}
+2025-08-07 12:18:16 - tools.tools - INFO - Getting range A1:BB1 from sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:18:16 - tools.tools - INFO - Range A1:BB1 contains 1 rows
+2025-08-07 12:18:16 - agents.spreadsheet_encoder_agent - INFO - Tool get_range_values returned result: [[None, None, None, 7, None, None, None, None, None, None, None, None, None, None, None, None, None, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, None, 1, 1, 1, 1, 1, 1, 1, ...
+================================================================================
+2025-08-07 12:18:16 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 4
+2025-08-07 12:18:20 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:18:20 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_range_values with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'A1', 'end_cell': 'Z10'}
+2025-08-07 12:18:20 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_range_values with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'A1', 'end_cell': 'Z10'}
+2025-08-07 12:18:20 - tools.tools - INFO - Getting range A1:Z10 from sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:18:20 - tools.tools - INFO - Range A1:Z10 contains 10 rows
+2025-08-07 12:18:20 - agents.spreadsheet_encoder_agent - INFO - Tool get_range_values returned result: [[None, None, None, 7, None, None, None, None, None, None, None, None, None, None, None, None, None, 1, 1, 1, 1, 1, 1, 1, 0, 0], [None, None, None, None, None, None, None, None, None, None, None, None...
+================================================================================
+2025-08-07 12:18:20 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 5
+2025-08-07 12:18:28 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:18:28 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_range_values with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'A1', 'end_cell': 'BB30'}
+2025-08-07 12:18:28 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_range_values with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'A1', 'end_cell': 'BB30'}
+2025-08-07 12:18:28 - tools.tools - INFO - Getting range A1:BB30 from sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:18:28 - tools.tools - INFO - Range A1:BB30 contains 30 rows
+2025-08-07 12:18:28 - agents.spreadsheet_encoder_agent - INFO - Tool get_range_values returned result: [[None, None, None, 7, None, None, None, None, None, None, None, None, None, None, None, None, None, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, None, 1, 1, 1, 1, 1, 1, 1, ...
+================================================================================
+2025-08-07 12:18:28 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 6
+2025-08-07 12:18:44 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:18:44 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_sheet_content with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:18:44 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_sheet_content with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:18:44 - tools.tools - INFO - Getting all content from sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:18:44 - tools.tools - INFO - Retrieved 99 rows with data from sheet 'Profit and Loss'
+2025-08-07 12:18:44 - agents.spreadsheet_encoder_agent - INFO - Tool get_sheet_content returned result: {1: {'D': 7, 'R': 1, 'S': 1, 'T': 1, 'U': 1, 'V': 1, 'W': 1, 'X': 1, 'Y': 0, 'Z': 0, 'AA': 0, 'AB': 0, 'AC': 0, 'AD': 1, 'AE': 1, 'AF': 1, 'AG': 1, 'AH': 1, 'AI': 1, 'AJ': 1, 'AK': 0, 'AL': 0, 'AM': 0...
+================================================================================
+2025-08-07 12:18:44 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 7
+2025-08-07 12:19:08 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:19:08 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_column_values_sample with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'D', 'sample_size': 20}
+2025-08-07 12:19:08 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_column_values_sample with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'D', 'sample_size': 20}
+2025-08-07 12:19:08 - tools.tools - INFO - Getting sample of 20 values from column D in sheet 'Profit and Loss' from data/single_sheet.xlsx
+2025-08-07 12:19:08 - tools.tools - INFO - Sampled 20 values from column D (total non-empty: 97)
+2025-08-07 12:19:08 - agents.spreadsheet_encoder_agent - INFO - Tool get_column_values_sample returned result: ['Norwich', 'Bridgend', 'Monitoring / Non Exec Fees', 'Deferred Consideration Interest', 'Bank Interest', 'Leicester', 'EBIT', '% sales', '% sales', 'Water St', '% sales', 'Edinburgh', 'PAT', 'Pre Ope...
+================================================================================
+2025-08-07 12:19:08 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 8
+2025-08-07 12:19:41 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:19:41 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_column_values_sample with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'F', 'sample_size': 10}
+2025-08-07 12:19:41 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_column_values_sample with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'F', 'sample_size': 10}
+2025-08-07 12:19:41 - tools.tools - INFO - Getting sample of 10 values from column F in sheet 'Profit and Loss' from data/single_sheet.xlsx
+2025-08-07 12:19:41 - tools.tools - INFO - Sampled 10 values from column F (total non-empty: 97)
+2025-08-07 12:19:41 - agents.spreadsheet_encoder_agent - INFO - Tool get_column_values_sample returned result: [99838.23, 2694877.18, 24730.98000000001, 20029.32000000001, 0.3510936151692877, '£k', 113404.15, 121764.08, 0.7689103919066652, 111966.62]...
+================================================================================
+2025-08-07 12:19:41 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 9
+2025-08-07 12:19:58 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:19:58 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_max_rows with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:19:58 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_max_rows with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:19:58 - tools.tools - INFO - Getting max rows for sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:19:59 - tools.tools - INFO - Sheet 'Profit and Loss' has 158 rows
+2025-08-07 12:19:59 - agents.spreadsheet_encoder_agent - INFO - Tool get_max_rows returned result: 158...
+================================================================================
+2025-08-07 12:19:59 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 10
+2025-08-07 12:20:14 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:20:14 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_range_values with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'D1', 'end_cell': 'D158'}
+2025-08-07 12:20:14 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_range_values with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'D1', 'end_cell': 'D158'}
+2025-08-07 12:20:14 - tools.tools - INFO - Getting range D1:D158 from sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:20:14 - tools.tools - INFO - Range D1:D158 contains 158 rows
+2025-08-07 12:20:14 - agents.spreadsheet_encoder_agent - INFO - Tool get_range_values returned result: [[7], [None], [None], ['Profit & Loss'], [None], ['Group Consolidated Profit & Loss FY25'], [None], [None], [None], [None], ['Bold St'], ['Corn Exchange'], ['Water St'], ['Birmingham'], ['Oxford'], ['...
+================================================================================
+2025-08-07 12:20:14 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 11
+2025-08-07 12:20:29 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:20:29 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_range_values with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'D11', 'end_cell': 'P40'}
+2025-08-07 12:20:29 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_range_values with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'D11', 'end_cell': 'P40'}
+2025-08-07 12:20:29 - tools.tools - INFO - Getting range D11:P40 from sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:20:29 - tools.tools - INFO - Range D11:P40 contains 30 rows
+2025-08-07 12:20:29 - agents.spreadsheet_encoder_agent - INFO - Tool get_range_values returned result: [['Bold St', None, 121764.08, 126800, -5035.920000000013, 127573.98, -5809.899999999994, None, 922980.4499999998, 961300, -38319.55000000016, 910080.08, 12900.36999999988], ['Corn Exchange', None, 179...
+================================================================================
+2025-08-07 12:20:29 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 12
+2025-08-07 12:21:28 - agents.spreadsheet_encoder_agent - INFO - No more tool calls, encoding completed
+2025-08-07 12:21:28 - __main__ - INFO - LLM encoding completed
+LLM-Generated Encoding:
+{
+  "file_info": {
+    "filename": "file.xlsx",
+    "total_sheets": 1,
+    "encoding_timestamp": "2024-06-11T00:00:00Z"
+  },
+  "sheets": [
+    {
+      "sheet_name": "Profit and Loss",
+      "sheet_description": "Management‐style profit & loss statement that combines: (a) period (4-week) outlet results, (b) year-to-date outlet results, (c) consolidated P&L with margin analysis, (d) cost-line and EBITDA break-outs, (e) repeat outlet-level contribution table.  All monetary figures are in £ thousands (explicit “£k” heading).  The worksheet is arranged vertically with blank rows separating logical blocks.",
+      "dimensions": {
+        "rows": 158,
+        "columns": 54,
+        "range": "A1:BB158"
+      },
+      "tables": [
+        {
+          "table_name": "Outlet_Period_and_YTD",
+          "table_description": "Period-7 (4 weeks) and year-to-date performance for each trading outlet.  Provides Actual, Budget, Variances and Prior-Year comparisons for both the current period and cumulative year-to-date.  Source lines sit under a two-row header that indicates ‘Actual / Budget / Variance / Last Year / Variance’ then ‘£k’.",
+          "boundaries": {
+            "start_row": 8,
+            "end_row": 40,
+            "start_column": "D",
+            "end_column": "P",
+            "range": "D8:P40"
+          },
+          "columns": [
+            {
+              "column_letter": "D",
+              "column_name": "Outlet",
+              "column_description": "Trading unit / restaurant name.  Serves as the row header.",
+              "data_type": "text",
+              "sample_values": ["Bold St", "Corn Exchange", "Water St", "Birmingham", "Uni Green"],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "F",
+              "column_name": "Period Actual (£k)",
+              "column_description": "Actual net sales for Period-7 expressed in £000.",
+              "data_type": "numeric",
+              "sample_values": [121764.08, 239083.17, 0, 165437.54, 99838.23],
+              "unique_values_count": 30,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "G",
+              "column_name": "Period Budget (£k)",
+              "column_description": "Budgeted sales for the period.",
+              "data_type": "numeric",
+              "sample_values": [126800, 265300, 0, 158700, 150792],
+              "unique_values_count": 25,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "H",
+              "column_name": "Period Variance (£k)",
+              "column_description": "Actual minus Budget for period.",
+              "data_type": "numeric",
+              "sample_values": [-5035.92, -31238.23, 0, 6737.54, -37387.85],
+              "unique_values_count": 30,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "I",
+              "column_name": "Period Last Year (£k)",
+              "column_description": "Same-period sales last year.",
+              "data_type": "numeric",
+              "sample_values": [127573.98, 245971.07, 0, 154843.44, 147727.35],
+              "unique_values_count": 29,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "J",
+              "column_name": "Period Δ vs LY (£k)",
+              "column_description": "Variance to last year.",
+              "data_type": "numeric",
+              "sample_values": [-5809.9, -6887.9, 0, 10594.1, -34323.2],
+              "unique_values_count": 30,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "L",
+              "column_name": "YTD Actual (£k)",
+              "column_description": "Cumulative net sales (weeks 1-30).",
+              "data_type": "numeric",
+              "sample_values": [922980.45, 2038798.61, 0, 1607917.23, 808407.83],
+              "unique_values_count": 30,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "M",
+              "column_name": "YTD Budget (£k)",
+              "column_description": "Cumulative budget.",
+              "data_type": "numeric",
+              "sample_values": [961300, 2180700, 0, 1539541, 1077998],
+              "unique_values_count": 25,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "N",
+              "column_name": "YTD Variance (£k)",
+              "column_description": "Actual minus Budget year-to-date.",
+              "data_type": "numeric",
+              "sample_values": [-38319.55, -141901.39, 0, 68376.23, -252244.37],
+              "unique_values_count": 30,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "O",
+              "column_name": "YTD Last Year (£k)",
+              "column_description": "Cumulative sales prior year.",
+              "data_type": "numeric",
+              "sample_values": [910080.08, 2131091.34, 0, 1491961.07, 674656.25],
+              "unique_values_count": 30,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "P",
+              "column_name": "YTD Δ vs LY (£k)",
+              "column_description": "Variance to last year cumulative.",
+              "data_type": "numeric",
+              "sample_values": [12900.37, -92292.73, 0, 115956.16, 167183.78],
+              "unique_values_count": 30,
+              "has_null_values": false
+            }
+          ],
+          "row_headers": {
+            "has_row_headers": true,
+            "row_header_column": "D",
+            "row_header_description": "Outlet / restaurant identifier"
+          },
+          "data_quality": {
+            "completeness": "Out of 30 outlet rows, all financial columns populated; some outlets contain zero values where outlet not trading (e.g., Uni Green, Kings Road).",
+            "consistency": "Numeric columns consistently numeric; text outlet names consistent. Blank column E & K act as spacers.",
+            "anomalies": ["Rows with all zero monetary values suggest closed / not-trading outlets."]
+          }
+        },
+        {
+          "table_name": "Consolidated_PandL",
+          "table_description": "Group-level P&L from Net Sales down to PAT including margin (% of sales) analyses.  Covers current period, budget, variance, last year and YTD equivalents.",
+          "boundaries": {
+            "start_row": 60,
+            "end_row": 105,
+            "start_column": "D",
+            "end_column": "P",
+            "range": "D60:P105"
+          },
+          "columns": [
+            {
+              "column_letter": "D",
+              "column_name": "Cost Line / KPI",
+              "column_description": "Label for each P&L line (e.g., Net Sales, Gross Profit, Labour, EBITDA, Tax).",
+              "data_type": "text",
+              "sample_values": ["Net Sales", "Gross Profit", "% sales", "EBITDA", "PAT"],
+              "unique_values_count": 26,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "F",
+              "column_name": "Period Actual (£k / ratio)",
+              "column_description": "Actual value for period (monetary) or ratio for ‘% sales’ rows.",
+              "data_type": "mixed_numeric",
+              "sample_values": [3504800.05, 0.7689103919, 1230512.92, 437666.73, -154526.76],
+              "unique_values_count": 40,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "G",
+              "column_name": "Period Budget",
+              "column_description": "Budget value for period.",
+              "data_type": "mixed_numeric",
+              "sample_values": [4202748, 0.7718469291, 1394789.152, 575196.74, 28596.78],
+              "unique_values_count": 40,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "H",
+              "column_name": "Period Variance",
+              "column_description": "Actual-Budget or ratio delta.",
+              "data_type": "mixed_numeric",
+              "sample_values": [-697947.95, -0.0029365372, 164276.232, -137530.01, -183123.54],
+              "unique_values_count": 40,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "I",
+              "column_name": "Period Last Year",
+              "column_description": "Prior year value.",
+              "data_type": "mixed_numeric",
+              "sample_values": [3317334.59, 0.7467696438, 1088239.63, 362397.22, -198997.14],
+              "unique_values_count": 38,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "J",
+              "column_name": "Period Δ vs LY",
+              "column_description": "Variance to last year.",
+              "data_type": "mixed_numeric",
+              "sample_values": [187465.46, 0.0221407481, -142273.29, 75269.51, 106194.89],
+              "unique_values_count": 38,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "L",
+              "column_name": "YTD Actual",
+              "column_description": "Cumulative value YTD.",
+              "data_type": "mixed_numeric",
+              "sample_values": [27029444.07, 0.7730185832, 9144784.88, 3678313.07, -852895.17],
+              "unique_values_count": 40,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "M",
+              "column_name": "YTD Budget",
+              "column_description": "Cumulative budget.",
+              "data_type": "mixed_numeric",
+              "sample_values": [29695784, 0.7680900415, 10133382.083, 3764044.94, -565505.69],
+              "unique_values_count": 39,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "N",
+              "column_name": "YTD Variance",
+              "column_description": "Actual-Budget YTD.",
+              "data_type": "mixed_numeric",
+              "sample_values": [-2666339.93, 0.0049285417, 988597.20, -85731.87, -287389.48],
+              "unique_values_count": 39,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "O",
+              "column_name": "YTD Last Year",
+              "column_description": "Prior year cumulative.",
+              "data_type": "mixed_numeric",
+              "sample_values": [22729321.9, 0.7525525827, 7437855.32, 2835695.90, -1479027.50],
+              "unique_values_count": 38,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "P",
+              "column_name": "YTD Δ vs LY",
+              "column_description": "Variance to last year cumulative.",
+              "data_type": "mixed_numeric",
+              "sample_values": [4300122.17, 0.0204660005, -1706929.56, 842617.17, 0],
+              "unique_values_count": 37,
+              "has_null_values": true
+            }
+          ],
+          "row_headers": {
+            "has_row_headers": true,
+            "row_header_column": "D",
+            "row_header_description": "Line-item description"
+          },
+          "data_quality": {
+            "completeness": "All monetary lines fully populated. Ratio rows (% sales) hold decimal values between 0 and 1.  Blank spacer rows exist between logical blocks.",
+            "consistency": "Consistent five-column repeating pattern (Actual, Budget, Var, LY, Var) for both period and YTD.",
+            "anomalies": ["Inter-company interest shows extremely small scientific-notation numbers indicating rounding noise."]
+          }
+        },
+        {
+          "table_name": "Outlet_EBITDA_and_Costs",
+          "table_description": "Detailed EBITDA contribution by outlet plus allocation of labour/overheads etc.  Mirrors outlet list but values represent contribution rather than sales.",
+          "boundaries": {
+            "start_row": 109,
+            "end_row": 138,
+            "start_column": "D",
+            "end_column": "P",
+            "range": "D109:P138"
+          },
+          "columns": [
+            {
+              "column_letter": "D",
+              "column_name": "Outlet",
+              "column_description": "Outlet / restaurant name (repeat of earlier list).",
+              "data_type": "text",
+              "sample_values": ["Bold St", "Cheshire Oaks", "Lincoln", "Newcastle", "Restaurant EBITDA before pre-opening"],
+              "unique_values_count": 33,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "F",
+              "column_name": "Period EBITDA / Cost (£k)",
+              "column_description": "Contribution or cost for the period.",
+              "data_type": "numeric",
+              "sample_values": [34979.99, 55568.35, 0, 1.76e-12, 742734.74],
+              "unique_values_count": 34,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "G",
+              "column_name": "Budget",
+              "column_description": "Budgeted value.",
+              "data_type": "numeric",
+              "sample_values": [56472.63, 58571.67, 17308.49, 38376.27, 887454.80],
+              "unique_values_count": 34,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "H",
+              "column_name": "Variance",
+              "column_description": "Actual-Budget.",
+              "data_type": "numeric",
+              "sample_values": [-17553.07, -3003.32, 2720.83, -38376.27, -144720.06],
+              "unique_values_count": 34,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "I",
+              "column_name": "Last Year",
+              "column_description": "Prior-year value (many zero for new outlets).",
+              "data_type": "numeric",
+              "sample_values": [47761.39, 36691.34, 0, 0, 691530.06],
+              "unique_values_count": 30,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "J",
+              "column_name": "Δ vs LY",
+              "column_description": "Variance to prior year.",
+              "data_type": "numeric",
+              "sample_values": [-8841.83, 18877.01, 20029.32, 0.81, 51204.68],
+              "unique_values_count": 33,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "L",
+              "column_name": "YTD Actual",
+              "column_description": "Cumulative EBITDA / cost.",
+              "data_type": "numeric",
+              "sample_values": [245228.48, 597802.84, 233339.02, -3477.06, 5884365.23],
+              "unique_values_count": 34,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "M",
+              "column_name": "YTD Budget",
+              "column_description": "Cumulative budget.",
+              "data_type": "numeric",
+              "sample_values": [242797.26, 528659.15, 103379.63, 106801.87, 5955875.96],
+              "unique_values_count": 34,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "N",
+              "column_name": "YTD Variance",
+              "column_description": "Actual-Budget year-to-date.",
+              "data_type": "numeric",
+              "sample_values": [2431.22, 69143.69, 129959.40, -110278.93, -71510.73],
+              "unique_values_count": 34,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "O",
+              "column_name": "YTD LY",
+              "column_description": "Prior-year cumulative.",
+              "data_type": "numeric",
+              "sample_values": [202976.10, 434820.98, 0, 0, 4667175.77],
+              "unique_values_count": 30,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "P",
+              "column_name": "YTD Δ vs LY",
+              "column_description": "Variance to prior year cumulative.",
+              "data_type": "numeric",
+              "sample_values": [42252.38, 162981.86, 233339.02, -3477.06, 1217189.46],
+              "unique_values_count": 33,
+              "has_null_values": false
+            }
+          ],
+          "row_headers": {
+            "has_row_headers": true,
+            "row_header_column": "D",
+            "row_header_description": "Outlet / cost category"
+          },
+          "data_quality": {
+            "completeness": "Some outlets have zero or negative contribution indicating non-trading or development stage; Newcastle row shows negative YTD due to pre-opening spend.",
+            "consistency": "All numeric cells hold numbers; blank rows between detail and subtotal rows (e.g., Restaurant EBITDA before pre-opening).",
+            "anomalies": ["Scientific-notation tiny value in Interco Interest row (carried through to this table)."]
+          }
+        }
+      ]
+    }
+  ]
+}
+2025-08-07 12:21:28 - __main__ - INFO - === Using ExcelAgent ===
+2025-08-07 12:21:28 - __main__ - INFO - Task description: Map values to the CoA codes based on the CoA codes in the below text
+2025-08-07 12:21:28 - __main__ - INFO - Reading CoA codes from file
+2025-08-07 12:21:28 - __main__ - INFO - Read 7989 characters from coa_codes.txt
+2025-08-07 12:21:28 - agents.excel_agent - INFO - ExcelAgent initialized
+2025-08-07 12:21:28 - __main__ - INFO - Executing task on Excel file: data/single_sheet.xlsx
+2025-08-07 12:21:28 - agents.excel_agent - INFO - Starting task execution: Map values to the CoA codes based on the CoA codes in the below text
+
+Guide to mapping borrower-supp...
+2025-08-07 12:21:28 - agents.excel_agent - INFO - Excel file: data/single_sheet.xlsx
+2025-08-07 12:21:28 - agents.excel_agent - INFO - LLM iteration 1
+2025-08-07 12:21:34 - agents.excel_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:21:34 - agents.excel_agent - INFO - Executing tool: get_sheet_names with args: {'file_path': 'data/single_sheet.xlsx'}
+2025-08-07 12:21:34 - tools.tools - INFO - Getting sheet names from data/single_sheet.xlsx
+2025-08-07 12:21:34 - tools.tools - INFO - Found 1 sheets: ['Profit and Loss']
+2025-08-07 12:21:34 - agents.excel_agent - INFO - Tool get_sheet_names returned result: ['Profit and Loss']...
+2025-08-07 12:21:34 - agents.excel_agent - INFO - LLM iteration 2
+2025-08-07 12:21:36 - agents.excel_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:21:36 - agents.excel_agent - INFO - Executing tool: get_sheet_dimensions with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 12:21:36 - tools.tools - INFO - Getting dimensions for sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:21:36 - tools.tools - INFO - Sheet 'Profit and Loss' dimensions: 158 rows x 54 columns
+2025-08-07 12:21:36 - agents.excel_agent - INFO - Tool get_sheet_dimensions returned result: {'rows': 158, 'columns': 54}...
+2025-08-07 12:21:36 - agents.excel_agent - INFO - LLM iteration 3
+2025-08-07 12:21:41 - agents.excel_agent - INFO - LLM requested 1 tool calls
+2025-08-07 12:21:41 - agents.excel_agent - INFO - Executing tool: get_row_values with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'row_number': 1}
+2025-08-07 12:21:41 - tools.tools - INFO - Getting row 1 values from sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 12:21:41 - tools.tools - INFO - Row 1 has 54 values
+2025-08-07 12:21:41 - agents.excel_agent - INFO - Tool get_row_values returned result: [None, None, None, 7, None, None, None, None, None, None, None, None, None, None, None, None, None, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, None, 1, 1, 1, 1, 1, 1, 1, 0...
+2025-08-07 12:21:41 - agents.excel_agent - INFO - LLM iteration 4
+2025-08-07 12:21:49 - agents.excel_agent - INFO - No more tool calls, task completed
+2025-08-07 12:21:49 - __main__ - INFO - Task execution completed successfully
+2025-08-07 12:21:49 - __main__ - INFO - Result length: 1238 characters
+
+Task Execution Result:
+The data in the first row appears to be numerical and does not give us relevant information about column headers. It is possible that headers are found in a different row or the spreadsheet contains mappings as key-value pairs in different cells, rather than organized in clear column-oriented format.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2025-08-07 13:24:33 - __main__ - INFO - Starting ExcelAgent application
+2025-08-07 13:24:33 - __main__ - INFO - Environment variables loaded
+2025-08-07 13:24:33 - __main__ - INFO - === Cleaning spreadsheet by removing hidden columns ===
+2025-08-07 13:24:33 - __main__ - INFO - No hidden columns found in Profit and Loss
+2025-08-07 13:24:33 - __main__ - INFO - === Using SpreadsheetEncoderAgent ===
+2025-08-07 13:24:33 - agents.base_agent - INFO - SpreadsheetEncoderAgent initialized
+2025-08-07 13:24:33 - agents.spreadsheet_encoder_agent - INFO - SpreadsheetEncoderAgent initialized
+2025-08-07 13:24:33 - agents.spreadsheet_encoder_agent - INFO - Starting spreadsheet encoding for: data/single_sheet.xlsx
+================================================================================
+2025-08-07 13:24:33 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 1
+2025-08-07 13:24:38 - agents.base_agent - INFO - Current cost for SpreadsheetEncoderAgent: $0.005798 (API calls: 1, tokens: 2236)
+2025-08-07 13:24:38 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 13:24:38 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_sheet_names with args: {'file_path': 'data/single_sheet.xlsx'}
+2025-08-07 13:24:38 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_sheet_names with arguments: {'file_path': 'data/single_sheet.xlsx'}
+2025-08-07 13:24:38 - tools.tools - INFO - Getting sheet names from data/single_sheet.xlsx
+2025-08-07 13:24:38 - tools.tools - INFO - Found 1 sheets: ['Profit and Loss']
+2025-08-07 13:24:38 - agents.spreadsheet_encoder_agent - INFO - Tool get_sheet_names returned result: ['Profit and Loss']...
+================================================================================
+2025-08-07 13:24:38 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 2
+2025-08-07 13:24:40 - agents.base_agent - INFO - Current cost for SpreadsheetEncoderAgent: $0.010148 (API calls: 2, tokens: 4321)
+2025-08-07 13:24:40 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 13:24:40 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_sheet_dimensions with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 13:24:40 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_sheet_dimensions with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 13:24:40 - tools.tools - INFO - Getting dimensions for sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 13:24:40 - tools.tools - INFO - Sheet 'Profit and Loss' dimensions: 158 rows x 54 columns
+2025-08-07 13:24:40 - agents.spreadsheet_encoder_agent - INFO - Tool get_sheet_dimensions returned result: {'rows': 158, 'columns': 54}...
+================================================================================
+2025-08-07 13:24:40 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 3
+2025-08-07 13:24:44 - agents.base_agent - INFO - Current cost for SpreadsheetEncoderAgent: $0.014606 (API calls: 3, tokens: 6460)
+2025-08-07 13:24:44 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 13:24:44 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_sheet_content with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 13:24:44 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_sheet_content with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss'}
+2025-08-07 13:24:44 - tools.tools - INFO - Getting all content from sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 13:24:44 - tools.tools - INFO - Retrieved 99 rows with data from sheet 'Profit and Loss'
+2025-08-07 13:24:44 - agents.spreadsheet_encoder_agent - INFO - Tool get_sheet_content returned result: {1: {'D': 7, 'R': 1, 'S': 1, 'T': 1, 'U': 1, 'V': 1, 'W': 1, 'X': 1, 'Y': 0, 'Z': 0, 'AA': 0, 'AB': 0, 'AC': 0, 'AD': 1, 'AE': 1, 'AF': 1, 'AG': 1, 'AH': 1, 'AI': 1, 'AJ': 1, 'AK': 0, 'AL': 0, 'AM': 0...
+================================================================================
+2025-08-07 13:24:44 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 4
+2025-08-07 13:24:55 - agents.base_agent - INFO - Current cost for SpreadsheetEncoderAgent: $0.04469 (API calls: 4, tokens: 20029)
+2025-08-07 13:24:55 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 13:24:55 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_data_types_column_sample with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'F'}
+2025-08-07 13:24:55 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_data_types_column_sample with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'F'}
+2025-08-07 13:24:55 - tools.tools - INFO - Getting data types for sample of 10 values from column F in sheet 'Profit and Loss' from data/single_sheet.xlsx
+2025-08-07 13:24:55 - tools.tools - INFO - Sampled 10 values from column F (total non-empty: 97)
+2025-08-07 13:24:55 - tools.utils - INFO - Analyzing data types for 10 values
+2025-08-07 13:24:55 - tools.utils - INFO - Data type analysis complete: 3 unique types found
+2025-08-07 13:24:55 - agents.spreadsheet_encoder_agent - INFO - Tool get_data_types_column_sample returned result: ['float', 'text', 'float', 'float', 'integer', 'float', 'float', 'float', 'integer', 'float']...
+================================================================================
+2025-08-07 13:24:55 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 5
+2025-08-07 13:24:58 - agents.base_agent - INFO - Current cost for SpreadsheetEncoderAgent: $0.071304 (API calls: 5, tokens: 33225)
+2025-08-07 13:24:58 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 13:24:58 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_data_types_column_sample with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'D'}
+2025-08-07 13:24:58 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_data_types_column_sample with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'D'}
+2025-08-07 13:24:58 - tools.tools - INFO - Getting data types for sample of 10 values from column D in sheet 'Profit and Loss' from data/single_sheet.xlsx
+2025-08-07 13:24:58 - tools.tools - INFO - Sampled 10 values from column D (total non-empty: 97)
+2025-08-07 13:24:58 - tools.utils - INFO - Analyzing data types for 10 values
+2025-08-07 13:24:58 - tools.utils - INFO - Data type analysis complete: 2 unique types found
+2025-08-07 13:24:58 - agents.spreadsheet_encoder_agent - INFO - Tool get_data_types_column_sample returned result: ['integer', 'text', 'text', 'text', 'text', 'text', 'text', 'text', 'text', 'text']...
+================================================================================
+2025-08-07 13:24:58 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 6
+2025-08-07 13:25:29 - agents.base_agent - INFO - Current cost for SpreadsheetEncoderAgent: $0.112496 (API calls: 6, tokens: 48304)
+2025-08-07 13:25:29 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 13:25:29 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_column_values_sample with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'D', 'sample_size': 15}
+2025-08-07 13:25:29 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_column_values_sample with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'D', 'sample_size': 15}
+2025-08-07 13:25:29 - tools.tools - INFO - Getting sample of 15 values from column D in sheet 'Profit and Loss' from data/single_sheet.xlsx
+2025-08-07 13:25:29 - tools.tools - INFO - Sampled 15 values from column D (total non-empty: 97)
+2025-08-07 13:25:29 - agents.spreadsheet_encoder_agent - INFO - Tool get_column_values_sample returned result: ['Nottingham', 'Deferred Consideration Interest', 'Corn Exchange', 'Net Sales', 'Newcastle', 'Belfast', 'Stratford', 'Birmingham', 7, 'Birmingham', 'Bury St Edmunds', 'Brighton', '% sales', 'Oxford', ...
+================================================================================
+2025-08-07 13:25:29 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 7
+2025-08-07 13:25:58 - agents.base_agent - INFO - Current cost for SpreadsheetEncoderAgent: $0.147282 (API calls: 7, tokens: 62673)
+2025-08-07 13:25:58 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 13:25:58 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_range_values with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'D8', 'end_cell': 'D105'}
+2025-08-07 13:25:58 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_range_values with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'start_cell': 'D8', 'end_cell': 'D105'}
+2025-08-07 13:25:58 - tools.tools - INFO - Getting range D8:D105 from sheet 'Profit and Loss' in data/single_sheet.xlsx
+2025-08-07 13:25:59 - tools.tools - INFO - Range D8:D105 contains 98 rows
+2025-08-07 13:25:59 - agents.spreadsheet_encoder_agent - INFO - Tool get_range_values returned result: [[None], [None], [None], ['Bold St'], ['Corn Exchange'], ['Water St'], ['Birmingham'], ['Oxford'], ['Nottingham'], ['Uni Green'], ['Sheffield'], ['Cardiff'], ['Leicester'], ['Leeds'], ['Cheshire Oaks'...
+================================================================================
+2025-08-07 13:25:59 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 8
+2025-08-07 13:26:32 - agents.base_agent - INFO - Current cost for SpreadsheetEncoderAgent: $0.188066 (API calls: 8, tokens: 78124)
+2025-08-07 13:26:32 - agents.spreadsheet_encoder_agent - INFO - LLM requested 1 tool calls
+2025-08-07 13:26:32 - agents.spreadsheet_encoder_agent - INFO - Executing tool: get_column_values_sample with args: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'F', 'sample_size': 20}
+2025-08-07 13:26:32 - agents.spreadsheet_encoder_agent - INFO - Calling tool function: get_column_values_sample with arguments: {'file_path': 'data/single_sheet.xlsx', 'sheet_name': 'Profit and Loss', 'column_letter': 'F', 'sample_size': 20}
+2025-08-07 13:26:32 - tools.tools - INFO - Getting sample of 20 values from column F in sheet 'Profit and Loss' from data/single_sheet.xlsx
+2025-08-07 13:26:32 - tools.tools - INFO - Sampled 20 values from column F (total non-empty: 97)
+2025-08-07 13:26:32 - agents.spreadsheet_encoder_agent - INFO - Tool get_column_values_sample returned result: [742734.7399999995, 111966.62, 2694877.18, 32992.98999999996, 113730.5656986301, 175580.7, 20310.57095890411, 0.1248763763285154, 0, 385753.8199999995, 170068.7200000007, 0, 20029.32000000001, 121764....
+================================================================================
+2025-08-07 13:26:32 - agents.spreadsheet_encoder_agent - INFO - LLM iteration 9
+2025-08-07 13:28:14 - agents.base_agent - INFO - Current cost for SpreadsheetEncoderAgent: $0.271166 (API calls: 9, tokens: 99013)
+2025-08-07 13:28:14 - agents.spreadsheet_encoder_agent - INFO - No more tool calls, encoding completed
+2025-08-07 13:28:14 - agents.spreadsheet_encoder_agent - INFO - Encoding completed. Final cost: $0.271166 (API calls: 9, tokens: 99013)
+2025-08-07 13:28:14 - __main__ - INFO - LLM encoding completed
+LLM-Generated Encoding:
+{
+  "file_info": {
+    "filename": "single_sheet.xlsx",
+    "total_sheets": 1,
+    "encoding_timestamp": "2024-06-27T15:52:00Z"
+  },
+  "sheets": [
+    {
+      "sheet_name": "Profit and Loss",
+      "sheet_description": "Multi-section Profit & Loss statement combining period (4-week ‘Period 7’ FY25) and year-to-date (30 weeks FY25) performance. The sheet mixes restaurant-level detail, consolidated subtotals, and financing lines. All financial figures are presented in £k, with percentage lines immediately following some value lines.",
+      "dimensions": {
+        "rows": 158,
+        "columns": 54,
+        "range": "A1:BB158"
+      },
+      "tables": [
+        {
+          "table_name": "Restaurant_Sales_Period_vs_YTD",
+          "table_description": "Period and YTD net-sales performance for each trading location. Each data line represents one restaurant; the two numeric blocks (columns F–J and L–P) hold Actual, Budget, Variance, Last-Year, and Variance-to-LY for the current 4-week period and for the year-to-date respectively.",
+          "boundaries": {
+            "start_row": 8,
+            "end_row": 40,
+            "start_column": "D",
+            "end_column": "P",
+            "range": "D8:P40"
+          },
+          "columns": [
+            {
+              "column_letter": "D",
+              "column_name": "Restaurant / Descriptor",
+              "column_description": "Name of restaurant (e.g. “Bold St”, “Corn Exchange”) or blank in header rows.",
+              "data_type": "text",
+              "sample_values": ["Bold St", "Oxford", "Kings Road"],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "F",
+              "column_name": "Period Actual (£k)",
+              "column_description": "Current 4-week actual sales for each location.",
+              "data_type": "numeric",
+              "sample_values": [121764.08, 0, 239083.17],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "G",
+              "column_name": "Period Budget (£k)",
+              "column_description": "Budgeted sales for the same 4-week period.",
+              "data_type": "numeric",
+              "sample_values": [126800, 191300, 0],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "H",
+              "column_name": "Period Variance (£k)",
+              "column_description": "Actual minus Budget for the period.",
+              "data_type": "numeric",
+              "sample_values": [-5035.92, 6737.54, -62114.76],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "I",
+              "column_name": "Period Last Year (£k)",
+              "column_description": "Sales in the same period last financial year.",
+              "data_type": "numeric",
+              "sample_values": [127573.98, 0, 245971.07],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "J",
+              "column_name": "Period Variance to LY (£k)",
+              "column_description": "Actual minus Last-Year for the period.",
+              "data_type": "numeric",
+              "sample_values": [-5809.90, 10594.10, -17437.21],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "L",
+              "column_name": "YTD Actual (£k)",
+              "column_description": "Accumulated 30-week actual sales.",
+              "data_type": "numeric",
+              "sample_values": [922980.45, 0, 2038798.61],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "M",
+              "column_name": "YTD Budget (£k)",
+              "column_description": "Budgeted YTD sales.",
+              "data_type": "numeric",
+              "sample_values": [961300, 0, 2180700],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "N",
+              "column_name": "YTD Variance (£k)",
+              "column_description": "Actual minus Budget YTD.",
+              "data_type": "numeric",
+              "sample_values": [-38319.55, 124054.35, -184065.72],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "O",
+              "column_name": "YTD Last Year (£k)",
+              "column_description": "YTD sales last financial year.",
+              "data_type": "numeric",
+              "sample_values": [910080.08, 0, 2131091.34],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "P",
+              "column_name": "YTD Variance to LY (£k)",
+              "column_description": "Actual minus Last-Year YTD.",
+              "data_type": "numeric",
+              "sample_values": [12900.37, -92292.73, 148752.62],
+              "unique_values_count": 30,
+              "has_null_values": true
+            }
+          ],
+          "row_headers": {
+            "has_row_headers": false,
+            "row_header_column": "",
+            "row_header_description": ""
+          },
+          "data_quality": {
+            "completeness": "All 30 known trading locations represented; some locations have zero values indicating closures or non-trading weeks.",
+            "consistency": "Numeric scale consistent (all currency in £k).",
+            "anomalies": ["Rows for new sites (e.g. Newcastle) show budget but zero actuals, generating large negative variances."]
+          }
+        },
+        {
+          "table_name": "Consolidated_Summary_Lines",
+          "table_description": "Summary P&L lines following restaurant detail: Net Sales -> EBITDA -> PAT with interspersed percentage-of-sales rows. Two numeric blocks (period and YTD) mirror the column pattern of the first table.",
+          "boundaries": {
+            "start_row": 60,
+            "end_row": 105,
+            "start_column": "D",
+            "end_column": "P",
+            "range": "D60:P105"
+          },
+          "columns": [
+            {
+              "column_letter": "D",
+              "column_name": "P&L Line",
+              "column_description": "Text describing the account line (e.g., “Net Sales”, “Gross Profit”, “% sales”, “EBITDA”).",
+              "data_type": "text",
+              "sample_values": ["Net Sales", "Gross Profit", "% sales"],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "F",
+              "column_name": "Period Actual",
+              "column_description": "£k unless the row is ‘% sales’ then value is ratio (0–1).",
+              "data_type": "numeric",
+              "sample_values": [3504800.05, 0.7689, 437666.73],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "G",
+              "column_name": "Period Budget",
+              "column_description": "Comparable budget figure; same unit rules as column F.",
+              "data_type": "numeric",
+              "sample_values": [4202748, 0.7718, 575196.74],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "H",
+              "column_name": "Period Variance",
+              "column_description": "Actual minus Budget.",
+              "data_type": "numeric",
+              "sample_values": [-697947.95, -0.00294, -137530.01],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "I",
+              "column_name": "Period Last Year",
+              "column_description": "Last year comparatives.",
+              "data_type": "numeric",
+              "sample_values": [3317334.59, 0.74677, 362397.22],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "J",
+              "column_name": "Period Var to LY",
+              "column_description": "Difference to last year.",
+              "data_type": "numeric",
+              "sample_values": [187465.46, 0.02214, 75269.51],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "L",
+              "column_name": "YTD Actual",
+              "column_description": "30-week cumulative.",
+              "data_type": "numeric",
+              "sample_values": [27029444.07, 0.7730, 3678313.07],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "M",
+              "column_name": "YTD Budget",
+              "column_description": "Budget cumulative.",
+              "data_type": "numeric",
+              "sample_values": [29695784, 0.7681, 3764044.94],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "N",
+              "column_name": "YTD Variance",
+              "column_description": "Actual minus Budget cumulative.",
+              "data_type": "numeric",
+              "sample_values": [-2666339.93, 0.00493, -85731.87],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "O",
+              "column_name": "YTD Last Year",
+              "column_description": "Cumulative last-year comparatives.",
+              "data_type": "numeric",
+              "sample_values": [22729321.9, 0.75255, 2835695.9],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "P",
+              "column_name": "YTD Var to LY",
+              "column_description": "Difference to last year cumulative.",
+              "data_type": "numeric",
+              "sample_values": [4300122.17, 0.02047, 842617.17],
+              "unique_values_count": 23,
+              "has_null_values": false
+            }
+          ],
+          "row_headers": {
+            "has_row_headers": false,
+            "row_header_column": "",
+            "row_header_description": ""
+          },
+          "data_quality": {
+            "completeness": "All expected P&L lines present; percentage rows always follow their corresponding value row.",
+            "consistency": "Currency vs % rows distinguished by magnitude (values <1 signal ratio).",
+            "anomalies": ["Inter-company interest row contains scientific-notation rounding artefacts (very small values)."]
+          }
+        },
+        {
+          "table_name": "Restaurant_EBITDA_Contributions",
+          "table_description": "Location-level EBITDA (or contribution) detail, mirroring the period/YTD split. This block starts after consolidated PAT and ends with a re-stated ‘Restaurant EBITDA before pre-opening’.",
+          "boundaries": {
+            "start_row": 109,
+            "end_row": 139,
+            "start_column": "D",
+            "end_column": "P",
+            "range": "D109:P139"
+          },
+          "columns": [
+            {
+              "column_letter": "D",
+              "column_name": "Restaurant / Descriptor",
+              "column_description": "Restaurant name or total line.",
+              "data_type": "text",
+              "sample_values": ["Bold St", "Cheshire Oaks", "Restaurant EBITDA before pre-opening"],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "F",
+              "column_name": "Period Actual (£k)",
+              "column_description": "EBITDA or contribution amount for 4-week period.",
+              "data_type": "numeric",
+              "sample_values": [34979.99, 12422.63, 1.76e-12],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "G",
+              "column_name": "Period Budget (£k)",
+              "column_description": "Budget contribution.",
+              "data_type": "numeric",
+              "sample_values": [32308.32, 38376.27, 0],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "H",
+              "column_name": "Period Variance (£k)",
+              "column_description": "Actual minus Budget.",
+              "data_type": "numeric",
+              "sample_values": [2671.67, -3003.32, -38376.27],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "I",
+              "column_name": "Period Last Year (£k)",
+              "column_description": "Last year contribution; many new sites have zero LY.",
+              "data_type": "numeric",
+              "sample_values": [30562.09, 0, 46865.21],
+              "unique_values_count": 32,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "J",
+              "column_name": "Period Var to LY (£k)",
+              "column_description": "Actual minus LY.",
+              "data_type": "numeric",
+              "sample_values": [4417.90, 808.46, -25662.47],
+              "unique_values_count": 32,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "L",
+              "column_name": "YTD Actual (£k)",
+              "column_description": "30-week cumulative contribution.",
+              "data_type": "numeric",
+              "sample_values": [245228.48, 0, 597802.84],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "M",
+              "column_name": "YTD Budget (£k)",
+              "column_description": "Budget cumulative contribution.",
+              "data_type": "numeric",
+              "sample_values": [242797.26, 106801.87, 528659.15],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "N",
+              "column_name": "YTD Variance (£k)",
+              "column_description": "Actual minus Budget.",
+              "data_type": "numeric",
+              "sample_values": [2431.22, -17491.52, 69143.69],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "O",
+              "column_name": "YTD Last Year (£k)",
+              "column_description": "Last year cumulative contribution.",
+              "data_type": "numeric",
+              "sample_values": [202976.10, 0, 434820.98],
+              "unique_values_count": 32,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "P",
+              "column_name": "YTD Var to LY (£k)",
+              "column_description": "Actual minus LY cumulative.",
+              "data_type": "numeric",
+              "sample_values": [42252.38, 197400.12, -40186.63],
+              "unique_values_count": 32,
+              "has_null_values": true
+            }
+          ],
+          "row_headers": {
+            "has_row_headers": false,
+            "row_header_column": "",
+            "row_header_description": ""
+          },
+          "data_quality": {
+            "completeness": "Includes all restaurants (same list as sales) plus total line. Some new sites show negative totals where costs incurred but sales not yet booked.",
+            "consistency": "Currency values consistent; no percentage rows in this section.",
+            "anomalies": ["One row (‘Newcastle’) shows a very small positive number (~1.7e-12) due to rounding of zero values."]
+          }
+        }
+      ]
+    }
+  ]
+}
+2025-08-07 13:28:14 - __main__ - INFO - === Using ExcelAgent ===
