@@ -26,30 +26,34 @@ def main():
             logger.info("No hidden columns found in %s", sheet_name)
 
     # Example 1: Use SpreadsheetEncoderAgent to get structure
-    logger.info("=== Using SpreadsheetEncoderAgent ===")
-    encoder_agent = SpreadsheetEncoderAgent(api_key=api_key)
+    # logger.info("=== Using SpreadsheetEncoderAgent ===")
+    # encoder_agent = SpreadsheetEncoderAgent(api_key=api_key)
     
     # Get LLM-generated encoding
-    llm_encoding = encoder_agent.encode(excel_file)
-    logger.info("LLM encoding completed")
-    print("LLM-Generated Encoding:")
-    print(llm_encoding)
+    # llm_encoding = encoder_agent.encode(excel_file)
+    # logger.info("LLM encoding completed")
+    # print("LLM-Generated Encoding:")
+    # print(llm_encoding)
     
-    # Example 2: Use ExcelAgent for task execution
-    logger.info("=== Using ExcelAgent ===")
-    task_description = "Map values to the CoA codes based on the CoA codes in the below text"
-    logger.info("Task description: %s", task_description)
+    # Load encoded spreadsheet from file
+    logger.info("=== Loading encoded spreadsheet from file ===")
+    with open("encoded_spreadsheet.txt", "r", encoding="utf-8") as f:
+        encoded_spreadsheet_content = f.read()
+    logger.info("Successfully loaded encoded spreadsheet from file")
+   
+    
+    # Example 2: Use ExcelAgent for task execution with encoded spreadsheet
     
     logger.info("Reading CoA codes from file")
     with open("data/coa_codes.txt", "r", encoding="utf-8") as f:
         coa_text = f.read()
     logger.info("Read %d characters from coa_codes.txt", len(coa_text))
     
-    task = f"{task_description}\n\n{coa_text}"
+    
     
     agent = ExcelAgent(api_key=api_key)
-    logger.info("Executing task on Excel file: %s", excel_file)
-    result = agent.execute(task, excel_file)
+    logger.info("Executing task on Excel file: %s with encoded spreadsheet", excel_file)
+    result = agent.execute(excel_file, coa_text=coa_text, encoded_spreadsheet=encoded_spreadsheet_content)
     
     logger.info("Task execution completed successfully")
     logger.info("Result length: %d characters", len(result))

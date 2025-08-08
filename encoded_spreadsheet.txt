@@ -1,0 +1,386 @@
+{
+  "file_info": {
+    "filename": "single_sheet.xlsx",
+    "total_sheets": 1,
+    "encoding_timestamp": "2024-06-27T15:52:00Z"
+  },
+  "sheets": [
+    {
+      "sheet_name": "Profit and Loss",
+      "sheet_description": "Multi-section Profit & Loss statement combining period (4-week ‘Period 7’ FY25) and year-to-date (30 weeks FY25) performance. The sheet mixes restaurant-level detail, consolidated subtotals, and financing lines. All financial figures are presented in £k, with percentage lines immediately following some value lines.",
+      "dimensions": {
+        "rows": 158,
+        "columns": 54,
+        "range": "A1:BB158"
+      },
+      "tables": [
+        {
+          "table_name": "Restaurant_Sales_Period_vs_YTD",
+          "table_description": "Period and YTD net-sales performance for each trading location. Each data line represents one restaurant; the two numeric blocks (columns F–J and L–P) hold Actual, Budget, Variance, Last-Year, and Variance-to-LY for the current 4-week period and for the year-to-date respectively.",
+          "boundaries": {
+            "start_row": 8,
+            "end_row": 40,
+            "start_column": "D",
+            "end_column": "P",
+            "range": "D8:P40"
+          },
+          "columns": [
+            {
+              "column_letter": "D",
+              "column_name": "Restaurant / Descriptor",
+              "column_description": "Name of restaurant (e.g. “Bold St”, “Corn Exchange”) or blank in header rows.",
+              "data_type": "text",
+              "sample_values": ["Bold St", "Oxford", "Kings Road"],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "F",
+              "column_name": "Period Actual (£k)",
+              "column_description": "Current 4-week actual sales for each location.",
+              "data_type": "numeric",
+              "sample_values": [121764.08, 0, 239083.17],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "G",
+              "column_name": "Period Budget (£k)",
+              "column_description": "Budgeted sales for the same 4-week period.",
+              "data_type": "numeric",
+              "sample_values": [126800, 191300, 0],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "H",
+              "column_name": "Period Variance (£k)",
+              "column_description": "Actual minus Budget for the period.",
+              "data_type": "numeric",
+              "sample_values": [-5035.92, 6737.54, -62114.76],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "I",
+              "column_name": "Period Last Year (£k)",
+              "column_description": "Sales in the same period last financial year.",
+              "data_type": "numeric",
+              "sample_values": [127573.98, 0, 245971.07],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "J",
+              "column_name": "Period Variance to LY (£k)",
+              "column_description": "Actual minus Last-Year for the period.",
+              "data_type": "numeric",
+              "sample_values": [-5809.90, 10594.10, -17437.21],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "L",
+              "column_name": "YTD Actual (£k)",
+              "column_description": "Accumulated 30-week actual sales.",
+              "data_type": "numeric",
+              "sample_values": [922980.45, 0, 2038798.61],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "M",
+              "column_name": "YTD Budget (£k)",
+              "column_description": "Budgeted YTD sales.",
+              "data_type": "numeric",
+              "sample_values": [961300, 0, 2180700],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "N",
+              "column_name": "YTD Variance (£k)",
+              "column_description": "Actual minus Budget YTD.",
+              "data_type": "numeric",
+              "sample_values": [-38319.55, 124054.35, -184065.72],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "O",
+              "column_name": "YTD Last Year (£k)",
+              "column_description": "YTD sales last financial year.",
+              "data_type": "numeric",
+              "sample_values": [910080.08, 0, 2131091.34],
+              "unique_values_count": 30,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "P",
+              "column_name": "YTD Variance to LY (£k)",
+              "column_description": "Actual minus Last-Year YTD.",
+              "data_type": "numeric",
+              "sample_values": [12900.37, -92292.73, 148752.62],
+              "unique_values_count": 30,
+              "has_null_values": true
+            }
+          ],
+          "row_headers": {
+            "has_row_headers": false,
+            "row_header_column": "",
+            "row_header_description": ""
+          },
+          "data_quality": {
+            "completeness": "All 30 known trading locations represented; some locations have zero values indicating closures or non-trading weeks.",
+            "consistency": "Numeric scale consistent (all currency in £k).",
+            "anomalies": ["Rows for new sites (e.g. Newcastle) show budget but zero actuals, generating large negative variances."]
+          }
+        },
+        {
+          "table_name": "Consolidated_Summary_Lines",
+          "table_description": "Summary P&L lines following restaurant detail: Net Sales -> EBITDA -> PAT with interspersed percentage-of-sales rows. Two numeric blocks (period and YTD) mirror the column pattern of the first table.",
+          "boundaries": {
+            "start_row": 60,
+            "end_row": 105,
+            "start_column": "D",
+            "end_column": "P",
+            "range": "D60:P105"
+          },
+          "columns": [
+            {
+              "column_letter": "D",
+              "column_name": "P&L Line",
+              "column_description": "Text describing the account line (e.g., “Net Sales”, “Gross Profit”, “% sales”, “EBITDA”).",
+              "data_type": "text",
+              "sample_values": ["Net Sales", "Gross Profit", "% sales"],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "F",
+              "column_name": "Period Actual",
+              "column_description": "£k unless the row is ‘% sales’ then value is ratio (0–1).",
+              "data_type": "numeric",
+              "sample_values": [3504800.05, 0.7689, 437666.73],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "G",
+              "column_name": "Period Budget",
+              "column_description": "Comparable budget figure; same unit rules as column F.",
+              "data_type": "numeric",
+              "sample_values": [4202748, 0.7718, 575196.74],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "H",
+              "column_name": "Period Variance",
+              "column_description": "Actual minus Budget.",
+              "data_type": "numeric",
+              "sample_values": [-697947.95, -0.00294, -137530.01],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "I",
+              "column_name": "Period Last Year",
+              "column_description": "Last year comparatives.",
+              "data_type": "numeric",
+              "sample_values": [3317334.59, 0.74677, 362397.22],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "J",
+              "column_name": "Period Var to LY",
+              "column_description": "Difference to last year.",
+              "data_type": "numeric",
+              "sample_values": [187465.46, 0.02214, 75269.51],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "L",
+              "column_name": "YTD Actual",
+              "column_description": "30-week cumulative.",
+              "data_type": "numeric",
+              "sample_values": [27029444.07, 0.7730, 3678313.07],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "M",
+              "column_name": "YTD Budget",
+              "column_description": "Budget cumulative.",
+              "data_type": "numeric",
+              "sample_values": [29695784, 0.7681, 3764044.94],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "N",
+              "column_name": "YTD Variance",
+              "column_description": "Actual minus Budget cumulative.",
+              "data_type": "numeric",
+              "sample_values": [-2666339.93, 0.00493, -85731.87],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "O",
+              "column_name": "YTD Last Year",
+              "column_description": "Cumulative last-year comparatives.",
+              "data_type": "numeric",
+              "sample_values": [22729321.9, 0.75255, 2835695.9],
+              "unique_values_count": 23,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "P",
+              "column_name": "YTD Var to LY",
+              "column_description": "Difference to last year cumulative.",
+              "data_type": "numeric",
+              "sample_values": [4300122.17, 0.02047, 842617.17],
+              "unique_values_count": 23,
+              "has_null_values": false
+            }
+          ],
+          "row_headers": {
+            "has_row_headers": false,
+            "row_header_column": "",
+            "row_header_description": ""
+          },
+          "data_quality": {
+            "completeness": "All expected P&L lines present; percentage rows always follow their corresponding value row.",
+            "consistency": "Currency vs % rows distinguished by magnitude (values <1 signal ratio).",
+            "anomalies": ["Inter-company interest row contains scientific-notation rounding artefacts (very small values)."]
+          }
+        },
+        {
+          "table_name": "Restaurant_EBITDA_Contributions",
+          "table_description": "Location-level EBITDA (or contribution) detail, mirroring the period/YTD split. This block starts after consolidated PAT and ends with a re-stated ‘Restaurant EBITDA before pre-opening’.",
+          "boundaries": {
+            "start_row": 109,
+            "end_row": 139,
+            "start_column": "D",
+            "end_column": "P",
+            "range": "D109:P139"
+          },
+          "columns": [
+            {
+              "column_letter": "D",
+              "column_name": "Restaurant / Descriptor",
+              "column_description": "Restaurant name or total line.",
+              "data_type": "text",
+              "sample_values": ["Bold St", "Cheshire Oaks", "Restaurant EBITDA before pre-opening"],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "F",
+              "column_name": "Period Actual (£k)",
+              "column_description": "EBITDA or contribution amount for 4-week period.",
+              "data_type": "numeric",
+              "sample_values": [34979.99, 12422.63, 1.76e-12],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "G",
+              "column_name": "Period Budget (£k)",
+              "column_description": "Budget contribution.",
+              "data_type": "numeric",
+              "sample_values": [32308.32, 38376.27, 0],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "H",
+              "column_name": "Period Variance (£k)",
+              "column_description": "Actual minus Budget.",
+              "data_type": "numeric",
+              "sample_values": [2671.67, -3003.32, -38376.27],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "I",
+              "column_name": "Period Last Year (£k)",
+              "column_description": "Last year contribution; many new sites have zero LY.",
+              "data_type": "numeric",
+              "sample_values": [30562.09, 0, 46865.21],
+              "unique_values_count": 32,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "J",
+              "column_name": "Period Var to LY (£k)",
+              "column_description": "Actual minus LY.",
+              "data_type": "numeric",
+              "sample_values": [4417.90, 808.46, -25662.47],
+              "unique_values_count": 32,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "L",
+              "column_name": "YTD Actual (£k)",
+              "column_description": "30-week cumulative contribution.",
+              "data_type": "numeric",
+              "sample_values": [245228.48, 0, 597802.84],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "M",
+              "column_name": "YTD Budget (£k)",
+              "column_description": "Budget cumulative contribution.",
+              "data_type": "numeric",
+              "sample_values": [242797.26, 106801.87, 528659.15],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "N",
+              "column_name": "YTD Variance (£k)",
+              "column_description": "Actual minus Budget.",
+              "data_type": "numeric",
+              "sample_values": [2431.22, -17491.52, 69143.69],
+              "unique_values_count": 32,
+              "has_null_values": false
+            },
+            {
+              "column_letter": "O",
+              "column_name": "YTD Last Year (£k)",
+              "column_description": "Last year cumulative contribution.",
+              "data_type": "numeric",
+              "sample_values": [202976.10, 0, 434820.98],
+              "unique_values_count": 32,
+              "has_null_values": true
+            },
+            {
+              "column_letter": "P",
+              "column_name": "YTD Var to LY (£k)",
+              "column_description": "Actual minus LY cumulative.",
+              "data_type": "numeric",
+              "sample_values": [42252.38, 197400.12, -40186.63],
+              "unique_values_count": 32,
+              "has_null_values": true
+            }
+          ],
+          "row_headers": {
+            "has_row_headers": false,
+            "row_header_column": "",
+            "row_header_description": ""
+          },
+          "data_quality": {
+            "completeness": "Includes all restaurants (same list as sales) plus total line. Some new sites show negative totals where costs incurred but sales not yet booked.",
+            "consistency": "Currency values consistent; no percentage rows in this section.",
+            "anomalies": ["One row (‘Newcastle’) shows a very small positive number (~1.7e-12) due to rounding of zero values."]
+          }
+        }
+      ]
+    }
+  ]
+}

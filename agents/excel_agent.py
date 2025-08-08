@@ -1,9 +1,8 @@
 from agents.base_agent import BaseAgent
 from tools.tools import (
     get_sheet_names, get_row_values, get_column_values, get_cell_value,
-    get_data_types_column, get_sheet_dimensions,
-    find_cells_with_value, get_range_values, get_sheet_content,
-    get_max_rows, get_max_columns
+    get_sheet_dimensions,
+    get_range_values, get_max_rows, get_max_columns
 )
 from core.logger import setup_logger
 from prompts.excel_agent import get_system_prompt
@@ -18,8 +17,7 @@ class ExcelAgent(BaseAgent):
         super().__init__(api_key)
         self.tools = [
             get_sheet_names, get_row_values, get_column_values, get_cell_value,
-            get_data_types_column, get_sheet_dimensions,
-            find_cells_with_value, get_range_values, get_sheet_content,
+            get_sheet_dimensions, get_range_values,
             get_max_rows, get_max_columns
         ]
         logger.info("ExcelAgent initialized")
@@ -29,17 +27,18 @@ class ExcelAgent(BaseAgent):
         """Return the list of tools available to this agent."""
         return self.tools
     
-    def execute(self, task_description: str, excel_file_path: str, **prompt_kwargs) -> str:
+    def execute(self, excel_file_path: str, **prompt_kwargs) -> str:
         """Execute task on Excel file using LLM and tools."""
-        logger.info("Starting task execution: %s...", task_description[:100])
         logger.info("Excel file: %s", excel_file_path)
         
         # Get system prompt with any additional context including file path
         system_prompt = get_system_prompt(excel_file_path=excel_file_path, **prompt_kwargs)
+
+        logger.info("System prompt:\n%s", system_prompt)
         
         messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Task: {task_description}\nExcel file: {excel_file_path}"}
+            {"role": "system", "content": "You are an expert financial analyst that understands spreadsheets."},
+            {"role": "user", "content": system_prompt}
         ]
         iteration = 0
         max_iterations = 20
@@ -59,6 +58,7 @@ class ExcelAgent(BaseAgent):
         
         while iteration < max_iterations:
             iteration += 1
+            print("=" * 80)
             logger.info("LLM iteration %d", iteration)
             
             response = self.client.chat.completions.create(
@@ -90,6 +90,7 @@ class ExcelAgent(BaseAgent):
                 logger.info("Executing tool: %s with args: %s", tool_name, tool_args)
                 
                 tool_func = next(tool for tool in self.tools if tool.name == tool_name)
+                logger.info("Calling tool function: %s with arguments: %s", tool_name, tool_args)
                 result = tool_func.invoke(tool_args)
                 
                 logger.info("Tool %s returned result: %s...", tool_name, str(result)[:200])
