@@ -1,13 +1,13 @@
-def get_system_prompt(**kwargs) -> str:
+def get_task_prompt(**kwargs) -> str:
     """
-    Returns the system prompt for the Excel Agent.
+    Returns the task prompt for the Excel Agent.
     
     The Excel Agent is responsible for executing various tasks on Excel files using
     a set of specialized tools. It can analyze spreadsheet data, extract information,
     and perform data manipulation tasks.
     
     Args:
-        **kwargs: Additional named arguments to append to the end of the system prompt
+        **kwargs: Additional named arguments to append to the end of the task prompt
     """
     prompt_template = """You are an Excel Agent, a specialized AI assistant designed to work with Excel spreadsheets and perform various data analysis and manipulation tasks. 
     Your main task is to map values in the spreadsheet to their corresponding Chart of Accounts (CoA) codes.

@@ -5,7 +5,7 @@ from tools.tools import (
     get_max_rows, get_max_columns, get_nonempty_column_letters
 )
 from core.logger import setup_logger
-from prompts.spreadsheet_encoder_agent import get_system_prompt
+from prompts.spreadsheet_encoder_agent import get_task_prompt
 
 logger = setup_logger(__name__)
 
@@ -33,12 +33,12 @@ class SpreadsheetEncoderAgent(BaseAgent):
         """Generate compressed representation of spreadsheet structure and data."""
         logger.info("Starting spreadsheet encoding for: %s", excel_file_path)
         
-        # Get system prompt with any additional context including file path
-        system_prompt = get_system_prompt(excel_file_path=excel_file_path, **prompt_kwargs)
+        # Get task prompt with any additional context including file path
+        task_prompt = get_task_prompt(excel_file_path=excel_file_path, **prompt_kwargs)
         
         messages = [
             {"role": "system", "content": "You are an expert financial analyst that understands spreadsheets."},
-            {"role": "user", "content": system_prompt}
+            {"role": "user", "content": task_prompt}
         ]
         iteration = 0
         max_iterations = 50

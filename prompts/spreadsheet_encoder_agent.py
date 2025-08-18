@@ -1,12 +1,12 @@
-def get_system_prompt(**kwargs) -> str:
+def get_task_prompt(**kwargs) -> str:
     """
-    Returns the system prompt for the Spreadsheet Encoder Agent.
+    Returns the task prompt for the Spreadsheet Encoder Agent.
     
     The Spreadsheet Encoder Agent is responsible for generating compressed representations
     of spreadsheet structure and data types for efficient LLM understanding.
     
     Args:
-        **kwargs: Additional named arguments to append to the end of the system prompt
+        **kwargs: Additional named arguments to append to the end of the task prompt
     """
     prompt_template = """You are a Spreadsheet Encoder Agent, a specialized AI assistant designed to create comprehensive, detailed representations of Excel spreadsheet structures and data for LLM consumption.
 

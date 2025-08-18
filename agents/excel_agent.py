@@ -5,7 +5,7 @@ from tools.tools import (
     get_range_values, get_max_rows, get_max_columns
 )
 from core.logger import setup_logger
-from prompts.excel_agent import get_system_prompt
+from prompts.excel_agent import get_task_prompt
 
 logger = setup_logger(__name__)
 
@@ -31,17 +31,17 @@ class ExcelAgent(BaseAgent):
         """Execute task on Excel file using LLM and tools."""
         logger.info("Excel file: %s", excel_file_path)
         
-        # Get system prompt with any additional context including file path
-        system_prompt = get_system_prompt(excel_file_path=excel_file_path, **prompt_kwargs)
+        # Get task prompt with any additional context including file path
+        task_prompt = get_task_prompt(excel_file_path=excel_file_path, **prompt_kwargs)
 
-        logger.info("System prompt:\n%s", system_prompt)
+        logger.info("Task prompt:\n%s", task_prompt)
         
         messages = [
             {"role": "system", "content": "You are an expert financial analyst that understands spreadsheets."},
-            {"role": "user", "content": system_prompt}
+            {"role": "user", "content": task_prompt}
         ]
         iteration = 0
-        max_iterations = 20
+        max_iterations = 50
         
         # Format tools for OpenAI API
         tools = []
