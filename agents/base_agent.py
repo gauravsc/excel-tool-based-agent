@@ -27,6 +27,41 @@ class BaseAgent(ABC):
         """Return the list of tools available to this agent."""
         pass
     
+    def reduce_messages(self, messages: List[Dict[str, Any]], max_messages: int = 10) -> List[Dict[str, Any]]:
+        """Reduce the message list to a maximum number of messages while preserving system and task prompts."""
+        if len(messages) <= max_messages:
+            return messages
+        
+        # Find system and user (task) prompts
+        system_messages = [msg for msg in messages if msg.get("role") == "system"]
+        user_messages = [msg for msg in messages if msg.get("role") == "user"]
+        
+        # Keep all system messages and the first user message (task prompt)
+        preserved_messages = system_messages + user_messages[:1]
+        
+        # Calculate how many recent messages we can keep
+        remaining_slots = max_messages - len(preserved_messages)
+        
+        if remaining_slots <= 0:
+            # If we can't fit even the preserved messages, just return them
+            logger.warning("Message limit too low to preserve system and task prompts. Returning preserved messages only.")
+            return preserved_messages
+        
+        # Get the most recent messages (excluding system and first user message)
+        recent_messages = [msg for msg in messages if msg.get("role") not in ["system"] or 
+                          (msg.get("role") == "user" and msg not in user_messages[:1])]
+        
+        # Take the most recent messages that fit in the remaining slots
+        recent_messages_to_keep = recent_messages[-remaining_slots:]
+        
+        # Combine preserved messages with recent messages
+        reduced_messages = preserved_messages + recent_messages_to_keep
+        
+        logger.info("Reduced messages from %d to %d (preserved %d system/task messages, kept %d recent messages)", 
+                   len(messages), len(reduced_messages), len(preserved_messages), len(recent_messages_to_keep))
+        
+        return reduced_messages
+    
     def compute_total_cost(self) -> Dict[str, Any]:
         """Compute and return the total cost incurred by the agent."""
         pricing = {

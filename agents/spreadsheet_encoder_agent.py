@@ -62,6 +62,9 @@ class SpreadsheetEncoderAgent(BaseAgent):
             print("=" * 80)
             logger.info("LLM iteration %d", iteration)
             
+            # Reduce messages to prevent context from becoming too long
+            messages = self.reduce_messages(messages)
+            
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
