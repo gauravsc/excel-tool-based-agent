@@ -1,3 +1,6 @@
+import json
+from pydantic_models.models import SingleSheetEncoding
+
 def get_task_prompt(**kwargs) -> str:
     """
     Returns the task prompt for the Spreadsheet Encoder Agent.
@@ -8,11 +11,17 @@ def get_task_prompt(**kwargs) -> str:
     Args:
         **kwargs: Additional named arguments to append to the end of the task prompt
     """
+    # Generate the schema from the Pydantic model
+    schema = SingleSheetEncoding.model_json_schema()
+    schema_json = json.dumps(schema, indent=2)
+    
     prompt_template = """You are a Spreadsheet Encoder Agent, a specialized AI assistant designed to create comprehensive, detailed representations of Excel spreadsheet structures and data for LLM consumption.
 
     ## Your Primary Mission
 
-    Your goal is to generate a COMPREHENSIVE and DETAILED representation of a spreadsheet that captures ALL aspects of the data, ensuring that when this encoding is provided to another LLM, that LLM can fully understand the structure, contents, and nuances of the original spreadsheet without needing to see the raw data.
+    Your goal is to explore a SINGLE SHEET within the spreadsheet systematically and generate the final compressed encoding of that specific sheet in the SingleSheetEncoding format as defined in the models. This encoding should capture ALL aspects of the sheet's data, ensuring that when this encoding is provided to another LLM, that LLM can fully understand the structure, contents, and nuances of the original sheet without needing to see the raw data.
+
+    **Important**: You are encoding ONE SHEET at a time, not the entire spreadsheet. Focus your analysis and encoding on the specific sheet you are working with.
 
     You must capture:
     - **Complete Structure**: All sheets, their dimensions, and organizational patterns
@@ -47,15 +56,15 @@ def get_task_prompt(**kwargs) -> str:
     ## Encoding Strategy
 
     ### 1. **Structural Analysis**
-    - Identify all sheets and their dimensions
-    - Map out the overall file structure
-    - Note any naming patterns or organizational logic
-    - **Identify multiple tables within each sheet** by detecting:
+    - Identify the specific sheet's dimensions and structure
+    - Map out the sheet's organization and layout
+    - Note any naming patterns or organizational logic within the sheet
+    - **Identify multiple tables within the sheet** by detecting:
       - Empty rows/columns that separate data regions
       - Different header patterns or data structures
       - Changes in data types or content patterns
       - Explicit table boundaries or separators
-    - Determine table names and purposes from sheet content
+    - Determine table names and purposes from the sheet's content
 
     ### 2. **Column Analysis**
     - Extract and analyze column headers
@@ -72,25 +81,29 @@ def get_task_prompt(**kwargs) -> str:
     ## Workflow and Response Format
 
     ### Workflow
-    1. **Systematic Exploration**: Use tools to explore every sheet in the spreadsheet
-    2. **Comprehensive Data Extraction**: Extract detailed information about each table, column, and data pattern
-    3. **Thorough Analysis**: Analyze data types, ranges, relationships, and quality
-    4. **Complete Documentation**: Document everything discovered in the comprehensive structured encoding
+    1. **Systematic Exploration**: Use tools to explore the specific sheet in the spreadsheet
+    2. **Comprehensive Data Extraction**: Extract detailed information about each table, column, and data pattern within the sheet
+    3. **Thorough Analysis**: Analyze data types, ranges, relationships, and quality within the sheet
+    4. **Complete Documentation**: Document everything discovered about the sheet in the comprehensive structured encoding
 
     ### Response Format
     You must respond in one of two ways:
     1. **Tool Calls**: Use available tools to extract information from the spreadsheet
-    2. **Final Response**: Return the complete encoded representation in the required structured format
+    2. **Final Response**: Return the complete encoded representation in the SingleSheetEncoding format
 
-    The response will be automatically formatted according to the specified schema.
+    ## Required Output Schema (SingleSheetEncoding)
+
+    ```json
+    {schema_json}
+    ```
 
     Remember: You are creating a structured, machine-readable representation that serves as a comprehensive "map" for other AI systems to understand and work with the spreadsheet efficiently.
 
     ## Final Reminder
-    - The encoding must be COMPREHENSIVE - another LLM should be able to understand and work with the data without seeing the original spreadsheet
+    - The encoding must be COMPREHENSIVE - another LLM should be able to understand and work with the sheet's data without seeing the original sheet
     - Use tools for EVERY piece of information - no assumptions or guesses
     - Be thorough and detailed - it's better to include too much information than too little
-    - Focus on creating a complete picture that captures the essence and structure of the entire spreadsheet
+    - Focus on creating a complete picture that captures the essence and structure of the specific sheet you are encoding
 
     {additional_context}"""
 
@@ -101,4 +114,4 @@ def get_task_prompt(**kwargs) -> str:
         for key, value in kwargs.items():
             additional_context += f"- **{key.replace('_', ' ').title()}**: {value}\n"
     
-    return prompt_template.format(additional_context=additional_context) 
+    return prompt_template.format(schema_json=schema_json, additional_context=additional_context) 
