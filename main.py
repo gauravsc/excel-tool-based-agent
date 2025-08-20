@@ -22,13 +22,13 @@ def main():
     client_coa_mapping_file = f"data/{client_name}/{client_name}_coa.json"
 
     # Clean the spreadsheet by removing hidden columns
-    logger.info("=== Cleaning spreadsheet by removing hidden columns ===")
-    removed_columns_by_sheet = remove_hidden_columns_all_sheets(excel_file, output_path=excel_file)
-    for sheet_name, removed_columns in removed_columns_by_sheet.items():
-        if removed_columns:
-            logger.info("Removed %d hidden columns from %s", len(removed_columns), sheet_name)
-        else:
-            logger.info("No hidden columns found in %s", sheet_name)
+    # logger.info("=== Cleaning spreadsheet by removing hidden columns ===")
+    # removed_columns_by_sheet = remove_hidden_columns_all_sheets(excel_file, output_path=excel_file)
+    # for sheet_name, removed_columns in removed_columns_by_sheet.items():
+    #     if removed_columns:
+    #         logger.info("Removed %d hidden columns from %s", len(removed_columns), sheet_name)
+    #     else:
+    #         logger.info("No hidden columns found in %s", sheet_name)
 
     # Create encoded_sheets directory if it doesn't exist
     os.makedirs(encoded_sheets_dir, exist_ok=True)

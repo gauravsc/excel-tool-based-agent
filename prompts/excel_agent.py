@@ -38,23 +38,9 @@ def get_task_prompt(**kwargs) -> str:
     
     ### CoA Code Analysis Output Format
 
-    Your final output must follow this specific JSON structure:
+    Your final output must follow the required structured format for CoA analysis results.
 
-    ```json
-    {{
-    "coa_analysis": {{
-        "coa_code": "string",
-        "values": ["list", "of", "values", "belonging", "to", "this", "coa", "code"],
-        "cell_locations": [
-        {{
-            "sheet": "sheet_name",
-            "cell": "A1",
-            "value": "actual_value_in_cell"
-        }}
-        ]
-    }}
-    }}
-    ```
+    The response will be automatically formatted according to the specified schema.
     
     """
 
