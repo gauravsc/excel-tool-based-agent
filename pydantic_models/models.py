@@ -107,6 +107,7 @@ class SingleSheetEncoding(BaseModel):
     """
     Model representing a complete encoding of a single spreadsheet sheet.
     """
+    name: str = Field(..., description="Name of the sheet")
     sheet_name: str = Field(..., description="Name of the sheet")
     sheet_description: str = Field(..., description="Detailed description of what the sheet contains")
     dimensions: SheetDimensions = Field(..., description="Sheet dimensions")

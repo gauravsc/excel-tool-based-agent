@@ -38,6 +38,7 @@ class SpreadsheetEncoderAgent(BaseAgent):
         
         # Get task prompt with any additional context including file path and sheet name
         task_prompt = get_task_prompt(excel_file_path=excel_file_path, sheet_name=sheet_name, **prompt_kwargs)
+        logger.info("Task prompt: %s", task_prompt)
         
         messages = [
             {"role": "system", "content": "You are an expert financial analyst that understands spreadsheets."},
@@ -73,7 +74,7 @@ class SpreadsheetEncoderAgent(BaseAgent):
                 messages=messages,
                 tools=tools,
                 tool_choice="auto",
-                response_format={"type": "json_schema", "json_schema": SingleSheetEncoding.model_json_schema()}
+                # response_format={"type": "json_schema", "json_schema": SingleSheetEncoding.model_json_schema()}
             )
             
             # Update cost tracker with response information
@@ -87,9 +88,12 @@ class SpreadsheetEncoderAgent(BaseAgent):
                 final_cost = self.compute_total_cost()
                 logger.info("Encoding completed. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
                 
-                # Parse the structured response directly
-                response_data = json.loads(message.content)
-                parsed_response = SingleSheetEncoding(**response_data)
+                # Parse the structured response using response.parse
+                parsed_response = self.client.responses.parse(
+                    model=self.model,
+                    input=messages,
+                    text_format=SingleSheetEncoding
+                )
                 logger.info("Successfully parsed response into SingleSheetEncoding")
                 return parsed_response
             

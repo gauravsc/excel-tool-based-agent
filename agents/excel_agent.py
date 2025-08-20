@@ -1,11 +1,13 @@
+import json
 from agents.base_agent import BaseAgent
 from tools.tools import (
-    get_sheet_names, get_row_values, get_column_values, get_cell_value,
+    get_row_values, get_column_values, get_cell_value,
     get_sheet_dimensions,
     get_range_values, get_max_rows, get_max_columns
 )
 from core.logger import setup_logger
 from prompts.excel_agent import get_task_prompt
+from pydantic_models.models import ExpectedOutputList
 
 logger = setup_logger(__name__)
 
@@ -16,7 +18,7 @@ class ExcelAgent(BaseAgent):
         """Initialize with OpenAI API key."""
         super().__init__(api_key)
         self.tools = [
-            get_sheet_names, get_row_values, get_column_values, get_cell_value,
+            get_row_values, get_column_values, get_cell_value,
             get_sheet_dimensions, get_range_values,
             get_max_rows, get_max_columns
         ]
@@ -27,7 +29,7 @@ class ExcelAgent(BaseAgent):
         """Return the list of tools available to this agent."""
         return self.tools
     
-    def execute(self, excel_file_path: str, **prompt_kwargs) -> str:
+    def execute(self, excel_file_path: str, **prompt_kwargs) -> ExpectedOutputList:
         """Execute task on Excel file using LLM and tools."""
         logger.info("Excel file: %s", excel_file_path)
         
@@ -81,7 +83,15 @@ class ExcelAgent(BaseAgent):
                 logger.info("No more tool calls, task completed")
                 final_cost = self.compute_total_cost()
                 logger.info("Task completed. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
-                return message.content
+                
+                # Parse the structured response using response.parse
+                parsed_response = self.client.responses.parse(
+                    model=self.model,
+                    input=messages,
+                    text_format=ExpectedOutputList
+                )
+                logger.info("Successfully parsed response into ExpectedOutputList")
+                return parsed_response
             
             logger.info("LLM requested %d tool calls", len(message.tool_calls))
             
@@ -107,4 +117,4 @@ class ExcelAgent(BaseAgent):
         logger.warning("Reached maximum iterations (%d), stopping execution", max_iterations)
         final_cost = self.compute_total_cost()
         logger.info("Task stopped due to max iterations. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
-        return "Task execution stopped due to maximum iteration limit reached."
+        return ExpectedOutputList(entries=[])
