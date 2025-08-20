@@ -1,7 +1,7 @@
 import json
 from agents.base_agent import BaseAgent
 from tools.tools import (
-    get_sheet_names, get_row_values_sample, get_column_values_sample, get_data_types_column_sample, get_sheet_dimensions,
+    get_row_values_sample, get_column_values_sample, get_data_types_column_sample, get_sheet_dimensions,
     get_range_values, get_sheet_content,
     get_max_rows, get_max_columns, get_nonempty_column_letters
 )
@@ -19,7 +19,7 @@ class SpreadsheetEncoderAgent(BaseAgent):
         """Initialize with OpenAI API key."""
         super().__init__(api_key)
         self.tools = [
-            get_sheet_names, get_row_values_sample, get_column_values_sample,
+            get_row_values_sample, get_column_values_sample,
             get_data_types_column_sample, get_sheet_dimensions,
             get_range_values, get_sheet_content,
             get_max_rows, get_max_columns, get_nonempty_column_letters

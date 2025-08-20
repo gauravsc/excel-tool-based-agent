@@ -19,24 +19,36 @@ logger = setup_logger(__name__)
 
 
 @tool
-def get_row_values(file_path: str, sheet_name: str, row_number: int) -> List[Any]:
-    """Get all values from a specific row in the Excel sheet."""
+def get_row_values(file_path: str, sheet_name: str, row_number: int) -> List[Dict[str, Any]]:
+    """Get all values from a specific row in the Excel sheet with their cell references."""
     logger.info("Getting row %d values from sheet '%s' in %s", row_number, sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
-    result = [cell.value for cell in sheet[row_number]]
-    logger.info("Row %d has %d values", row_number, len(result))
+    result = []
+    for cell in sheet[row_number]:
+        if cell.value is not None:  # Only include non-empty cells
+            result.append({
+                "cell_reference": cell.coordinate,
+                "value": cell.value
+            })
+    logger.info("Row %d has %d non-empty values", row_number, len(result))
     return result
 
 
 @tool
-def get_column_values(file_path: str, sheet_name: str, column_letter: str) -> List[Any]:
-    """Get all values from a specific column in the Excel sheet."""
+def get_column_values(file_path: str, sheet_name: str, column_letter: str) -> List[Dict[str, Any]]:
+    """Get all values from a specific column in the Excel sheet with their cell references."""
     logger.info("Getting column %s values from sheet '%s' in %s", column_letter, sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
-    result = [cell.value for cell in sheet[column_letter]]
-    logger.info("Column %s has %d values", column_letter, len(result))
+    result = []
+    for cell in sheet[column_letter]:
+        if cell.value is not None:  # Only include non-empty cells
+            result.append({
+                "cell_reference": cell.coordinate,
+                "value": cell.value
+            })
+    logger.info("Column %s has %d non-empty values", column_letter, len(result))
     return result
 
 
