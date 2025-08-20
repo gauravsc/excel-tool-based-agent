@@ -2,8 +2,10 @@ import openpyxl
 from openpyxl.utils import get_column_letter, column_index_from_string
 from openpyxl.styles import Border
 from typing import List, Optional, Dict
-import shutil
+from core.logger import setup_logger
+from openpyxl import load_workbook
 
+logger = setup_logger(__name__)
 
 def remove_hidden_columns(file_path: str, sheet_name: str, output_path: Optional[str] = None) -> List[str]:
     """Remove hidden and grouped columns from an Excel sheet and return list of removed columns."""
@@ -74,3 +76,10 @@ def remove_hidden_columns_all_sheets(file_path: str, output_path: Optional[str] 
     return results
 
 
+def get_sheet_names(file_path: str) -> List[str]:
+    """Get all sheet names from the Excel file."""
+    logger.info("Getting sheet names from %s", file_path)
+    workbook = load_workbook(file_path)
+    result = workbook.sheetnames
+    logger.info("Found %d sheets: %s", len(result), result)
+    return result

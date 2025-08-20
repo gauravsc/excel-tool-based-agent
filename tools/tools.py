@@ -8,14 +8,14 @@ from tools.utils import get_detailed_data_types
 logger = setup_logger(__name__)
 
 
-@tool
-def get_sheet_names(file_path: str) -> List[str]:
-    """Get all sheet names from the Excel file."""
-    logger.info("Getting sheet names from %s", file_path)
-    workbook = load_workbook(file_path)
-    result = workbook.sheetnames
-    logger.info("Found %d sheets: %s", len(result), result)
-    return result
+# @tool
+# def get_sheet_names(file_path: str) -> List[str]:
+#     """Get all sheet names from the Excel file."""
+#     logger.info("Getting sheet names from %s", file_path)
+#     workbook = load_workbook(file_path)
+#     result = workbook.sheetnames
+#     logger.info("Found %d sheets: %s", len(result), result)
+#     return result
 
 
 @tool

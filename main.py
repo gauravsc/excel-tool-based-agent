@@ -1,8 +1,10 @@
 import os
+import json
 from dotenv import load_dotenv
 from agents import ExcelAgent, SpreadsheetEncoderAgent
 from core.logger import setup_logger
 from core.utils import remove_hidden_columns_all_sheets
+from core.utils import get_sheet_names
 
 logger = setup_logger(__name__)
 
@@ -13,8 +15,11 @@ def main():
     load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
     logger.info("Environment variables loaded")
-    
-    excel_file = "data/single_sheet.xlsx"
+
+    client_name = "client_1"
+    excel_file = f"data/{client_name}/{client_name}.xlsx"
+    encoded_sheets_dir = f"data/{client_name}/encoded_sheets"
+    client_coa_mapping_file = f"data/{client_name}/{client_name}_coa.json"
 
     # Clean the spreadsheet by removing hidden columns
     logger.info("=== Cleaning spreadsheet by removing hidden columns ===")
@@ -25,40 +30,49 @@ def main():
         else:
             logger.info("No hidden columns found in %s", sheet_name)
 
-    # Example 1: Use SpreadsheetEncoderAgent to get structure
-    # logger.info("=== Using SpreadsheetEncoderAgent ===")
-    # encoder_agent = SpreadsheetEncoderAgent(api_key=api_key)
+    # Create encoded_sheets directory if it doesn't exist
+    os.makedirs(encoded_sheets_dir, exist_ok=True)
     
-    # Get LLM-generated encoding
-    # llm_encoding = encoder_agent.encode(excel_file)
-    # logger.info("LLM encoding completed")
-    # print("LLM-Generated Encoding:")
-    # print(llm_encoding)
+    # Get sheet names and encode each sheet
+    logger.info("=== Getting sheet names and encoding each sheet ===")
+    sheet_names = get_sheet_names(excel_file)
+    logger.info("Found %d sheets: %s", len(sheet_names), sheet_names)
     
-    # Load encoded spreadsheet from file
-    logger.info("=== Loading encoded spreadsheet from file ===")
-    with open("encoded_spreadsheet.txt", "r", encoding="utf-8") as f:
-        encoded_spreadsheet_content = f.read()
-    logger.info("Successfully loaded encoded spreadsheet from file")
+    encoder_agent = SpreadsheetEncoderAgent(api_key=api_key)
+    all_sheet_encodings = []
+    
+    for sheet_name in sheet_names:
+        logger.info("Encoding sheet: %s", sheet_name)
+        sheet_encoding = encoder_agent.encode(excel_file, sheet_name=sheet_name)
+        
+        # Save individual sheet encoding to separate JSON file
+        sheet_filename = f"{sheet_name}.json"
+        sheet_filepath = os.path.join(encoded_sheets_dir, sheet_filename)
+        with open(sheet_filepath, "w", encoding="utf-8") as f:
+            json.dump(sheet_encoding.model_dump(), f, indent=2, ensure_ascii=False)
+        logger.info("Saved sheet encoding to: %s", sheet_filepath)
+        
+        all_sheet_encodings.append(sheet_encoding)
+        logger.info("Successfully encoded sheet: %s", sheet_name)
+    
+    logger.info("Successfully encoded all sheets and saved individual files to %s", encoded_sheets_dir)
    
     
-    # Example 2: Use ExcelAgent for task execution with encoded spreadsheet
+    # Example 2: Use ExcelAgent for task execution
     
-    logger.info("Reading CoA codes from file")
-    with open("data/coa_codes.txt", "r", encoding="utf-8") as f:
-        coa_text = f.read()
-    logger.info("Read %d characters from coa_codes.txt", len(coa_text))
+    # logger.info("Reading CoA codes from file")
+    # with open("data/coa_codes.txt", "r", encoding="utf-8") as f:
+    #     coa_text = f.read()
+    # logger.info("Read %d characters from coa_codes.txt", len(coa_text))
     
+    # agent = ExcelAgent(api_key=api_key)
+    # logger.info("Executing task on Excel file: %s", excel_file)
+    # result = agent.execute(excel_file, coa_text=coa_text)
     
-    
-    agent = ExcelAgent(api_key=api_key)
-    logger.info("Executing task on Excel file: %s with encoded spreadsheet", excel_file)
-    result = agent.execute(excel_file, coa_text=coa_text, encoded_spreadsheet=encoded_spreadsheet_content)
-    
-    logger.info("Task execution completed successfully")
-    logger.info("Result length: %d characters", len(result))
-    print("\nTask Execution Result:")
-    print(result)
+    # logger.info("Task execution completed successfully")
+    # logger.info("Result length: %d characters", len(result))
+    # print("\nTask Execution Result:")
+    # print(result)
 
 if __name__ == "__main__":
     main()

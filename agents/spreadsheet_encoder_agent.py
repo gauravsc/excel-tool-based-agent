@@ -1,3 +1,4 @@
+import json
 from agents.base_agent import BaseAgent
 from tools.tools import (
     get_sheet_names, get_row_values_sample, get_column_values_sample, get_data_types_column_sample, get_sheet_dimensions,
@@ -6,6 +7,8 @@ from tools.tools import (
 )
 from core.logger import setup_logger
 from prompts.spreadsheet_encoder_agent import get_task_prompt
+from pydantic_models.models import SingleSheetEncoding
+
 
 logger = setup_logger(__name__)
 
@@ -29,12 +32,12 @@ class SpreadsheetEncoderAgent(BaseAgent):
         """Return the list of tools available to this agent."""
         return self.tools
     
-    def encode(self, excel_file_path: str, **prompt_kwargs) -> str:
+    def encode(self, excel_file_path: str, sheet_name: str = None, **prompt_kwargs) -> SingleSheetEncoding:
         """Generate compressed representation of spreadsheet structure and data."""
         logger.info("Starting spreadsheet encoding for: %s", excel_file_path)
         
-        # Get task prompt with any additional context including file path
-        task_prompt = get_task_prompt(excel_file_path=excel_file_path, **prompt_kwargs)
+        # Get task prompt with any additional context including file path and sheet name
+        task_prompt = get_task_prompt(excel_file_path=excel_file_path, sheet_name=sheet_name, **prompt_kwargs)
         
         messages = [
             {"role": "system", "content": "You are an expert financial analyst that understands spreadsheets."},
@@ -63,13 +66,14 @@ class SpreadsheetEncoderAgent(BaseAgent):
             logger.info("LLM iteration %d", iteration)
             
             # Reduce messages to prevent context from becoming too long
-            messages = self.reduce_messages(messages)
+            # messages = self.reduce_messages(messages)
             
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
                 tools=tools,
-                tool_choice="auto"
+                tool_choice="auto",
+                response_format={"type": "json_schema", "json_schema": SingleSheetEncoding.model_json_schema()}
             )
             
             # Update cost tracker with response information
@@ -82,7 +86,12 @@ class SpreadsheetEncoderAgent(BaseAgent):
                 logger.info("No more tool calls, encoding completed")
                 final_cost = self.compute_total_cost()
                 logger.info("Encoding completed. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
-                return message.content
+                
+                # Parse the structured response directly
+                response_data = json.loads(message.content)
+                parsed_response = SingleSheetEncoding(**response_data)
+                logger.info("Successfully parsed response into SingleSheetEncoding")
+                return parsed_response
             
             logger.info("LLM requested %d tool calls", len(message.tool_calls))
             
@@ -108,4 +117,9 @@ class SpreadsheetEncoderAgent(BaseAgent):
         logger.warning("Reached maximum iterations (%d), stopping encoding", max_iterations)
         final_cost = self.compute_total_cost()
         logger.info("Encoding stopped due to max iterations. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
-        return "Spreadsheet encoding stopped due to maximum iteration limit reached." 
+        return SingleSheetEncoding(
+            sheet_name="",
+            sheet_description="Encoding stopped due to maximum iteration limit reached",
+            dimensions={"rows": 0, "columns": 0, "range": ""},
+            tables=[]
+        ) 
