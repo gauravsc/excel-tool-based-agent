@@ -1,0 +1,94 @@
+{
+  "name": "Exceptionals",
+  "sheet_name": "Exceptionals",
+  "sheet_description": "Sheet appears mostly empty, minimal sample suggests small excerpt of a multi-header financial forecast table containing periods, dates and forecast/actual flags.",
+  "dimensions": {
+    "rows": 29,
+    "columns": 31,
+    "range": "A1:AE29"
+  },
+  "tables": [
+    {
+      "table_name": "Exceptional Costs Forecast/Actuals (Partial extract)",
+      "table_description": "Small 5-column snippet of a wider exceptional-cost forecast vs actual table. Only 5 period columns (Periods 10,4,11,5,6) have been populated in this sheet extract together with date and status header layers and a single cost line (IT Consultancy) plus totals.",
+      "boundaries": {
+        "start_row": 6,
+        "end_row": 12,
+        "start_column": "F",
+        "end_column": "J",
+        "range": "F6:J12"
+      },
+      "columns": [
+        {
+          "column_letter": "F",
+          "column_name": "Period 10",
+          "column_description": "Column representing Period 10 for exceptional cost reporting; header layers include Date Aug-23, marked as Forecast, unit £k.",
+          "data_type": "numeric",
+          "sample_values": [
+            0,
+            11108.67
+          ],
+          "unique_values_count": 2,
+          "has_null_values": false
+        },
+        {
+          "column_letter": "G",
+          "column_name": "Period 4",
+          "column_description": "Column representing Period 4; date Sep-23, unit £k, status Forecast/Actual per multi-header.",
+          "data_type": "numeric",
+          "sample_values": [
+            0
+          ],
+          "unique_values_count": 1,
+          "has_null_values": false
+        },
+        {
+          "column_letter": "H",
+          "column_name": "Period 11",
+          "column_description": "Column representing Period 11 with date Jan-24.",
+          "data_type": "numeric",
+          "sample_values": [
+            11590
+          ],
+          "unique_values_count": 1,
+          "has_null_values": false
+        },
+        {
+          "column_letter": "I",
+          "column_name": "Period 5",
+          "column_description": "Column for Period 5; date Jan-25; status Actual.",
+          "data_type": "numeric",
+          "sample_values": [
+            38539.23
+          ],
+          "unique_values_count": 1,
+          "has_null_values": false
+        },
+        {
+          "column_letter": "J",
+          "column_name": "Period 6",
+          "column_description": "Column for Period 6; date Feb-24; status Actual.",
+          "data_type": "numeric",
+          "sample_values": [
+            8262.69
+          ],
+          "unique_values_count": 1,
+          "has_null_values": false
+        }
+      ],
+      "row_headers": {
+        "has_row_headers": true,
+        "row_header_column": "D",
+        "row_header_description": "Column D contains row descriptions such as 'Total Exceptional Costs', 'IT Consultancy'"
+      },
+      "data_quality": {
+        "completeness": "Sheet highly incomplete; only five period columns and one cost line populated.",
+        "consistency": "Numeric values consistent as currency; headers mixed text with spelling error 'Foreacst'.",
+        "anomalies": [
+          "Misspelling 'Foreacst' in header",
+          "Sheet truncated—majority of expected periods/rows missing"
+        ]
+      }
+    }
+  ]
+}

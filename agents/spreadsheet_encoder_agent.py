@@ -21,7 +21,6 @@ class SpreadsheetEncoderAgent(BaseAgent):
         self.tools = [
             get_row_values_sample, get_column_values_sample,
             get_data_types_column_sample, get_sheet_dimensions,
-            get_range_values, get_sheet_content_sample,
             get_max_rows, get_max_columns, get_nonempty_column_letters
         ]
         logger.info("SpreadsheetEncoderAgent initialized")
@@ -45,7 +44,7 @@ class SpreadsheetEncoderAgent(BaseAgent):
             {"role": "user", "content": task_prompt}
         ]
         iteration = 0
-        max_iterations = 50
+        max_iterations = 20
         
         # Format tools for OpenAI API
         tools = []
@@ -84,43 +83,9 @@ class SpreadsheetEncoderAgent(BaseAgent):
 
             if not message.tool_calls:
                 break
+            
             messages.append(message)
-            
-            if not message.tool_calls:
-                
-                logger.info("LLM response text: %s", message.content)
-                # Remove the last message (the LLM's final response) before parsing
-                messages.pop()
-                logger.info("No more tool calls, encoding completed")
-                final_cost = self.compute_total_cost()
-                logger.info("Encoding completed. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
-                
-                # Write the final response to a file called dump.txt
-                with open("dump.txt", "w", encoding="utf-8") as f:
-                    f.write(message.content)
-                logger.info("Final encoding written to file: dump.txt")
-
-                # Get structured response using chat.completions.create with response_format
-                final_response = self.client.chat.completions.create(
-                    model=self.model,
-                    messages=messages,
-                    response_format={"type": "json_schema", "json_schema": SingleSheetEncoding.model_json_schema()},
-                )
-
-                logger.info("Final LLM response object: %r", final_response)
-                
-                # Update cost tracker with final response
-                self.update_cost_tracker(final_response)
-
-                
-                # Parse the JSON response into SingleSheetEncoding
-                response_content = final_response.choices[0].message.content
-                parsed_data = json.loads(response_content)
-                parsed_response = SingleSheetEncoding(**parsed_data)
-                
-                logger.info("Successfully parsed response into SingleSheetEncoding")
-                return parsed_response
-            
+        
             logger.info("LLM requested %d tool calls", len(message.tool_calls))
             
             for tool_call in message.tool_calls:
@@ -141,13 +106,41 @@ class SpreadsheetEncoderAgent(BaseAgent):
                     "tool_call_id": tool_call.id,
                     "content": str(result)
                 })
-        
-        logger.warning("Reached maximum iterations (%d), stopping encoding", max_iterations)
+
+        logger.info("LLM response text: %s", message.content)
+        # Remove the last message (the LLM's final response) before parsing
         final_cost = self.compute_total_cost()
-        logger.info("Encoding stopped due to max iterations. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
-        return SingleSheetEncoding(
-            sheet_name="",
-            sheet_description="Encoding stopped due to maximum iteration limit reached",
-            dimensions={"rows": 0, "columns": 0, "range": ""},
-            tables=[]
-        ) 
+        logger.info("Encoding completed. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
+        
+        # Write the final response to a file called dump.txt
+        if message.content:
+            with open("dump.txt", "w", encoding="utf-8") as f:
+                f.write(message.content)
+            logger.info("Final encoding written to file: dump.txt")
+
+        # Get structured response using chat.completions.create with response_format
+        pydantic_schema = SingleSheetEncoding.model_json_schema()
+        json_schema = {
+            "name": pydantic_schema['title'],
+            "schema": pydantic_schema
+        }
+        logger.info("JSON schema: %r", json_schema)
+        final_response = self.client.chat.completions.create(
+            model=self.model,
+            messages=messages,
+            response_format={"type": "json_schema", "json_schema": json_schema},
+        )
+
+        logger.info("Final LLM response object: %r", final_response)
+        
+        # Update cost tracker with final response
+        self.update_cost_tracker(final_response)
+
+        # Parse the JSON response into SingleSheetEncoding
+        response_content = final_response.choices[0].message.content
+        parsed_data = json.loads(response_content)
+        parsed_response = SingleSheetEncoding(**parsed_data)
+        
+        logger.info("Successfully parsed response into SingleSheetEncoding")
+        return parsed_response
+    

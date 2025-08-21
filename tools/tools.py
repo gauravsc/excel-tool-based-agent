@@ -165,8 +165,10 @@ def get_sheet_content(file_path: str, sheet_name: str) -> Dict[int, Dict[str, An
 
 
 @tool
-def get_sheet_content_sample(file_path: str, sheet_name: str, num_rows: int = 10, num_columns: int = 10) -> Dict[int, Dict[str, Any]]:
-    """Get a sample of the sheet content by taking the first num_rows rows and num_columns columns."""
+def get_sheet_content_sample(file_path: str, sheet_name: str) -> Dict[int, Dict[str, Any]]:
+    """Get a sample of the sheet content. """
+    num_rows = 5
+    num_columns = 5
     logger.info("Getting sample content (%d rows x %d columns) from sheet '%s' in %s", num_rows, num_columns, sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
@@ -190,9 +192,11 @@ def get_sheet_content_sample(file_path: str, sheet_name: str, num_rows: int = 10
 
 
 @tool
-def get_row_values_sample(file_path: str, sheet_name: str, row_number: int, sample_size: int = 10) -> List[Any]:
+def get_row_values_sample(file_path: str, sheet_name: str, row_number: int) -> List[Any]:
     """Get a random sample of values from a specific row in the Excel sheet."""
+    sample_size = 5
     logger.info("Getting sample of %d values from row %d in sheet '%s' from %s", sample_size, row_number, sheet_name, file_path)
+
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]
     all_values = [cell.value for cell in sheet[row_number]]
@@ -211,8 +215,9 @@ def get_row_values_sample(file_path: str, sheet_name: str, row_number: int, samp
 
 
 @tool
-def get_column_values_sample(file_path: str, sheet_name: str, column_letter: str, sample_size: int = 10) -> List[Any]:
+def get_column_values_sample(file_path: str, sheet_name: str, column_letter: str) -> List[Any]:
     """Get a random sample of values from a specific column in the Excel sheet."""
+    sample_size = 5
     logger.info("Getting sample of %d values from column %s in sheet '%s' from %s", sample_size, column_letter, sheet_name, file_path)
     workbook = load_workbook(file_path)
     sheet = workbook[sheet_name]

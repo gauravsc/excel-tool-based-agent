@@ -43,6 +43,8 @@ def get_task_prompt(**kwargs) -> str:
     - You MUST use the provided tools to extract ALL information from the spreadsheet
     - Do NOT make assumptions about data without using tools to verify
     - Use tools systematically to explore every sheet, table, and column
+    - **IMPORTANT**: Tool calls are costly, so use only the minimum number necessary to gather complete information
+    - Plan your tool usage efficiently - batch related queries when possible
     - Only respond with either:
       - Tool calls to extract information
       - The final comprehensive encoded representation in JSON format
@@ -104,6 +106,7 @@ def get_task_prompt(**kwargs) -> str:
     - Use tools for EVERY piece of information - no assumptions or guesses
     - Be thorough and detailed - it's better to include too much information than too little
     - Focus on creating a complete picture that captures the essence and structure of the specific sheet you are encoding
+    - **CRITICAL**: Use the minimum number of tool calls necessary - they are costly, so plan efficiently and batch related queries
 
     {additional_context}"""
 
