@@ -118,3 +118,18 @@ class SingleSheetEncoding(BaseModel):
     class Config:
         """Configuration for SingleSheetEncoding model."""
         name = "SingleSheetEncoding" 
+
+
+class SheetSelection(BaseModel):
+    """Model representing the selection decision for a single sheet."""
+    sheet_name: str = Field(..., description="Name of the sheet")
+    include: bool = Field(..., description="Whether this sheet should be included for CoA analysis")
+    reasoning: str = Field(..., description="Brief explanation of why this sheet should/shouldn't be included")
+
+
+class SheetSelectionResponse(BaseModel):
+    """Model representing the response from the sheet selector agent."""
+    selected_sheets: List[SheetSelection] = Field(..., description="List of sheet selection decisions")
+    class Config:
+        """Configuration for SheetSelectionResponse model."""
+        name = "SheetSelectionResponse"

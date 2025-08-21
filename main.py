@@ -1,7 +1,7 @@
 import os
 import json
 from dotenv import load_dotenv
-from agents import ExcelAgent, SpreadsheetEncoderAgent
+from agents import ExcelAgent, SpreadsheetEncoderAgent, SheetSelectorAgent
 from core.logger import setup_logger
 from core.utils import remove_hidden_columns_all_sheets
 from core.utils import get_sheet_names
@@ -33,16 +33,38 @@ def main():
     # Create encoded_sheets directory if it doesn't exist
     os.makedirs(encoded_sheets_dir, exist_ok=True)
     
-    # Get sheet names and encode each sheet
-    logger.info("=== Getting sheet names and encoding each sheet ===")
+    # Get sheet names
+    logger.info("=== Getting sheet names ===")
     sheet_names = get_sheet_names(excel_file)
     logger.info("Found %d sheets: %s", len(sheet_names), sheet_names)
     
+    # Load CoA items from the client's CoA mapping file
+    logger.info("=== Loading CoA items ===")
+    with open(client_coa_mapping_file, "r", encoding="utf-8") as f:
+        coa_items = json.load(f)
+    logger.info("Loaded %d CoA items", len(coa_items))
+    
+    # Use SheetSelectorAgent to identify which sheets contain CoA-related data
+    logger.info("=== Using SheetSelectorAgent to identify relevant sheets ===")
+    sheet_selector_agent = SheetSelectorAgent(api_key=api_key)
+    sheet_selection_response = sheet_selector_agent.select_sheets(sheet_names, coa_items, excel_file_path=excel_file)
+    
+    # Get the selected sheet names
+    selected_sheet_names = [sheet.sheet_name for sheet in sheet_selection_response.selected_sheets if sheet.include]
+    logger.info("Selected %d sheets for encoding: %s", len(selected_sheet_names), selected_sheet_names)
+    
+    # Save the selected sheet names to a JSON file in the client folder
+    selected_sheets_file = f"data/{client_name}/selected_sheets.json"
+    with open(selected_sheets_file, "w", encoding="utf-8") as f:
+        json.dump(selected_sheet_names, f, indent=2, ensure_ascii=False)
+    logger.info("Saved selected sheet names to: %s", selected_sheets_file)
+    
+    # Encode only the selected sheets
+    logger.info("=== Encoding selected sheets ===")
     encoder_agent = SpreadsheetEncoderAgent(api_key=api_key)
     all_sheet_encodings = []
-    sheet_names = ["Exceptionals"]
     
-    for sheet_name in sheet_names:
+    for sheet_name in selected_sheet_names:
         logger.info("Encoding sheet: %s", sheet_name)
         sheet_encoding = encoder_agent.encode(excel_file, sheet_name=sheet_name)
         
@@ -56,7 +78,7 @@ def main():
         all_sheet_encodings.append(sheet_encoding)
         logger.info("Successfully encoded sheet: %s", sheet_name)
     
-    logger.info("Successfully encoded all sheets and saved individual files to %s", encoded_sheets_dir)
+    logger.info("Successfully encoded all selected sheets and saved individual files to %s", encoded_sheets_dir)
    
     
     # Example 2: Use ExcelAgent for task execution
