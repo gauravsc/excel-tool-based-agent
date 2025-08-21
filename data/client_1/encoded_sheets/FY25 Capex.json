@@ -1,0 +1,189 @@
+{
+  "name": "FY25 Capex",
+  "sheet_name": "FY25 Capex",
+  "sheet_description": "The sheet appears to be a partially-broken planning worksheet intended for FY25 capital expenditure (Capex) analysis by accounting period. Only a handful of cells still contain values; most cells contain “=#REF!” formula remnants indicating broken references. Despite the small physical size (28×19), meaningful data is extremely sparse, and no coherent structured table with stable headers can be reconstructed. The sheet is effectively unusable in its current state for analytical purposes.",
+  "dimensions": {
+    "rows": 28,
+    "columns": 19,
+    "range": "A1:S28"
+  },
+  "tables": [
+    {
+      "table_name": "Unrecoverable FY25 Capex planning range",
+      "table_description": "Intended to store Capex budget per period (Period 3, 8, 10, 11, Full Year, etc.) but virtually all numerical data, headers, and totals are broken (#REF!). Only a few header-like text labels remain (Period 11, Nov 24, Budget, £k, Newcastle, Kings Road, Total Refurb / Maintenance). No consistent columns or numerical values exist.",
+      "boundaries": {
+        "start_row": 6,
+        "end_row": 17,
+        "start_column": "D",
+        "end_column": "Q",
+        "range": "D6:Q17"
+      },
+      "columns": [
+        {
+          "column_letter": "D",
+          "column_name": "Misc broken formulas/labels",
+          "column_description": "Cells contain scattered text such as “Period 11”, dates (“Nov 24”), the word “Budget”, the unit “£k”, the text “=#REF!” etc. No single consistent data type.",
+          "data_type": "mixed",
+          "sample_values": [
+            "Period 11",
+            "Nov 24",
+            "Budget",
+            "£k",
+            "=#REF!"
+          ],
+          "unique_values_count": 5,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "F",
+          "column_name": "Calculated totals / broken refs",
+          "column_description": "Mixture of subtotal formulas (“=SUM(F14:Q14)”) now showing as text, plus “=#REF!” placeholders.",
+          "data_type": "text",
+          "sample_values": [
+            "=SUM(F14:Q14)",
+            "=#REF!"
+          ],
+          "unique_values_count": 2,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "G",
+          "column_name": "Location / subtotal descriptor",
+          "column_description": "Cells like “Newcastle”, “Total Refurb / Maintenance”, but also “=#REF!”.",
+          "data_type": "text",
+          "sample_values": [
+            "Newcastle",
+            "Total Refurb / Maintenance",
+            "=#REF!"
+          ],
+          "unique_values_count": 3,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "H",
+          "column_name": "Broken references",
+          "column_description": "All visible cells are “=#REF!”.",
+          "data_type": "text",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 1,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "I",
+          "column_name": "Broken references",
+          "column_description": "All visible cells are “=#REF!”.",
+          "data_type": "text",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 1,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "J",
+          "column_name": "Broken references",
+          "column_description": "All visible cells are “=#REF!”.",
+          "data_type": "text",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 1,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "K",
+          "column_name": "Broken references",
+          "column_description": "All visible cells are “=#REF!”.",
+          "data_type": "text",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 1,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "L",
+          "column_name": "Broken references",
+          "column_description": "All visible cells are “=#REF!”.",
+          "data_type": "text",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 1,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "M",
+          "column_name": "Broken references",
+          "column_description": "All visible cells are “=#REF!”.",
+          "data_type": "text",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 1,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "N",
+          "column_name": "Broken references",
+          "column_description": "All visible cells are “=#REF!”.",
+          "data_type": "text",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 1,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "O",
+          "column_name": "Broken references",
+          "column_description": "All visible cells are “=#REF!”.",
+          "data_type": "text",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 1,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "P",
+          "column_name": "Broken references",
+          "column_description": "All visible cells are “=#REF!”.",
+          "data_type": "text",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 1,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "Q",
+          "column_name": "Broken references",
+          "column_description": "All visible cells are “=#REF!”.",
+          "data_type": "text",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 1,
+          "has_null_values": true
+        }
+      ],
+      "row_headers": {
+        "has_row_headers": false,
+        "row_header_column": "",
+        "row_header_description": ""
+      },
+      "data_quality": {
+        "completeness": "Extremely poor. The vast majority of cells are either empty or contain broken reference strings (“=#REF!”).",
+        "consistency": "No consistent structure remains; labels and formulas are intermixed haphazardly.",
+        "anomalies": [
+          "More than 90 % of filled cells show “=#REF!” indicating lost cell references.",
+          "Rows 6–8 include three different header lines but do not align into a proper table.",
+          "Numerical cells expected (budget values in £k) are entirely missing."
+        ]
+      }
+    }
+  ]
+}

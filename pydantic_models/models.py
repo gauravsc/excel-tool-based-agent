@@ -32,7 +32,19 @@ class ExpectedOutputList(BaseModel):
     entries: list[ExpectedOutput] = Field(..., description="List of expected output entries")
     class Config:
         """Configuration for ExpectedOutputList model."""
-        name = "ExpectedOutputList" 
+        name = "ExpectedOutputList"
+
+
+class SheetCoAMapping(BaseModel):
+    """
+    Model representing CoA mapping results for a single sheet.
+    """
+    sheet_name: str = Field(..., description="Name of the sheet that was analyzed")
+    mappings: list[ExpectedOutput] = Field(..., description="List of CoA mappings found in this sheet")
+    analysis_summary: str = Field(..., description="Summary of the analysis performed on this sheet")
+    class Config:
+        """Configuration for SheetCoAMapping model."""
+        name = "SheetCoAMapping" 
 
 
 class GroundTruthList(BaseModel):

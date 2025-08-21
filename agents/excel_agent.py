@@ -7,7 +7,7 @@ from tools.tools import (
 )
 from core.logger import setup_logger
 from prompts.excel_agent import get_task_prompt
-from pydantic_models.models import ExpectedOutputList
+from pydantic_models.models import SheetCoAMapping
 
 logger = setup_logger(__name__)
 
@@ -29,12 +29,12 @@ class ExcelAgent(BaseAgent):
         """Return the list of tools available to this agent."""
         return self.tools
     
-    def execute(self, excel_file_path: str, **prompt_kwargs) -> ExpectedOutputList:
+    def execute(self, excel_file_path: str, sheet_name: str = None, **prompt_kwargs) -> SheetCoAMapping:
         """Execute task on Excel file using LLM and tools."""
         logger.info("Excel file: %s", excel_file_path)
         
-        # Get task prompt with any additional context including file path
-        task_prompt = get_task_prompt(excel_file_path=excel_file_path, **prompt_kwargs)
+        # Get task prompt with any additional context including file path and sheet name
+        task_prompt = get_task_prompt(excel_file_path=excel_file_path, sheet_name=sheet_name, **prompt_kwargs)
 
         logger.info("Task prompt:\n%s", task_prompt)
         
@@ -115,7 +115,7 @@ class ExcelAgent(BaseAgent):
             logger.info("Final response written to file: output.txt")
 
         # Get structured response using chat.completions.create with response_format
-        pydantic_schema = ExpectedOutputList.model_json_schema()
+        pydantic_schema = SheetCoAMapping.model_json_schema()
         json_schema = {
             "name": pydantic_schema['title'],
             "schema": pydantic_schema
@@ -132,10 +132,10 @@ class ExcelAgent(BaseAgent):
         # Update cost tracker with final response
         self.update_cost_tracker(final_response)
 
-        # Parse the JSON response into ExpectedOutputList
+        # Parse the JSON response into SheetCoAMapping
         response_content = final_response.choices[0].message.content
         parsed_data = json.loads(response_content)
-        parsed_response = ExpectedOutputList(**parsed_data)
+        parsed_response = SheetCoAMapping(**parsed_data)
         
-        logger.info("Successfully parsed response into ExpectedOutputList")
+        logger.info("Successfully parsed response into SheetCoAMapping")
         return parsed_response

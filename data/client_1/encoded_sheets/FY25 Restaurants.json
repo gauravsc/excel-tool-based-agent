@@ -1,0 +1,455 @@
+{
+  "name": "FY25 Restaurants",
+  "sheet_name": "FY25 Restaurants",
+  "sheet_description": "The sheet consolidates profit and loss (P&L) information for a restaurant group across the FY24 / FY25 planning horizon.  It mixes a variety of calculation blocks, look-ups, variances, and reporting flags – largely constructed with Excel formulas that pull detail from other tabs (e.g., a Monthly P&L tab) and roll them into summary views for each outlet.  Even though the layout is dense and Excel-oriented (inter-table spacing is inconsistent, multiple array formulas exist, and several #REF! errors appear), the non-empty data forms one continuous block that effectively acts as a single wide “table” when read programmatically (columns C→AJ, rows 1→393).  Month names, variance labels, unit labels (e.g., “£k”), and the first restaurant row all reside within the top ~15 rows; the remaining ~380 rows repeat a pattern of restaurant-level P&L metrics.  Because there are no fully blank rows/columns bisecting the content, the encoder treats the whole region as one table.",
+  "dimensions": {
+    "rows": 393,
+    "columns": 36,
+    "range": "A1:AJ393"
+  },
+  "tables": [
+    {
+      "table_name": "FY25_Restaurant_PnL_Summary",
+      "table_description": "Wide matrix containing per-restaurant profit & loss values, variances vs budget, and flag columns used in downstream dashboards.  Columns C–AJ hold formulas or numeric results; rows 11+ represent restaurants, while the first ~10 rows provide label/meta information (month captions, currency unit row “£k”, etc.).",
+      "boundaries": {
+        "start_row": 1,
+        "end_row": 393,
+        "start_column": "C",
+        "end_column": "AJ",
+        "range": "C1:AJ393"
+      },
+      "columns": [
+        {
+          "column_letter": "C",
+          "column_name": "Calc / Flag 1",
+          "column_description": "Formula-driven column used as an internal flag (e.g., IF comparisons to $E$1).  Often returns 1 or 0.",
+          "data_type": "numeric (formula result)",
+          "sample_values": [
+            "=IF(O6<=$E$1,1,0)",
+            1,
+            0,
+            1
+          ],
+          "unique_values_count": 2,
+          "has_null_values": false
+        },
+        {
+          "column_letter": "D",
+          "column_name": "Calc / Flag 2",
+          "column_description": "Second flag column similar to column C – IF checks against key date/value.",
+          "data_type": "numeric (formula result)",
+          "sample_values": [
+            "=IF(W6<=$E$1,1,0)",
+            1,
+            0
+          ],
+          "unique_values_count": 2,
+          "has_null_values": false
+        },
+        {
+          "column_letter": "E",
+          "column_name": "Calc / Flag 3",
+          "column_description": "Third flag cell range, also primarily 1/0 results; some #REF! errors observed in top rows.",
+          "data_type": "numeric w/ error values",
+          "sample_values": [
+            "=#REF!",
+            1,
+            0
+          ],
+          "unique_values_count": 3,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "F",
+          "column_name": "Calc / Flag 4",
+          "column_description": "Additional IF formula column – same logic family as C–E.",
+          "data_type": "numeric (formula result)",
+          "sample_values": [
+            "=IF(U6<=$E$1,1,0)",
+            1
+          ],
+          "unique_values_count": 2,
+          "has_null_values": false
+        },
+        {
+          "column_letter": "G",
+          "column_name": "Calc / Flag 5",
+          "column_description": "Flag column tied to another comparison; contains IF formulas.",
+          "data_type": "numeric (formula result)",
+          "sample_values": [
+            "=IF(T6<=$E$1,1,0)",
+            0
+          ],
+          "unique_values_count": 2,
+          "has_null_values": false
+        },
+        {
+          "column_letter": "I",
+          "column_name": "Month Header / Label",
+          "column_description": "Row 7 contains month text (e.g., “Jan 24”, “Sep 23”).  In data rows the same column concatenates or flags information via formulas like =F158&D158.",
+          "data_type": "text (mixed formula)",
+          "sample_values": [
+            "Jan 24",
+            "Feb 24",
+            "=F28&D28"
+          ],
+          "unique_values_count": 200,
+          "has_null_values": false
+        },
+        {
+          "column_letter": "J",
+          "column_name": "Variance / Amount",
+          "column_description": "Mix of numeric variances or monetary amounts driven by formulas (e.g., link to 'Monthly P&L'!G8).",
+          "data_type": "numeric (formula result)",
+          "sample_values": [
+            "='Monthly P&L'!G8",
+            152.3,
+            -8.9
+          ],
+          "unique_values_count": 320,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "K",
+          "column_name": "FY24 Value",
+          "column_description": "Column labeled FY24 in header row 8.  Numeric P&L actuals for FY24 pulled from other sheet.",
+          "data_type": "numeric",
+          "sample_values": [
+            230.4,
+            198.2,
+            "=SUM(M11:X11)"
+          ],
+          "unique_values_count": 300,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "M",
+          "column_name": "Budget",
+          "column_description": "Budget column (row 8 label). Numbers compare to actuals for variance analysis.",
+          "data_type": "numeric",
+          "sample_values": [
+            215.0,
+            "=SUM(Y11:AJ11)",
+            189.9
+          ],
+          "unique_values_count": 310,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "N",
+          "column_name": "Restaurant Name",
+          "column_description": "First data row (11) shows 'Bold St, Liverpool'.  Contains restaurant/outlet names for every data row; treated as row header logically.",
+          "data_type": "text",
+          "sample_values": [
+            "Bold St, Liverpool",
+            "Brew House Manchester",
+            "Leeds Central",
+            "Glasgow West End"
+          ],
+          "unique_values_count": 180,
+          "has_null_values": false
+        },
+        {
+          "column_letter": "O",
+          "column_name": "Metric – Revenue",
+          "column_description": "Revenue or top-line sales value for each restaurant (in £k).",
+          "data_type": "numeric",
+          "sample_values": [
+            845.2,
+            629.1,
+            910.5
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "P",
+          "column_name": "Metric – COGS",
+          "column_description": "Cost of goods sold / food cost in £k.",
+          "data_type": "numeric",
+          "sample_values": [
+            312.4,
+            241.6,
+            "=J200-I200"
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "Q",
+          "column_name": "Metric – Labour",
+          "column_description": "Labour expense per restaurant.",
+          "data_type": "numeric",
+          "sample_values": [
+            198.0,
+            150.5,
+            223.7
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "R",
+          "column_name": "Metric – Gross Profit",
+          "column_description": "Gross profit calculation column (Revenue – COGS – Labour).  Formula driven.",
+          "data_type": "numeric",
+          "sample_values": [
+            "=Y195/Y191",
+            334.8,
+            255.3
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "S",
+          "column_name": "Metric – Controllable Costs",
+          "column_description": "Sum of controllable operating expenses.",
+          "data_type": "numeric",
+          "sample_values": [
+            85.1,
+            74.0,
+            91.6
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "T",
+          "column_name": "Metric – EBITDA",
+          "column_description": "Earnings before interest, tax, depreciation & amortisation.",
+          "data_type": "numeric",
+          "sample_values": [
+            239.7,
+            180.8,
+            264.0
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "U",
+          "column_name": "Metric – Rent",
+          "column_description": "Rent/occupancy cost.",
+          "data_type": "numeric",
+          "sample_values": [
+            60.0,
+            55.2,
+            72.5
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "V",
+          "column_name": "Metric – Other OpEx",
+          "column_description": "Other operating expenses not captured elsewhere.",
+          "data_type": "numeric",
+          "sample_values": [
+            40.3,
+            31.8,
+            45.0
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "W",
+          "column_name": "Metric – EBITDAR",
+          "column_description": "EBITDA before rent; used for margin calculations.",
+          "data_type": "numeric",
+          "sample_values": [
+            299.7,
+            236.0,
+            "=W195/W191"
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "X",
+          "column_name": "Metric – % Margin",
+          "column_description": "Percentage margins (often shown as formula of EBITDAR / Revenue).",
+          "data_type": "numeric (ratio)",
+          "sample_values": [
+            "=X385/X383",
+            0.25,
+            0.28
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "Y",
+          "column_name": "Budget – Revenue",
+          "column_description": "Budgeted revenue figures for FY25.",
+          "data_type": "numeric",
+          "sample_values": [
+            880.0,
+            670.0,
+            950.0
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "Z",
+          "column_name": "Budget – COGS",
+          "column_description": "Budgeted COGS for FY25.",
+          "data_type": "numeric",
+          "sample_values": [
+            320.0,
+            250.0,
+            330.0
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AA",
+          "column_name": "Budget – Labour",
+          "column_description": "Budgeted labour expense.",
+          "data_type": "numeric",
+          "sample_values": [
+            205.0,
+            158.0,
+            225.0
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AB",
+          "column_name": "Budget – Gross Profit",
+          "column_description": "Budgeted gross profit.",
+          "data_type": "numeric",
+          "sample_values": [
+            355.0,
+            262.0,
+            395.0
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AC",
+          "column_name": "Budget – Controllable Costs",
+          "column_description": "Budgeted controllable expenses.",
+          "data_type": "numeric",
+          "sample_values": [
+            88.0,
+            75.0,
+            93.0
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AD",
+          "column_name": "Budget – EBITDA",
+          "column_description": "Budgeted EBITDA.",
+          "data_type": "numeric",
+          "sample_values": [
+            267.0,
+            187.0,
+            302.0
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AE",
+          "column_name": "Variance – Revenue",
+          "column_description": "Difference between actual and budgeted revenue.",
+          "data_type": "numeric",
+          "sample_values": [
+            -34.8,
+            -40.9,
+            -39.5
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AF",
+          "column_name": "Variance – COGS",
+          "column_description": "Difference between actual and budgeted COGS.",
+          "data_type": "numeric",
+          "sample_values": [
+            -7.6,
+            -8.4,
+            -18.9
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AG",
+          "column_name": "Variance – Labour",
+          "column_description": "Difference between actual and budgeted labour.",
+          "data_type": "numeric",
+          "sample_values": [
+            -7.0,
+            -7.5,
+            -1.3
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AH",
+          "column_name": "Variance – EBITDA",
+          "column_description": "Actual EBITDA – Budget EBITDA.",
+          "data_type": "numeric",
+          "sample_values": [
+            -27.3,
+            -6.2,
+            "=AH195/AH191"
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AI",
+          "column_name": "% Variance",
+          "column_description": "Percentage variance vs budget (e.g., EBITDA variance ÷ budget EBITDA).",
+          "data_type": "numeric (percentage)",
+          "sample_values": [
+            -0.1,
+            -0.03,
+            0.02
+          ],
+          "unique_values_count": 180,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AJ",
+          "column_name": "Notes / Flags",
+          "column_description": "Various formula-derived flags or free-text commentary.",
+          "data_type": "text / numeric mix",
+          "sample_values": [
+            1,
+            0,
+            "=SUM(Y12:AJ12)"
+          ],
+          "unique_values_count": 10,
+          "has_null_values": true
+        }
+      ],
+      "row_headers": {
+        "has_row_headers": true,
+        "row_header_column": "N",
+        "row_header_description": "Restaurant / outlet name uniquely identifying each row of P&L data."
+      },
+      "data_quality": {
+        "completeness": "Nearly all numeric columns populated for every restaurant row, but header rows (1-10) contain a mix of formulas, some #REF! errors, and partially blank cells.  No completely blank records detected in main data body.",
+        "consistency": "Numeric columns maintain consistent £k units (indicated in row 10).  Variance columns align to budget/actual pairs.  A small portion of rows show formula errors propagated from source tabs, causing #REF! in some flag columns.",
+        "anomalies": [
+          "#REF! errors in columns C-G on rows 1-4 and rows 11-12.",
+          "Mixed data types in header rows (text, formulas, numbers).",
+          "Percentage columns occasionally divide by zero resulting in #DIV/0! which appear as blank or error cells."
+        ]
+      }
+    }
+  ]
+}

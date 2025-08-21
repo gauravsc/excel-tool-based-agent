@@ -1,0 +1,575 @@
+{
+  "name": "FY25 Monthly P&L",
+  "sheet_name": "FY25 Monthly P&L",
+  "sheet_description": "The sheet appears to be a working-paper or intermediary calculation sheet for a FY25 monthly P&L report. 154 rows and 136 columns are physically defined, but only 48 columns contain any non-empty cells. The occupied cells are dominated by formulas that currently evaluate to “#REF!” because upstream sheets/ranges are missing. Human-readable headers or clear contiguous tabular regions are largely absent; instead, the sheet is a collapsed web of reference formulas scattered across the grid (likely used by a master model when all links are intact). Because no contiguous, self-describing tables with intact data exist, the sheet cannot be mapped into conventional tables with meaningful business content. The encoding therefore documents the single implicit ‘table’ consisting of every non-empty cell, primarily for diagnostic purposes.",
+  "dimensions": {
+    "rows": 154,
+    "columns": 136,
+    "range": "A1:EN154"
+  },
+  "tables": [
+    {
+      "table_name": "Orphaned-formula grid",
+      "table_description": "A sparse grid of orphaned formulas (mostly “#REF!”) scattered across 48 non-empty columns and up to row 154. No coherent header row or field layout is detectable. The grid seems to have once contained P&L budget/actual values by month (see stray text values like “Nov 24”, “Budget”, “£k”, etc.), but upstream references are broken so numeric results are unavailable.",
+      "boundaries": {
+        "start_row": 1,
+        "end_row": 154,
+        "start_column": "C",
+        "end_column": "DW",
+        "range": "C1:DW154"
+      },
+      "columns": [
+        {
+          "column_letter": "C",
+          "column_name": "Unknown (sparse numeric / formula)",
+          "column_description": "Contains scattered constants (e.g., integers that look like fiscal years) and many formulas now evaluating to #REF!. Occasional integer values 105-130 appear in early rows; lower rows contain only formulas.",
+          "data_type": "numeric / error",
+          "sample_values": [
+            122,
+            127,
+            129,
+            130,
+            111
+          ],
+          "unique_values_count": 38,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "D",
+          "column_name": "Unknown (error results)",
+          "column_description": "Primarily cells showing “#REF!”. One text cell “% sales” appears around row 5.",
+          "data_type": "error / text",
+          "sample_values": [
+            "=#REF!",
+            "% sales"
+          ],
+          "unique_values_count": 12,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "F",
+          "column_name": "Unknown (formula)",
+          "column_description": "Nearly every populated cell is a formula currently returning “#REF!”; a few intact formulas reference in-sheet ranges (e.g. =F72/F$60).",
+          "data_type": "error / formula",
+          "sample_values": [
+            "=#REF!",
+            "=F72/F$60",
+            "=F101-F103"
+          ],
+          "unique_values_count": 14,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "G",
+          "column_name": "Unknown",
+          "column_description": "Consists of #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 6,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "H",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 5,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "I",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 5,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "J",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 5,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "K",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 4,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "L",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 5,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "M",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 4,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "N",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 4,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "O",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas and a date label “Nov 24” in row 7.",
+          "data_type": "error / date-text",
+          "sample_values": [
+            "Nov 24",
+            "=#REF!"
+          ],
+          "unique_values_count": 7,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "P",
+          "column_name": "Unknown",
+          "column_description": "Scattered formulas. Row 8 has text “Budget”.",
+          "data_type": "error / text",
+          "sample_values": [
+            "Budget",
+            "=#REF!"
+          ],
+          "unique_values_count": 6,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "Q",
+          "column_name": "Unknown",
+          "column_description": "Sparse numeric strings (e.g. 105-130) and #REF!; row 10 has currency unit “£k”.",
+          "data_type": "error / text / numeric",
+          "sample_values": [
+            "£k",
+            108,
+            "=#REF!"
+          ],
+          "unique_values_count": 37,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "R",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! results.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 5,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "S",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 5,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "T",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 5,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "U",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas and possible percentage calculations.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 6,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "V",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 4,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "W",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas; row 8 has formula “=COUNTIF(DF11:DF43,\">0\")” hinting at a count of positive values.",
+          "data_type": "error / formula",
+          "sample_values": [
+            "=COUNTIF(DF11:DF43,\">0\")",
+            "=#REF!"
+          ],
+          "unique_values_count": 9,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "X",
+          "column_name": "Unknown",
+          "column_description": "Sparse #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 4,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "Y",
+          "column_name": "Unknown",
+          "column_description": "Sparse #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 3,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "Z",
+          "column_name": "Unknown",
+          "column_description": "Sparse #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 4,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AA",
+          "column_name": "Unknown",
+          "column_description": "Entirely #REF!.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 1,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AB",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 4,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AC",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 3,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "AE",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas; notable formula “=COUNTIF(DQ11:DQ43,\">0\")”.",
+          "data_type": "error / formula",
+          "sample_values": [
+            "=COUNTIF(DQ11:DQ43,\">0\")",
+            "=#REF!"
+          ],
+          "unique_values_count": 7,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DD",
+          "column_name": "Unknown helper range",
+          "column_description": "Appears to contain month labels (e.g. “Sep 24”, “Mar 25”, “Aug 24”, “Apr 25”) in row 7; lower rows #REF!. Used by COUNTIF and SUMIF elsewhere.",
+          "data_type": "text / error",
+          "sample_values": [
+            "Sep 24",
+            "=#REF!"
+          ],
+          "unique_values_count": 8,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DE",
+          "column_name": "Unknown fiscal sub-group",
+          "column_description": "Row 1 shows “Q1” (quarter label) and row 5 “FY23”; otherwise #REF!.",
+          "data_type": "text / error",
+          "sample_values": [
+            "Q1",
+            "FY23",
+            "=#REF!"
+          ],
+          "unique_values_count": 11,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DF",
+          "column_name": "Helper column (positive-value count)",
+          "column_description": "Referenced by COUNTIF formulas. Mostly numeric or empty; currently resolves to 0 or error. Sample rows show no direct values due to #REF! upstream.",
+          "data_type": "numeric / error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 3,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DG",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 2,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DH",
+          "column_name": "Unknown",
+          "column_description": "Scattered #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 2,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DI",
+          "column_name": "Unknown",
+          "column_description": "Scattered formulas; used in SUMIF references.",
+          "data_type": "error / formula",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 4,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DJ",
+          "column_name": "Unknown",
+          "column_description": "Row 1 “Q4” (quarter label), various #REF! formulas elsewhere.",
+          "data_type": "text / error",
+          "sample_values": [
+            "Q4",
+            "=#REF!"
+          ],
+          "unique_values_count": 9,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DK",
+          "column_name": "Unknown",
+          "column_description": "Row 1 “Q3”; row 2 concatenation formula “=DK1&DK5”. Other rows #REF!.",
+          "data_type": "text / formula / error",
+          "sample_values": [
+            "Q3",
+            "=DK1&DK5",
+            "=#REF!"
+          ],
+          "unique_values_count": 10,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DL",
+          "column_name": "Unknown",
+          "column_description": "#REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 2,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DM",
+          "column_name": "Unknown",
+          "column_description": "Referenced in COUNTIF; populated cells #REF!.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 3,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DN",
+          "column_name": "Unknown",
+          "column_description": "#REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 2,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DO",
+          "column_name": "Unknown",
+          "column_description": "Referenced by SUMIF formulas; cells #REF!.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 4,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DP",
+          "column_name": "Unknown",
+          "column_description": "#REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 2,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DQ",
+          "column_name": "Unknown",
+          "column_description": "Referenced by COUNTIF; #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 4,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DR",
+          "column_name": "Unknown",
+          "column_description": "Referenced by SUMIF; #REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 3,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DS",
+          "column_name": "Unknown",
+          "column_description": "#REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 2,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DT",
+          "column_name": "Unknown",
+          "column_description": "Referenced by COUNTIF and SUMIF formulas; #REF! results.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 4,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DU",
+          "column_name": "Unknown",
+          "column_description": "#REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 3,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DV",
+          "column_name": "Unknown",
+          "column_description": "#REF! formulas.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 2,
+          "has_null_values": true
+        },
+        {
+          "column_letter": "DW",
+          "column_name": "Unknown",
+          "column_description": "Referenced by SUMIF formulas; #REF! results.",
+          "data_type": "error",
+          "sample_values": [
+            "=#REF!"
+          ],
+          "unique_values_count": 3,
+          "has_null_values": true
+        }
+      ],
+      "row_headers": {
+        "has_row_headers": false,
+        "row_header_column": "",
+        "row_header_description": "No contiguous leftmost descriptor column exists; rows lack consistently populated identifiers."
+      },
+      "data_quality": {
+        "completeness": "Very low – the sheet relies on upstream links that are missing, causing most formulas to resolve to #REF!. Only scattered label cells remain.",
+        "consistency": "Structure and logic appear consistent (repeating formulas, references, quarter/month labels), but actual data is absent, so numeric consistency cannot be assessed.",
+        "anomalies": [
+          "The vast majority of formulas evaluate to #REF! indicating broken external or deleted in-workbook references.",
+          "No coherent headers or contiguous table boundaries; data is sparse.",
+          "Text labels (e.g., quarter, month, fiscal year) appear in unexpected columns and rows – suggests hidden/filtered views originally."
+        ]
+      }
+    }
+  ]
+}
