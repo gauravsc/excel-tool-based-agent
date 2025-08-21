@@ -77,22 +77,12 @@ class ExcelAgent(BaseAgent):
             self.update_cost_tracker(response)
             
             message = response.choices[0].message
-            messages.append(message)
-            
+
             if not message.tool_calls:
-                logger.info("No more tool calls, task completed")
-                final_cost = self.compute_total_cost()
-                logger.info("Task completed. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
-                
-                # Parse the structured response using response.parse
-                parsed_response = self.client.responses.parse(
-                    model=self.model,
-                    input=messages,
-                    text_format=ExpectedOutputList
-                )
-                logger.info("Successfully parsed response into ExpectedOutputList")
-                return parsed_response
+                break
             
+            messages.append(message)
+        
             logger.info("LLM requested %d tool calls", len(message.tool_calls))
             
             for tool_call in message.tool_calls:
@@ -113,8 +103,39 @@ class ExcelAgent(BaseAgent):
                     "tool_call_id": tool_call.id,
                     "content": str(result)
                 })
-        
-        logger.warning("Reached maximum iterations (%d), stopping execution", max_iterations)
+
+        logger.info("LLM response text: %s", message.content)
         final_cost = self.compute_total_cost()
-        logger.info("Task stopped due to max iterations. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
-        return ExpectedOutputList(entries=[])
+        logger.info("Task completed. Final cost: $%s (API calls: %s, tokens: %s)", final_cost['total_cost_usd'], final_cost['api_calls'], final_cost['total_tokens'])
+        
+        # Write the final response to a file called output.txt
+        if message.content:
+            with open("output.txt", "w", encoding="utf-8") as f:
+                f.write(message.content)
+            logger.info("Final response written to file: output.txt")
+
+        # Get structured response using chat.completions.create with response_format
+        pydantic_schema = ExpectedOutputList.model_json_schema()
+        json_schema = {
+            "name": pydantic_schema['title'],
+            "schema": pydantic_schema
+        }
+        logger.info("JSON schema: %r", json_schema)
+        final_response = self.client.chat.completions.create(
+            model=self.model,
+            messages=messages,
+            response_format={"type": "json_schema", "json_schema": json_schema},
+        )
+
+        logger.info("Final LLM response object: %r", final_response)
+        
+        # Update cost tracker with final response
+        self.update_cost_tracker(final_response)
+
+        # Parse the JSON response into ExpectedOutputList
+        response_content = final_response.choices[0].message.content
+        parsed_data = json.loads(response_content)
+        parsed_response = ExpectedOutputList(**parsed_data)
+        
+        logger.info("Successfully parsed response into ExpectedOutputList")
+        return parsed_response

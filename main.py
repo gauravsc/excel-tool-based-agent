@@ -1,12 +1,9 @@
 import os
 import json
 from dotenv import load_dotenv
-from agents import ExcelAgent, SpreadsheetEncoderAgent, SheetSelectorAgent
+from agents import SpreadsheetEncoderAgent, SheetSelectorAgent
 from core.logger import setup_logger
-from core.utils import remove_hidden_columns_all_sheets
 from core.utils import get_sheet_names
-from langfuse.openai import openai
-
 
 
 logger = setup_logger(__name__)
@@ -47,20 +44,32 @@ def main():
         coa_items = json.load(f)
     logger.info("Loaded %d CoA items", len(coa_items))
     
-    # Use SheetSelectorAgent to identify which sheets contain CoA-related data
-    logger.info("=== Using SheetSelectorAgent to identify relevant sheets ===")
-    sheet_selector_agent = SheetSelectorAgent(api_key=api_key)
-    sheet_selection_response = sheet_selector_agent.select_sheets(sheet_names, coa_items, excel_file_path=excel_file)
-    
-    # Get the selected sheet names
-    selected_sheet_names = [sheet.sheet_name for sheet in sheet_selection_response.selected_sheets if sheet.include]
-    logger.info("Selected %d sheets for encoding: %s", len(selected_sheet_names), selected_sheet_names)
-    
-    # Save the selected sheet names to a JSON file in the client folder
+    # Check if selected sheets file exists
     selected_sheets_file = f"data/{client_name}/selected_sheets.json"
-    with open(selected_sheets_file, "w", encoding="utf-8") as f:
-        json.dump(selected_sheet_names, f, indent=2, ensure_ascii=False)
-    logger.info("Saved selected sheet names to: %s", selected_sheets_file)
+    
+    if os.path.exists(selected_sheets_file):
+        # Load existing selected sheet names
+        logger.info("=== Loading existing selected sheets from file ===")
+        with open(selected_sheets_file, "r", encoding="utf-8") as f:
+            selected_sheet_names = json.load(f)
+        logger.info("Loaded %d selected sheets from file: %s", len(selected_sheet_names), selected_sheet_names)
+    else:
+        # Use SheetSelectorAgent to identify which sheets contain CoA-related data
+        logger.info("=== Using SheetSelectorAgent to identify relevant sheets ===")
+        sheet_selector_agent = SheetSelectorAgent(api_key=api_key)
+        sheet_selection_response = sheet_selector_agent.select_sheets(sheet_names, coa_items, excel_file_path=excel_file)
+        
+        # Get the selected sheet names
+        selected_sheet_names = [sheet.sheet_name for sheet in sheet_selection_response.selected_sheets if sheet.include]
+        logger.info("Selected %d sheets for encoding: %s", len(selected_sheet_names), selected_sheet_names)
+        
+        # Save the selected sheet names to a JSON file in the client folder
+        with open(selected_sheets_file, "w", encoding="utf-8") as f:
+            json.dump(selected_sheet_names, f, indent=2, ensure_ascii=False)
+        logger.info("Saved selected sheet names to: %s", selected_sheets_file)
+
+
+    
     
     # Encode only the selected sheets
     logger.info("=== Encoding selected sheets ===")

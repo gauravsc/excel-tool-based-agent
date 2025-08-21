@@ -1,0 +1,11 @@
+{
+  "name": "FY25 Full Year",
+  "sheet_name": "FY25 Full Year",
+  "sheet_description": "Unable to fully encode: sheet contains extensive formula errors (#REF!), sparse non-empty columns, no discernible clean table structure, and critical header / data loss. Non-empty cells largely hold broken formulas referencing missing ranges. Practical reconstruction is impossible without repairing source workbook.",
+  "dimensions": {
+    "rows": 158,
+    "columns": 135,
+    "range": "A1:DI158"
+  },
+  "tables": []
+}

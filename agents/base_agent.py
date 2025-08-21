@@ -1,10 +1,7 @@
-import os
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any
-from openai import OpenAI
-from core.logger import setup_logger
 from langfuse.openai import openai
-
+from core.logger import setup_logger
 
 logger = setup_logger(__name__)
 
