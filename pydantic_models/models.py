@@ -30,6 +30,9 @@ class ExpectedOutputList(BaseModel):
     Model for a list of expected output entries.
     """
     entries: list[ExpectedOutput] = Field(..., description="List of expected output entries")
+    class Config:
+        """Configuration for ExpectedOutputList model."""
+        name = "ExpectedOutputList" 
 
 
 class GroundTruthList(BaseModel):
@@ -112,3 +115,6 @@ class SingleSheetEncoding(BaseModel):
     sheet_description: str = Field(..., description="Detailed description of what the sheet contains")
     dimensions: SheetDimensions = Field(..., description="Sheet dimensions")
     tables: List[TableInfo] = Field(..., description="List of tables found in the sheet")
+    class Config:
+        """Configuration for SingleSheetEncoding model."""
+        name = "SingleSheetEncoding" 

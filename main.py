@@ -40,6 +40,7 @@ def main():
     
     encoder_agent = SpreadsheetEncoderAgent(api_key=api_key)
     all_sheet_encodings = []
+    sheet_names = ["Exceptionals"]
     
     for sheet_name in sheet_names:
         logger.info("Encoding sheet: %s", sheet_name)

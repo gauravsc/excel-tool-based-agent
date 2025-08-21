@@ -165,6 +165,31 @@ def get_sheet_content(file_path: str, sheet_name: str) -> Dict[int, Dict[str, An
 
 
 @tool
+def get_sheet_content_sample(file_path: str, sheet_name: str, num_rows: int = 10, num_columns: int = 10) -> Dict[int, Dict[str, Any]]:
+    """Get a sample of the sheet content by taking the first num_rows rows and num_columns columns."""
+    logger.info("Getting sample content (%d rows x %d columns) from sheet '%s' in %s", num_rows, num_columns, sheet_name, file_path)
+    workbook = load_workbook(file_path)
+    sheet = workbook[sheet_name]
+    
+    # Get the actual dimensions of the sheet
+    max_row = min(sheet.max_row, num_rows)
+    max_col = min(sheet.max_column, num_columns)
+    
+    result = {}
+    for row_num in range(1, max_row + 1):
+        row_dict = {}
+        for col_num in range(1, max_col + 1):
+            cell = sheet.cell(row=row_num, column=col_num)
+            if cell.value is not None:  # Only include non-empty cells
+                row_dict[cell.column_letter] = cell.value
+        if row_dict:  # Only include rows with data
+            result[row_num] = row_dict
+    
+    logger.info("Retrieved sample of %d rows with data from sheet '%s' (sampled %d rows x %d columns)", len(result), sheet_name, max_row, max_col)
+    return result
+
+
+@tool
 def get_row_values_sample(file_path: str, sheet_name: str, row_number: int, sample_size: int = 10) -> List[Any]:
     """Get a random sample of values from a specific row in the Excel sheet."""
     logger.info("Getting sample of %d values from row %d in sheet '%s' from %s", sample_size, row_number, sheet_name, file_path)
