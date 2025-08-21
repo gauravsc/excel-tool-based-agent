@@ -3,6 +3,8 @@ from abc import ABC, abstractmethod
 from typing import List, Dict, Any
 from openai import OpenAI
 from core.logger import setup_logger
+from langfuse.openai import openai
+
 
 logger = setup_logger(__name__)
 
@@ -11,7 +13,8 @@ class BaseAgent(ABC):
     
     def __init__(self, api_key: str = None):
         """Initialize base agent with OpenAI client and cost tracking."""
-        self.client = OpenAI(api_key=api_key or os.getenv("OPENAI_API_KEY"))
+        # self.client = OpenAI(api_key=api_key or os.getenv("OPENAI_API_KEY")) # OpenAI client
+        self.client = openai # Langfuse client
         self.cost_tracker = {
             "total_tokens": 0,
             "prompt_tokens": 0,

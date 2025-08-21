@@ -5,6 +5,9 @@ from agents import ExcelAgent, SpreadsheetEncoderAgent, SheetSelectorAgent
 from core.logger import setup_logger
 from core.utils import remove_hidden_columns_all_sheets
 from core.utils import get_sheet_names
+from langfuse.openai import openai
+
+
 
 logger = setup_logger(__name__)
 
