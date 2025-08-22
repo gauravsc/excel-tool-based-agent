@@ -64,7 +64,7 @@ class ExcelAgent(BaseAgent):
             logger.info("LLM iteration %d", iteration)
             
             # Reduce messages to prevent context from becoming too long
-            messages = self.reduce_messages(messages)
+            # messages = self.reduce_messages(messages)
             
             response = self.client.chat.completions.create(
                 model=self.model,

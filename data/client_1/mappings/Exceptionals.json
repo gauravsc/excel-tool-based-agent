@@ -1,0 +1,22 @@
+{
+  "sheet_name": "Exceptionals",
+  "mappings": [
+    {
+      "sheet_name": "Exceptionals",
+      "location_in_sheet": "AE11",
+      "value": 70136,
+      "CoA_label": "OTHER_EXP",
+      "timestamp_of_value": "FY25",
+      "unit": "£k"
+    },
+    {
+      "sheet_name": "Exceptionals",
+      "location_in_sheet": "AE12",
+      "value": 11109,
+      "CoA_label": "OTHER_EXP",
+      "timestamp_of_value": "FY25",
+      "unit": "£k"
+    }
+  ],
+  "analysis_summary": "Located full-year (FY25) exceptional cost figures in column AE.  Mapped the aggregated “Total Exceptional Costs” (cell AE11) and the specific line “IT Consultancy” (cell AE12) to the Chart-of-Accounts category OTHER_EXP, as these represent non-recurring cost items best classified as Other Expenses.  Values were recorded in thousands of pounds (£k) and rounded to whole-number integers to comply with the required schema."
+}

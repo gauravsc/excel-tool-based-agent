@@ -1,0 +1,14 @@
+{
+  "sheet_name": "FY25 Capex",
+  "mappings": [
+    {
+      "sheet_name": "FY25 Capex",
+      "location_in_sheet": "Q19",
+      "value": 275000,
+      "CoA_label": "CAPEX_GROWTH",
+      "timestamp_of_value": "Jul 2025",
+      "unit": "New FY26"
+    }
+  ],
+  "analysis_summary": "The FY25 Capex sheet contains mostly placeholder formulas with unresolved references (#REF!), resulting in no numeric values for most cells. The only concrete numeric entry is 275,000 located in cell Q19 (row labeled \"New FY26\", column representing July 2025). This figure represents growth-related capital expenditure and is mapped to the Chart of Accounts code CAPEX_GROWTH. No other valid numeric values were present to map."
+}
